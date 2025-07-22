@@ -2,7 +2,7 @@ name: Deploy Existing WebGL to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ web ]
     paths:
       - 'web/**'
       - '.github/workflows/deploy-existing-webgl.yml'
