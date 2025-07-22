@@ -8,7 +8,7 @@ on:
       - '.github/workflows/deploy-existing-webgl.yml'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
