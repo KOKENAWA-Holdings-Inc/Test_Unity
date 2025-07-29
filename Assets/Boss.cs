@@ -6,10 +6,10 @@ using UnityEngine.Events;
 
 public class Boss : MonoBehaviour
 {
-    public int BossHP = 10;
-    public int BossMAXHP = 20;
-    public int Attack = 5;
-    public int Defence = 5;
+    public float BossHP = 10f;
+    public float BossMAXHP = 20f;
+    public float Attack = 10f;
+    public float Defence = 0f;
     public int BossExperience = 10;
     private Rigidbody2D rb;
     private Vector2 movement;

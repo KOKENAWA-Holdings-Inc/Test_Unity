@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TheWorld : MonoBehaviour
 {
+    public OrbitManager OrbitManager;
     public GameManager GameManager;
     // public Player player; // ★ 不要なので削除
 
@@ -33,6 +34,7 @@ public class TheWorld : MonoBehaviour
 
         // 見つかったオブジェクトからPlayerスクリプトを取得する
         Player playerComponent = playerObj.GetComponent<Player>();
+        PlayerLanceShooter lanceShooterComponent = playerObj.GetComponent<PlayerLanceShooter>();
         if (playerComponent == null)
         {
             Debug.LogError("PlayerオブジェクトにPlayerスクリプトがアタッチされていません。");
@@ -43,19 +45,27 @@ public class TheWorld : MonoBehaviour
         // ★★★ これ以降、'player' の代わりに 'playerComponent' を使う ★★★
         switch (GameManager.selectedItem1)
         {
-            case "attack":
-                playerComponent.Attack++;
+            case "Attack+10%":
+                playerComponent.Attack = playerComponent.Attack * 1.1f;
                 break;
-            case "defence":
+            case "Defence+5%":
                 playerComponent.Defence++;
                 break;
-            case "HP":
+            case "MaxHP+5%":
                 // ロジックを改善: 最大HPを増やし、現在HPを最大値にする
-                playerComponent.PlayerMAXHP += 5;
+                playerComponent.PlayerMAXHP = playerComponent.PlayerMAXHP * 1.05f;
                 playerComponent.PlayerHP = playerComponent.PlayerMAXHP;
                 break;
-            case "luck":
-                playerComponent.Luck++;
+            case "MoveSpeed+0.1":
+                playerComponent.moveSpeed += 0.1f;
+                break;
+            case "Cool Time-10%":
+                OrbitManager.respawnDelay = OrbitManager.respawnDelay * 0.9f;
+                lanceShooterComponent.shootCooldown = lanceShooterComponent.shootCooldown * 0.9f;
+                break;
+            case "Weapon Speed+30%":
+                OrbitManager.orbitSpeed = OrbitManager.orbitSpeed * 1.3f;
+                lanceShooterComponent.bulletSpeed = lanceShooterComponent.bulletSpeed * 1.3f;
                 break;
         }
 

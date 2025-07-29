@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EliteSpawner : MonoBehaviour
 {
-    // public Transform player; // ← インスペクターでの設定は不要になるので削除またはコメントアウト
     private Transform player; // 内部でプレイヤーの情報を保持するための変数
 
-    public GameObject enemyPrefab;
+    public GameObject ElitePrefab;
     public TimeManager timeManager;
 
-    public float spawnInterval = 0.5f;
+    public float spawnInterval = 180f;
     private float spawnTimer = 0f;
     public Vector2 spawnArea = new Vector2(9.5f, 5.5f);
     private bool isSpawningActive = true;
@@ -71,9 +70,9 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (enemyPrefab == null)
+        if (ElitePrefab == null)
         {
-            Debug.LogError("Enemy Prefabが設定されていません。");
+            Debug.LogError("Elite Prefabが設定されていません。");
             return;
         }
 
@@ -99,6 +98,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         Vector2 spawnPosition = (Vector2)player.position + offset;
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(ElitePrefab, spawnPosition, Quaternion.identity);
     }
 }

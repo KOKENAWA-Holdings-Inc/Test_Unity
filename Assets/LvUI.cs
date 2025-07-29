@@ -49,6 +49,6 @@ public class LvUI : MonoBehaviour
         LvText.text = "Lv" + targetPlayer.PlayerLv;
 
         // 現在表示しているレベルの値を更新
-        currentDisplayedLv = targetPlayer.PlayerLv;
+        currentDisplayedLv = (int)targetPlayer.PlayerLv;
     }
 }

@@ -11,12 +11,12 @@ public class OrbitManager : MonoBehaviour
     [SerializeField] private GameObject orbitingObjectPrefab;
     [SerializeField] private int numberOfObjects = 8;
     [SerializeField] private float radius = 3.0f;
-    [SerializeField] private float orbitSpeed = 50.0f;
+    public float orbitSpeed = 50.0f;
 
     [Header("éûä‘ê›íË")]
     [SerializeField] private float initialSpawnDelay = 2.0f;
     [SerializeField] private float lifeTime = 10.0f;
-    [SerializeField] private float respawnDelay = 5.0f;
+    public float respawnDelay = 5.0f;
 
     private List<GameObject> spawnedObjects = new List<GameObject>();
 

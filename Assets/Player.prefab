@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 705463583909660170}
   - component: {fileID: 1588478722222055116}
   - component: {fileID: 622915866411615526}
+  - component: {fileID: 8085704878941699396}
+  - component: {fileID: -7766792012856661668}
+  - component: {fileID: 6678980943983778715}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -132,9 +135,8 @@ MonoBehaviour:
   ExperiencePoint: 0
   ExperienceTotal: 0
   PlayerLv: 1
-  Attack: 5
-  Defence: 5
-  Luck: 1
+  Attack: 10
+  Defence: 10
   moveSpeed: 5
 --- !u!61 &622915866411615526
 BoxCollider2D:
@@ -181,3 +183,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8085704878941699396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a92d8b05124d42bc9056091e73140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ringPrefab: {fileID: 2211501652500152945, guid: d2a58b94361f0ab459c5c8ac7008eb28, type: 3}
+--- !u!114 &-7766792012856661668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed561b3f8fb0e4f4bbe721f51dd93584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8533729602629975623, guid: 1f56b5862528b504e9beaf775bfc6496, type: 3}
+  bulletSpeed: 15
+  shootCooldown: 3
+--- !u!114 &6678980943983778715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9cd80d81318ee4f924a47026e22169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6598770115839735500, guid: 7c6ce82c0640e3a43b0e41eb7fdf194f, type: 3}
+  projectileSpeed: 15

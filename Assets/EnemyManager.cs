@@ -2,16 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
     private Transform playerTransform; // プレイヤー追従用のTransform
-    public int EnemyHP = 10;
-    public int Attack = 5;
+    public float EnemyHP = 10f;
+    public float EnemyMaxHP = 10f;
+    public float Attack = 1f;
     public int EnemyExperience = 1;
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private UnityEngine.UI.Slider healthSlider;
+
+    // ★追加: HPの変化を検知するために、直前のHPを保存する変数
+    private float previousHP;
 
     public static event Action OnEnemyDied;
+
+    private void Awake()
+    {
+        EnemyHP = EnemyMaxHP;
+    }
 
     void Start()
     {
@@ -21,10 +32,40 @@ public class EnemyManager : MonoBehaviour
         {
             playerTransform = playerObj.transform;
         }
+
+        // ★追加: 直前のHPを初期化
+        previousHP = EnemyHP;
+
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = EnemyMaxHP;
+            healthSlider.value = EnemyHP;
+            // 初期状態では非表示にする
+            healthSlider.gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
+        // ★変更点: HPが変化したかどうかをチェック
+        if (EnemyHP != previousHP)
+        {
+            // HPバーが非表示なら、最初に表示する
+            if (healthSlider != null && !healthSlider.gameObject.activeSelf)
+            {
+                healthSlider.gameObject.SetActive(true);
+            }
+
+            // Sliderの値を更新
+            if (healthSlider != null)
+            {
+                healthSlider.value = EnemyHP;
+            }
+
+            // 現在のHPを「直前のHP」として保存し、次回のフレームで比較できるようにする
+            previousHP = EnemyHP;
+        }
+
         // 自身のHPが0以下になったかを毎フレーム監視する
         if (EnemyHP <= 0)
         {
@@ -49,6 +90,17 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    // ★追加: HPバーの位置を敵に追従させるための処理
+    private void LateUpdate()
+    {
+        // HPバーが表示されている場合のみ、位置を更新する
+        if (healthSlider != null && healthSlider.gameObject.activeSelf)
+        {
+            // 敵本体の位置から真上に0.5ずらした位置にHPバーを配置する
+            healthSlider.transform.position = this.transform.position + new Vector3(0, 0.5f, 0);
+        }
+    }
+
     private void FixedUpdate()
     {
         // プレイヤーが見つかっている場合のみ追従
@@ -62,6 +114,4 @@ public class EnemyManager : MonoBehaviour
     {
         OnEnemyDied?.Invoke();
     }
-
-    // OnCollisionEnter2DとTakeDamageメソッドは不要
 }

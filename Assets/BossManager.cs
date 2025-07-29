@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    
-
-    // プレイヤーオブジェクト
-    public Transform player;
+    // ▼▼▼▼▼ 削除 ▼▼▼▼▼
+    // // プレイヤーオブジェクト
+    // public Transform player;
+    // ▲▲▲▲▲ 削除 ▲▲▲▲▲
 
     // スポーンさせる敵のプレハブ
     public GameObject BossPrefab;
@@ -18,14 +18,12 @@ public class BossManager : MonoBehaviour
 
     public TimeManager timeManager;
 
-    
-
     //private bool hasBossSpawned = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SpawnBoss", 4f);
+        Invoke("SpawnBoss", 420f);
     }
 
     // Update is called once per frame
@@ -36,13 +34,20 @@ public class BossManager : MonoBehaviour
             SpawnBoss();
             hasBossSpawned = true;
         }*/
-
-        
-        
     }
 
-    void SpawnBoss() 
+    void SpawnBoss()
     {
+        // ★追加: スポーンする瞬間にプレイヤーを探す
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        // ★追加: プレイヤーが見つからなかった場合は処理を中断する
+        if (playerObj == null)
+        {
+            Debug.LogError("プレイヤーが見つからなかったため、ボスをスポーンできませんでした。");
+            return;
+        }
+
         Vector2 offset = Vector2.zero; // スポーン位置のオフセットを初期化
 
         // 0:上, 1:下, 2:右, 3:左 の4つの辺から1つをランダムに選ぶ
@@ -68,12 +73,10 @@ public class BossManager : MonoBehaviour
                 break;
         }
 
-        // プレイヤーの位置に計算したオフセットを加算
-        Vector2 spawnPosition = (Vector2)player.position + offset;
+        // ★変更: 見つけ出したプレイヤーの位置に計算したオフセットを加算
+        Vector2 spawnPosition = (Vector2)playerObj.transform.position + offset;
 
         // 敵を生成
         Instantiate(BossPrefab, spawnPosition, Quaternion.identity);
     }
-
-    
 }
