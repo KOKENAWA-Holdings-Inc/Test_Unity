@@ -9,6 +9,7 @@ public class OrbitStatus : MonoBehaviour
     public float OrbitAttack = 2f;
     public bool attacked = false;
 
+
     [SerializeField] private float knockbackForce = 10f;
 
     void Start()
@@ -24,6 +25,7 @@ public class OrbitStatus : MonoBehaviour
     // ★変更: メソッド名と引数の型をトリガー用に変更
     private void OnTriggerEnter2D(Collider2D other)
     {
+        PlayerUltShooter.RaiseOnEnemyHit();
         attacked = true;
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         Player playerComponent = playerObj.GetComponent<Player>();

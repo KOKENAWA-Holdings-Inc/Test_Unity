@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TheWorld : MonoBehaviour
 {
-    public OrbitManager OrbitManager;
+    
     public GameManager GameManager;
     // public Player player; // ★ 不要なので削除
 
@@ -35,6 +35,7 @@ public class TheWorld : MonoBehaviour
         // 見つかったオブジェクトからPlayerスクリプトを取得する
         Player playerComponent = playerObj.GetComponent<Player>();
         PlayerLanceShooter lanceShooterComponent = playerObj.GetComponent<PlayerLanceShooter>();
+        OrbitManager OrbitComponent = playerObj.GetComponent<OrbitManager>();
         if (playerComponent == null)
         {
             Debug.LogError("PlayerオブジェクトにPlayerスクリプトがアタッチされていません。");
@@ -49,7 +50,7 @@ public class TheWorld : MonoBehaviour
                 playerComponent.Attack = playerComponent.Attack * 1.1f;
                 break;
             case "Defence+5%":
-                playerComponent.Defence++;
+                playerComponent.Defence = playerComponent.Defence * 1.05f;
                 break;
             case "MaxHP+5%":
                 // ロジックを改善: 最大HPを増やし、現在HPを最大値にする
@@ -60,11 +61,11 @@ public class TheWorld : MonoBehaviour
                 playerComponent.moveSpeed += 0.1f;
                 break;
             case "Cool Time-10%":
-                OrbitManager.respawnDelay = OrbitManager.respawnDelay * 0.9f;
+                OrbitComponent.respawnDelay = OrbitComponent.respawnDelay * 0.9f;
                 lanceShooterComponent.shootCooldown = lanceShooterComponent.shootCooldown * 0.9f;
                 break;
             case "Weapon Speed+30%":
-                OrbitManager.orbitSpeed = OrbitManager.orbitSpeed * 1.3f;
+                OrbitComponent.orbitSpeed = OrbitComponent.orbitSpeed * 1.3f;
                 lanceShooterComponent.bulletSpeed = lanceShooterComponent.bulletSpeed * 1.3f;
                 break;
         }

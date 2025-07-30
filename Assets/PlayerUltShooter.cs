@@ -14,10 +14,10 @@ public class PlayerUltShooter : MonoBehaviour
     public float maxUltCharge = 500f; // チャージの最大値
     public float passiveChargeRate = 2f;  // 1秒あたりの自然増加量
     public float hitChargeAmount = 3f;    // 1ヒットあたりの増加量
-    private float currentUltCharge = 0f;  // 現在のチャージ量
+    public float currentUltCharge = 0f;  // 現在のチャージ量
 
-    [Header("UI（任意）")]
-    [SerializeField] private Slider ultChargeSlider; // チャージ状況を表示するスライダー
+    private GameManager gameManager;
+
 
     // ★追加：敵に攻撃がヒットしたことを通知するためのイベント
     public static event Action OnEnemyHit;
@@ -47,12 +47,7 @@ public class PlayerUltShooter : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        // UIの初期設定（任意）
-        if (ultChargeSlider != null)
-        {
-            ultChargeSlider.maxValue = maxUltCharge;
-            ultChargeSlider.value = currentUltCharge;
-        }
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -65,7 +60,7 @@ public class PlayerUltShooter : MonoBehaviour
 
         // --- 2. 発射条件をチェック ---
         // ★変更：クリックに加えて、チャージが満タンであるかを確認
-        if (Input.GetMouseButtonDown(0) && currentUltCharge >= maxUltCharge)
+        if (!gameManager.IsPaused && Input.GetMouseButtonDown(0) && currentUltCharge >= maxUltCharge)
         {
             Vector3 targetPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;
@@ -76,10 +71,10 @@ public class PlayerUltShooter : MonoBehaviour
         }
 
         // --- 3. UIを更新（任意） ---
-        if (ultChargeSlider != null)
+        /*if (ultChargeSlider != null)
         {
             ultChargeSlider.value = currentUltCharge;
-        }
+        }*/
     }
 
     void Shoot(Vector3 target)

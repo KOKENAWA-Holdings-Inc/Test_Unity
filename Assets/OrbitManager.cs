@@ -4,62 +4,79 @@ using UnityEngine;
 
 public class OrbitManager : MonoBehaviour
 {
-    [Header("ターゲット設定")]
-    private Transform playerTransform; // 追従するプレイヤー
-
-    [Header("周回オブジェクト設定")]
+    // ... （変数の大部分はそのまま） ...
+    private Transform playerTransform;
     [SerializeField] private GameObject orbitingObjectPrefab;
     [SerializeField] private int numberOfObjects = 8;
     [SerializeField] private float radius = 3.0f;
     public float orbitSpeed = 50.0f;
-
-    [Header("時間設定")]
     [SerializeField] private float initialSpawnDelay = 2.0f;
-    [SerializeField] private float lifeTime = 10.0f;
+    public float lifeTime = 10.0f;
     public float respawnDelay = 5.0f;
-
     private List<GameObject> spawnedObjects = new List<GameObject>();
+    public List<GameObject> SpawnedObjects => spawnedObjects;
+    private Coroutine lifecycleCoroutine;
 
-    // ★ 変更点: Startでは初期化コルーチンを開始するだけ
     void Start()
     {
-        // プレイヤーを探して、見つかったらメイン処理を始めるコルーチンを開始
-        StartCoroutine(InitializeCoroutine());
+        // ★変更: ライフサイクルを開始するだけにする
+        lifecycleCoroutine = StartCoroutine(LifecycleCoroutine());
     }
 
-    // ★ 追加: プレイヤーを探して初期化を行うコルーチン
-    private IEnumerator InitializeCoroutine()
-    {
-        // playerTransformが見つかるまでループし続ける
-        while (playerTransform == null)
-        {
-            // "Player"タグを頼りにプレイヤーオブジェクトを探す
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
-            if (playerObj != null)
-            {
-                // 見つかったら参照を保存
-                playerTransform = playerObj.transform;
-            }
-
-            // プレイヤーが見つからなければ、次のフレームまで待機
-            yield return null;
-        }
-
-        // --- プレイヤーが見つかったら、ここから下の処理が実行される ---
-
-        // 召喚と消滅を繰り返すメインのサイクルを開始
-        StartCoroutine(LifecycleCoroutine());
-    }
+    // ▼▼▼ InitializeCoroutineは不要になったため削除 ▼▼▼
+    /*
+    private IEnumerator InitializeCoroutine() { ... }
+    */
 
     void LateUpdate()
     {
-        if (playerTransform != null && spawnedObjects.Count > 0)
+        // ★変更: プレイヤーへの参照が無効になったら、毎フレーム探し直す
+        if (playerTransform == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                playerTransform = playerObj.transform;
+            }
+            else
+            {
+                // プレイヤーがいない場合は何もしない
+                return;
+            }
+        }
+
+        // プレイヤーが見つかっていれば、周回処理を実行
+        if (spawnedObjects.Count > 0)
         {
             Orbit();
         }
     }
 
+    // ... （他のメソッドはそのまま） ...
+    private IEnumerator LifecycleCoroutine()
+    {
+        yield return new WaitForSeconds(initialSpawnDelay);
+        while (true)
+        {
+            SpawnObjects();
+            yield return new WaitForSeconds(lifeTime);
+            DespawnObjects();
+            yield return new WaitForSeconds(respawnDelay);
+        }
+    }
+    public void StopLifecycle()
+    {
+        if (lifecycleCoroutine != null)
+        {
+            StopCoroutine(lifecycleCoroutine);
+        }
+    }
+    public void RestartLifecycle()
+    {
+        StopLifecycle();
+        DespawnObjects();
+        lifecycleCoroutine = StartCoroutine(LifecycleCoroutine());
+    }
     private void Orbit()
     {
         for (int i = 0; i < spawnedObjects.Count; i++)
@@ -73,19 +90,6 @@ public class OrbitManager : MonoBehaviour
             spawnedObjects[i].transform.position = playerTransform.position + offset;
         }
     }
-
-    private IEnumerator LifecycleCoroutine()
-    {
-        yield return new WaitForSeconds(initialSpawnDelay);
-        while (true)
-        {
-            SpawnObjects();
-            yield return new WaitForSeconds(lifeTime);
-            DespawnObjects();
-            yield return new WaitForSeconds(respawnDelay);
-        }
-    }
-
     private void SpawnObjects()
     {
         if (spawnedObjects.Count > 0) DespawnObjects();
@@ -95,12 +99,11 @@ public class OrbitManager : MonoBehaviour
             spawnedObjects.Add(obj);
         }
     }
-
     private void DespawnObjects()
     {
         foreach (GameObject obj in spawnedObjects)
         {
-            Destroy(obj);
+            if (obj != null) Destroy(obj);
         }
         spawnedObjects.Clear();
     }

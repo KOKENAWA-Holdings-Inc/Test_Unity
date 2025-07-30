@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float ExperiencePoint = 0f;
     public float ExperienceTotal = 0f;
     public float PlayerLv = 1f;
-    public float Attack = 1f;
+    public float Attack = 10f;
     public float Defence = 1f;
     //public int Luck = 1;
     public float moveSpeed = 5f;
@@ -71,12 +71,13 @@ public class Player : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         // 衝突した相手のオブジェクトのタグを比較
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy")|| collision.gameObject.CompareTag("Elite"))
         {
             if (Time.time >= nextDamageTime)
             {
                 nextDamageTime = Time.time + damageCooldown;
                 EnemyManager EnemyComponent = collision.gameObject.GetComponent<EnemyManager>();
+                EliteManager EliteComponent = collision.gameObject.GetComponent<EliteManager>();
                 // 相手のタグが "Enemy" だった場合、コンソールにメッセージを出力
                 //Debug.Log("エネミーに接触しました！");
                 if (EnemyComponent != null)
@@ -84,6 +85,17 @@ public class Player : MonoBehaviour
                     if (EnemyComponent.Attack - (Defence - 1) >= 1)
                     {
                         PlayerHP = PlayerHP - (EnemyComponent.Attack - (Defence - 1)); // ダメージを受ける
+                    }
+                    else
+                    {
+                        PlayerHP -= 1f;
+                    }
+                }
+                if (EliteComponent != null)
+                {
+                    if (EliteComponent.Attack - (Defence - 1) >= 1)
+                    {
+                        PlayerHP = PlayerHP - (EliteComponent.Attack - (Defence - 1)); // ダメージを受ける
                     }
                     else
                     {

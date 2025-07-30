@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBallet : MonoBehaviour
+public class summonerStatus : MonoBehaviour
 {
     [SerializeField] private float Attack = 5f;
 
     void Start()
     {
         // 2秒後に弾が自動的に消えるようにする
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 0.2f);
     }
 
     // 何かに衝突した時に呼ばれる
@@ -26,15 +26,15 @@ public class BossBallet : MonoBehaviour
             // ★追加: EnemyManagerが取得できた場合のみダメージを与える
             if (PlayerComponent != null)
             {
-                if (Attack * (bossComponent.Attack * 0.5f) - PlayerComponent.Defence >= 1)
+                if (Attack * (bossComponent.Attack * 1.0f) - PlayerComponent.Defence >= 1)
                 {
                     PlayerComponent.PlayerHP = PlayerComponent.PlayerHP - (Attack * (bossComponent.Attack * 0.5f) - PlayerComponent.Defence);
                 }
-                else 
+                else
                 {
                     PlayerComponent.PlayerHP -= 1f;
                 }
-                
+
                 //Debug.Log(other.name + "にヒット！残りHP: " + EnemyComponent.EnemyHP);
             }
 

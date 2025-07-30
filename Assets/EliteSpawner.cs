@@ -9,7 +9,7 @@ public class EliteSpawner : MonoBehaviour
     public GameObject ElitePrefab;
     public TimeManager timeManager;
 
-    public float spawnInterval = 180f;
+    public float spawnInterval = 60f;
     private float spawnTimer = 0f;
     public Vector2 spawnArea = new Vector2(9.5f, 5.5f);
     private bool isSpawningActive = true;

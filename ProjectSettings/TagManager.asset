@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI
+    uniqueID: 1219897601
+    locked: 0
+  - name: Object
+    uniqueID: 4175171297
+    locked: 0

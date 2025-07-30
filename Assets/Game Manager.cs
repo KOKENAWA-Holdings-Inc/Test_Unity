@@ -8,6 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private bool isPaused = false;
+    public bool IsPaused => isPaused;
     private int playerLvre;
     // public Player player; // š •s—v‚È‚Ì‚Åíœ
     private Player targetPlayer; // š ©“®‚ÅŒŸo‚·‚é‚½‚ß‚Ì•Ï”
