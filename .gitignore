@@ -73,6 +73,9 @@ mono_crash.*
 *.unitypackage.meta
 *.app
 
+# Keep web build for GitHub Pages
+!web/
+
 # Crashlytics generated file
 crashlytics-build.properties
 
