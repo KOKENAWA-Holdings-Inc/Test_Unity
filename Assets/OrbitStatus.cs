@@ -6,53 +6,75 @@ public class OrbitStatus : MonoBehaviour
 {
     private GameObject Boss;
     private GameObject Enemy;
-    public int OrbitAttack = 5;
-    // Start is called before the first frame update
+    public float OrbitAttack = 2f;
+    public bool attacked = false;
+
+
+    [SerializeField] private float knockbackForce = 10f;
+
     void Start()
     {
-
+        // ...
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        // ...
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    // ★変更: メソッド名と引数の型をトリガー用に変更
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // 衝突した相手のオブジェクトのタグを比較
-        if (collision.gameObject.CompareTag("Enemy"))
+        PlayerUltShooter.RaiseOnEnemyHit();
+        attacked = true;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        Player playerComponent = playerObj.GetComponent<Player>();
+
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            EnemyManager EnemyComponent = collision.gameObject.GetComponent<EnemyManager>();
-            // 相手のタグが "Enemy" だった場合、コンソールにメッセージを出力
-            //Debug.Log("エネミーに接触しました！");
+            EnemyManager EnemyComponent = other.gameObject.GetComponent<EnemyManager>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.EnemyHP = EnemyComponent.EnemyHP - OrbitAttack; // ダメージを受ける
-                Debug.Log("Take " + OrbitAttack);
-
+                EnemyComponent.EnemyHP = EnemyComponent.EnemyHP - OrbitAttack * (playerComponent.Attack * 0.2f);
             }
 
-            // ここにダメージ処理やノックバック処理などを追加できます
-
+            Rigidbody2D enemyRb = other.gameObject.GetComponent<Rigidbody2D>();
+            if (enemyRb != null)
+            {
+                Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+                enemyRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            }
         }
 
-        if (collision.gameObject.CompareTag("Boss"))
+        if (other.gameObject.CompareTag("Elite"))
         {
-            Boss BossComponent = collision.gameObject.GetComponent<Boss>();
-            // 相手のタグが "Enemy" だった場合、コンソールにメッセージを出力
-            //Debug.Log("エネミーに接触しました！");
+            EliteManager EliteComponent = other.gameObject.GetComponent<EliteManager>();
+            if (EliteComponent != null)
+            {
+                EliteComponent.EliteHP = EliteComponent.EliteHP - OrbitAttack * (playerComponent.Attack * 0.2f);
+            }
+
+            Rigidbody2D eliteRb = other.gameObject.GetComponent<Rigidbody2D>();
+            if (eliteRb != null)
+            {
+                Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+                eliteRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            // 注意: BossコンポーネントがBossManagerを指しているか確認してください
+            BossManager BossComponent = other.gameObject.GetComponent<BossManager>();
             if (BossComponent != null)
             {
-                BossComponent.BossHP = BossComponent.BossHP - OrbitAttack; // ダメージを受ける
-                Debug.Log("Take " + OrbitAttack);
-
+                // 注意: BossManagerにBossHPという変数があるか確認してください
+                // BossComponent.BossHP = BossComponent.BossHP - OrbitAttack; 
             }
-
-            // ここにダメージ処理やノックバック処理などを追加できます
-
         }
-
-
+        if (attacked == true)
+        {
+            attacked = false;
+        }
     }
 }

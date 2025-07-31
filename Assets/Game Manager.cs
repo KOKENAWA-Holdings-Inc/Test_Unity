@@ -8,6 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private bool isPaused = false;
+    public bool IsPaused => isPaused;
     private int playerLvre;
     // public Player player; // ★ 不要なので削除
     private Player targetPlayer; // ★ 自動で検出するための変数
@@ -23,14 +24,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI RandomPassive2;
 
     [Header("選択肢の管理")]
-    public string[] masterItemChoices = { "attack", "defence", "HP", "luck" };
+    public string[] masterItemChoices = { "Attack+10%", "Defence+5%", "MaxHP+5%", "MoveSpeed+0.1", "Cool Time-2%", "Weapon Speed+3%" };
     private List<string> remainingChoices;
 
     void Start()
     {
         // 最初はUIを非表示にしておく
         if (passiveChoiceUIParent != null)
+        {
             passiveChoiceUIParent.SetActive(false);
+        }  
 
         // ★ プレイヤーを探し、見つけたらレベル監視を始めるコルーチンを開始
         StartCoroutine(InitializeAndMonitorPlayer());
@@ -51,7 +54,7 @@ public class GameManager : MonoBehaviour
         }
 
         // --- 2. プレイヤーが見つかったら初期設定を行う ---
-        playerLvre = targetPlayer.PlayerLv;
+        playerLvre = (int)targetPlayer.PlayerLv;
         ResetRemainingChoices();
         Debug.Log("プレイヤーを検出しました。レベル監視を開始します。");
 
@@ -65,10 +68,15 @@ public class GameManager : MonoBehaviour
                 {
                     DisplayUniqueChoices();
                     PauseGame();
-                    playerLvre = targetPlayer.PlayerLv;
+                    playerLvre = (int)targetPlayer.PlayerLv;
 
                     if (passiveChoiceUIParent != null)
+                    {
                         passiveChoiceUIParent.SetActive(true);
+                        PassiveUI.SetActive(true);
+                        PassiveUI1.SetActive(true);
+                    }
+                        
                 }
             }
             yield return null; // 1フレーム待つ
@@ -109,6 +117,9 @@ public class GameManager : MonoBehaviour
         isPaused = false;
 
         if (passiveChoiceUIParent != null)
+        {
             passiveChoiceUIParent.SetActive(false);
+        }
+            
     }
 }

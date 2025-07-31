@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int PlayerHP = 10;
-    public int PlayerMAXHP = 10; 
-    public int ExperiencePool = 10;
-    public int ExperiencePoint = 0;
-    public int ExperienceTotal = 0;
-    public int PlayerLv = 1;
-    public int Attack = 5;
-    public int Defence = 5;
-    public int Luck = 1;
+    public float PlayerHP = 100f;
+    public float PlayerMAXHP = 100f; 
+    public float ExperiencePool = 10f;
+    public float ExperiencePoint = 0f;
+    public float ExperienceTotal = 0f;
+    public float PlayerLv = 1f;
+    public float Attack = 10f;
+    public float Defence = 1f;
+    //public int Luck = 1;
     public float moveSpeed = 5f;
     private GameObject Enemy;
+    // ダメージを受ける間隔（秒）
+    private float damageCooldown = 0.1f;
+    // 次にダメージを受けることができる時刻を記録する変数
+    private float nextDamageTime = 0f;
+
 
     public static event Action OnPlayerDied;
     private Rigidbody2D rb;
@@ -63,31 +68,65 @@ public class Player : MonoBehaviour
         rb.velocity = movement.normalized * moveSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         // 衝突した相手のオブジェクトのタグを比較
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy")|| collision.gameObject.CompareTag("Elite"))
         {
-            EnemyManager EnemyComponent = collision.gameObject.GetComponent<EnemyManager>();
-            // 相手のタグが "Enemy" だった場合、コンソールにメッセージを出力
-            //Debug.Log("エネミーに接触しました！");
-            if (EnemyComponent != null)
+            if (Time.time >= nextDamageTime)
             {
-                PlayerHP = PlayerHP - EnemyComponent.Attack; // ダメージを受ける
-                Debug.Log("Take "+ EnemyComponent.Attack);
-                //EnemyHP = EnemyHP - playerComponent.Attack;
-                //Destroy(this.gameObject);
+                nextDamageTime = Time.time + damageCooldown;
+                EnemyManager EnemyComponent = collision.gameObject.GetComponent<EnemyManager>();
+                EliteManager EliteComponent = collision.gameObject.GetComponent<EliteManager>();
+                // 相手のタグが "Enemy" だった場合、コンソールにメッセージを出力
+                //Debug.Log("エネミーに接触しました！");
+                if (EnemyComponent != null)
+                {
+                    if (EnemyComponent.Attack - (Defence - 1) >= 1)
+                    {
+                        PlayerHP = PlayerHP - (EnemyComponent.Attack - (Defence - 1)); // ダメージを受ける
+                    }
+                    else
+                    {
+                        PlayerHP -= 1f;
+                    }
+                }
+                if (EliteComponent != null)
+                {
+                    if (EliteComponent.Attack - (Defence - 1) >= 1)
+                    {
+                        PlayerHP = PlayerHP - (EliteComponent.Attack - (Defence - 1)); // ダメージを受ける
+                    }
+                    else
+                    {
+                        PlayerHP -= 1f;
+                    }
+
+
+                }
             }
 
-            // ここにダメージ処理やノックバック処理などを追加できます
-            //PlayerHP = PlayerHP - EnemyComponent.Attack;
-            //ExperiencePoint++;
+            
         }
 
-        /*if (collision.gameObject.CompareTag("Boss")) 
+        if (collision.gameObject.CompareTag("Boss")) 
         {
-            //PlayerHP = PlayerHP - Boss.Attack;
-        }*/
+            Boss BossComponent = collision.gameObject.GetComponent<Boss>();
+            if (BossComponent != null)
+            {
+                if (BossComponent.Attack - Defence >= 1)
+                {
+                    PlayerHP = PlayerHP - (BossComponent.Attack - Defence); // ダメージを受ける
+                }
+                else 
+                {
+                    PlayerHP -= 1f;
+                }
+                
+                
+            }
+            
+        }
     }
 
     public void PlayerLvManager()

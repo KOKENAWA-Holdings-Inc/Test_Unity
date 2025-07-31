@@ -13,6 +13,12 @@ GameObject:
   - component: {fileID: 705463583909660170}
   - component: {fileID: 1588478722222055116}
   - component: {fileID: 622915866411615526}
+  - component: {fileID: 8085704878941699396}
+  - component: {fileID: -7766792012856661668}
+  - component: {fileID: 6678980943983778715}
+  - component: {fileID: -1309117862448685614}
+  - component: {fileID: 6493792167798821631}
+  - component: {fileID: -6276531822998365514}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -28,7 +34,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260270625765622361}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
@@ -73,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -119795999
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -132,9 +138,8 @@ MonoBehaviour:
   ExperiencePoint: 0
   ExperienceTotal: 0
   PlayerLv: 1
-  Attack: 5
-  Defence: 5
-  Luck: 1
+  Attack: 10
+  Defence: 1
   moveSpeed: 5
 --- !u!61 &622915866411615526
 BoxCollider2D:
@@ -181,3 +186,101 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8085704878941699396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a92d8b05124d42bc9056091e73140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ringPrefab: {fileID: 2211501652500152945, guid: d2a58b94361f0ab459c5c8ac7008eb28, type: 3}
+--- !u!114 &-7766792012856661668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed561b3f8fb0e4f4bbe721f51dd93584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8533729602629975623, guid: 1f56b5862528b504e9beaf775bfc6496, type: 3}
+  bulletSpeed: 15
+  shootCooldown: 3
+--- !u!114 &6678980943983778715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9cd80d81318ee4f924a47026e22169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6598770115839735500, guid: 7c6ce82c0640e3a43b0e41eb7fdf194f, type: 3}
+  projectileSpeed: 15
+  maxUltCharge: 500
+  passiveChargeRate: 2
+  hitChargeAmount: 3
+  currentUltCharge: 0
+--- !u!114 &-1309117862448685614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b2029dc6b35d34195b28ca7d041526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeedBoost: 1.5
+  chargeMax: 30
+  regenerationDelay: 3
+  regenerationRate: 1
+  drainRate: 0.2
+--- !u!114 &6493792167798821631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569391d58aa98c34490a6a7a633ce27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbitingObjectPrefab: {fileID: 3961423459727996009, guid: 40ebfb15597697e4788cef742333a435, type: 3}
+  numberOfObjects: 8
+  radius: 3
+  orbitSpeed: 50
+  initialSpawnDelay: 2
+  lifeTime: 10
+  respawnDelay: 5
+--- !u!114 &-6276531822998365514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260270625765622361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4c66dd0728eb44a8886f1f9f16c6bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 10
+  attackMultiplier: 1.5
+  speedMultiplier: 3
+  cooldown: 30

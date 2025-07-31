@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6778100330793479080}
   - component: {fileID: -8854907797111201342}
   - component: {fileID: -8605322684149387496}
+  - component: {fileID: 7697383002864943041}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -119795999
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -171,8 +172,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a5ac2eda0b5064b9154f2db6a758fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BossHP: 100
-  BossMAXHP: 20
+  BossHP: 1000
+  BossMAXHP: 1000
   Attack: 5
   Defence: 5
-  BossExperience: 10
+  BossExperience: 0
+--- !u!114 &7697383002864943041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140865389343808558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af37b64d8c2ab14bbe35bf3f8a2c9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2341915375230884911, guid: 03e16d955ce39e04fbc4d082fd2ca6ea, type: 3}
+  bulletSpeed: 5
