@@ -26,7 +26,7 @@ public class EliteSpawner : MonoBehaviour
         else
         {
             // もし見つからなかった場合、エラーログを出してスポーンを停止する
-            Debug.LogError("Playerオブジェクトが見つかりません！ 'Player'タグが設定されているか確認してください。");
+            //Debug.LogError("Playerオブジェクトが見つかりません！ 'Player'タグが設定されているか確認してください。");
             isSpawningActive = false;
         }
     }
@@ -45,14 +45,14 @@ public class EliteSpawner : MonoBehaviour
             if (spawnTimer >= spawnInterval)
             {
                 SpawnEnemy();
-                Debug.Log("Spawned");
+                //Debug.Log("Spawned");
                 spawnTimer -= spawnInterval;
             }
 
             // 時間が420秒以上になったら、スポーンを停止する
-            if (timeManager.elapsedTime >= 420)
+            if (timeManager.elapsedTime >= 419)
             {
-                Debug.Log("指定時間を超えたため、エネミーのスポーンを停止し、既存のエネミーを全て破壊します。");
+                //Debug.Log("指定時間を超えたため、エネミーのスポーンを停止し、既存のエネミーを全て破壊します。");
                 isSpawningActive = false;
                 DestroyAllEnemies();
             }
@@ -72,7 +72,7 @@ public class EliteSpawner : MonoBehaviour
     {
         if (ElitePrefab == null)
         {
-            Debug.LogError("Elite Prefabが設定されていません。");
+            //Debug.LogError("Elite Prefabが設定されていません。");
             return;
         }
 

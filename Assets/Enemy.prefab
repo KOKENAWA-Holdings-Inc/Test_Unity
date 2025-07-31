@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21134fd4be68e7145aeecf04fd20509d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePopupPrefab: {fileID: 2472530067132266711, guid: 31c69438c09deda4ea27b31d57f2c32a, type: 3}
   EnemyHP: 6
   EnemyMaxHP: 50
   Attack: 5

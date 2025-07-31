@@ -33,7 +33,7 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Playerオブジェクトが見つかりませんでした。");
+            //Debug.LogError("Playerオブジェクトが見つかりませんでした。");
             this.enabled = false; // プレイヤーがいないならスクリプトを無効化
             return;
         }
@@ -67,7 +67,7 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
             // チャージが0になったら強制的にブーストを終了
             if (charge <= 0)
             {
-                Debug.Log("チャージ切れ！ブーストを終了します。");
+                //Debug.Log("チャージ切れ！ブーストを終了します。");
                 StopBoost();
             }
         }
@@ -96,7 +96,7 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
             isBoosting = true;
             playerComponent.moveSpeed *= moveSpeedBoost;
             timeOfLastChargeChange = Time.time;
-            Debug.Log("ブースト開始！ 現在の速度: " + playerComponent.moveSpeed);
+            //Debug.Log("ブースト開始！ 現在の速度: " + playerComponent.moveSpeed);
         }
     }
 
@@ -110,7 +110,7 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
             isBoosting = false;
             playerComponent.moveSpeed /= moveSpeedBoost;
             timeOfLastChargeChange = Time.time;
-            Debug.Log("ブースト停止。 現在の速度: " + playerComponent.moveSpeed);
+            //Debug.Log("ブースト停止。 現在の速度: " + playerComponent.moveSpeed);
         }
     }
 }

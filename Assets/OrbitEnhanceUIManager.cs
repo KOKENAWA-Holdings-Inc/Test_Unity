@@ -19,13 +19,13 @@ public class OrbitEnhanceUIManager : MonoBehaviour
 
         if (orbitEnhancer == null)
         {
-            Debug.LogError("シーンにOrbitEnhancerコンポーネントが見つかりません！");
+            //Debug.LogError("シーンにOrbitEnhancerコンポーネントが見つかりません！");
             this.enabled = false;
             return;
         }
         if (cooldownSlider == null)
         {
-            Debug.LogError("Cooldown SliderがInspectorから設定されていません！");
+            //Debug.LogError("Cooldown SliderがInspectorから設定されていません！");
             this.enabled = false;
             return;
         }

@@ -8,8 +8,8 @@ public class OrbitManager : MonoBehaviour
     private Transform playerTransform;
     [SerializeField] private GameObject orbitingObjectPrefab;
     [SerializeField] private int numberOfObjects = 8;
-    [SerializeField] private float radius = 3.0f;
-    public float orbitSpeed = 50.0f;
+    [SerializeField] private float radius = 2.0f;
+    public float orbitSpeed = 70.0f;
     [SerializeField] private float initialSpawnDelay = 2.0f;
     public float lifeTime = 10.0f;
     public float respawnDelay = 5.0f;

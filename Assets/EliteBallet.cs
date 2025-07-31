@@ -41,7 +41,7 @@ public class EliteBallet : MonoBehaviour
                 {
                     PlayerComponent.PlayerHP -= 1f;
                 }
-                Debug.Log("hit");
+                //Debug.Log("hit");
             }
         }
     }

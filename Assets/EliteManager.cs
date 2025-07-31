@@ -6,6 +6,7 @@ using UnityEngine;
 public class EliteManager : MonoBehaviour
 {
     private Transform playerTransform; // プレイヤー追従用のTransform
+    public GameObject damagePopupPrefab;
     public float EliteHP = 10f;
     public float EliteMaxHP = 10f;
     public float Attack = 1f;
@@ -54,6 +55,20 @@ public class EliteManager : MonoBehaviour
             if (healthSlider != null)
             {
                 healthSlider.value = EliteHP;
+            }
+            if (damagePopupPrefab != null)
+            {
+                float damage = previousHP - EliteHP;
+
+                // ★変更: 敵の頭上に直接生成する
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // 敵の1ユニット上に表示
+                GameObject popup = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity);
+
+                // ▼▼▼ 問題の原因なので、この行を完全に削除 ▼▼▼
+                // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
+
+                // 生成したポップアップにダメージ量を設定
+                popup.GetComponent<DamagePopup>().Setup(damage);
             }
 
             // 現在のHPを「直前のHP」として保存し、次回のフレームで比較できるようにする

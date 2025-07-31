@@ -28,7 +28,7 @@ public class TheWorld : MonoBehaviour
         // プレイヤーが見つからなかった場合は、エラーログを出して処理を中断する
         if (playerObj == null)
         {
-            Debug.LogError("Playerオブジェクトが見つかりませんでした。");
+            //Debug.LogError("Playerオブジェクトが見つかりませんでした。");
             return;
         }
 
@@ -38,7 +38,7 @@ public class TheWorld : MonoBehaviour
         OrbitManager OrbitComponent = playerObj.GetComponent<OrbitManager>();
         if (playerComponent == null)
         {
-            Debug.LogError("PlayerオブジェクトにPlayerスクリプトがアタッチされていません。");
+            //Debug.LogError("PlayerオブジェクトにPlayerスクリプトがアタッチされていません。");
             return;
         }
 

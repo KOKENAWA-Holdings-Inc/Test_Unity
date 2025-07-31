@@ -4,21 +4,37 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // public Transform player; // ← インスペクターでの設定は不要になるので削除またはコメントアウト
-    private Transform player; // 内部でプレイヤーの情報を保持するための変数
+    private Transform player;
 
     public GameObject enemyPrefab;
     public TimeManager timeManager;
 
-    public float spawnInterval = 0.5f;
+    // ▼▼▼ スポーン間隔の設定をこちらに変更 ▼▼▼
+    [Header("Spawn Interval Settings")]
+    [Tooltip("ゲーム開始時のスポーン間隔")]
+    [SerializeField] private float initialSpawnInterval = 2.0f;
+    [Tooltip("最短のスポーン間隔")]
+    [SerializeField] private float minSpawnInterval = 0.1f;
+    [Tooltip("最短間隔に到達するまでの時間（秒）")]
+    [SerializeField] private float timeToMinInterval = 300f; // 5分
+
+    // ★追加: 敵の数の上限設定
+    [Header("Spawn Limit Settings")]
+    [Tooltip("シーン上の敵の最大数")]
+    [SerializeField] private int maxEnemies = 500;
+
     private float spawnTimer = 0f;
     public Vector2 spawnArea = new Vector2(9.5f, 5.5f);
     private bool isSpawningActive = true;
 
-    // ★★★ ゲーム開始時に一度だけ実行されるAwakeメソッドを追加 ★★★
+    [Header("HP Scaling Settings")]
+    [Tooltip("敵の基本的な最大HP")]
+    [SerializeField] private float baseEnemyMaxHp = 10f;
+    [Tooltip("1秒あたりに増加する最大HPの量")]
+    [SerializeField] private float hpGrowthPerSecond = 0.5f;
+
     void Start()
     {
-        // "Player"というタグが付いているゲームオブジェクトを探し、そのTransformコンポーネントを取得する
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
         {
@@ -26,34 +42,40 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            // もし見つからなかった場合、エラーログを出してスポーンを停止する
-            Debug.LogError("Playerオブジェクトが見つかりません！ 'Player'タグが設定されているか確認してください。");
+            //Debug.LogError("Playerオブジェクトが見つかりません！ 'Player'タグが設定されているか確認してください。");
             isSpawningActive = false;
         }
     }
 
     void Update()
     {
-        // playerがいない場合は何もしない
         if (player == null) return;
 
-        // スポナーがアクティブな場合のみ処理を実行
         if (isSpawningActive)
         {
-            // タイマー処理
-            spawnTimer += Time.deltaTime;
-
-            if (spawnTimer >= spawnInterval)
+            // ★追加: シーン上の敵の数が上限に達していたら、スポーン処理を中断
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length >= maxEnemies)
             {
-                SpawnEnemy();
-                Debug.Log("Spawned");
-                spawnTimer -= spawnInterval;
+                //Debug.Log("Upper Limited");
+                return; // 上限に達しているので何もしない
             }
 
-            // 時間が420秒以上になったら、スポーンを停止する
+            // ★変更: 経過時間に基づいて現在のスポーン間隔を計算
+            float progress = Mathf.Clamp01(timeManager.elapsedTime / timeToMinInterval);
+            float currentSpawnInterval = Mathf.Lerp(initialSpawnInterval, minSpawnInterval, progress);
+
+            spawnTimer += Time.deltaTime;
+
+            // ★変更: 計算した現在のスポーン間隔で判定
+            if (spawnTimer >= currentSpawnInterval)
+            {
+                SpawnEnemy();
+                spawnTimer = 0f; // タイマーをリセット
+            }
+
             if (timeManager.elapsedTime >= 420)
             {
-                Debug.Log("指定時間を超えたため、エネミーのスポーンを停止し、既存のエネミーを全て破壊します。");
+                //Debug.Log("指定時間を超えたため、エネミーのスポーンを停止し、既存のエネミーを全て破壊します。");
                 isSpawningActive = false;
                 DestroyAllEnemies();
             }
@@ -73,32 +95,30 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefab == null)
         {
-            Debug.LogError("Enemy Prefabが設定されていません。");
+            //Debug.LogError("Enemy Prefabが設定されていません。");
             return;
         }
 
-        //Debug.Log("Spawning enemy near player at position: " + player.position);
-
         Vector2 offset = Vector2.zero;
         int side = Random.Range(0, 4);
-
         switch (side)
         {
-            case 0:
-                offset = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), spawnArea.y);
-                break;
-            case 1:
-                offset = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), -spawnArea.y);
-                break;
-            case 2:
-                offset = new Vector2(spawnArea.x, Random.Range(-spawnArea.y, spawnArea.y));
-                break;
-            case 3:
-                offset = new Vector2(-spawnArea.x, Random.Range(-spawnArea.y, spawnArea.y));
-                break;
+            case 0: offset = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), spawnArea.y); break;
+            case 1: offset = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), -spawnArea.y); break;
+            case 2: offset = new Vector2(spawnArea.x, Random.Range(-spawnArea.y, spawnArea.y)); break;
+            case 3: offset = new Vector2(-spawnArea.x, Random.Range(-spawnArea.y, spawnArea.y)); break;
+        }
+        Vector2 spawnPosition = (Vector2)player.position + offset;
+
+        float scaledMaxHp = baseEnemyMaxHp + (hpGrowthPerSecond * timeManager.elapsedTime);
+        GameObject enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        EnemyManager enemyManager = enemyInstance.GetComponent<EnemyManager>();
+        if (enemyManager != null)
+        {
+            enemyManager.InitializeStats(scaledMaxHp);
         }
 
-        Vector2 spawnPosition = (Vector2)player.position + offset;
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        // ▼▼▼ この行は重複して敵を生成してしまうため削除しました ▼▼▼
+        // Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 }

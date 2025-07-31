@@ -19,14 +19,14 @@ public class ExperienceUIManager : MonoBehaviour
         // PlayerまたはSliderが見つからない場合は、エラーログを出して処理を止める
         if (targetPlayer == null)
         {
-            Debug.LogError("シーンにPlayerコンポーネントを持つオブジェクトが見つかりません！");
+            //Debug.LogError("シーンにPlayerコンポーネントを持つオブジェクトが見つかりません！");
             this.enabled = false; // このスクリプトを無効にする
             return;
         }
 
         if (experienceSlider == null)
         {
-            Debug.LogError("Experience SliderがInspectorから設定されていません！");
+            //Debug.LogError("Experience SliderがInspectorから設定されていません！");
             this.enabled = false; // このスクリプトを無効にする
             return;
         }

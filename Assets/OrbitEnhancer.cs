@@ -25,7 +25,7 @@ public class OrbitEnhancer : MonoBehaviour
         orbitManager = GetComponent<OrbitManager>();
         if (orbitManager == null)
         {
-            Debug.LogError("OrbitManagerが同じオブジェクトにアタッチされていません！");
+            //Debug.LogError("OrbitManagerが同じオブジェクトにアタッチされていません！");
             this.enabled = false;
         }
     }
@@ -43,7 +43,7 @@ public class OrbitEnhancer : MonoBehaviour
         // --- 1. バフ開始処理 ---
         // ★変更: 次に使用可能になる時刻を「現在時刻 + クールダウン」に設定
         abilityReadyTime = Time.time + duration + cooldown;
-        Debug.Log("オービット強化！");
+        //Debug.Log("オービット強化！");
 
         float originalSpeed = orbitManager.orbitSpeed;
         orbitManager.orbitSpeed *= speedMultiplier;
@@ -62,7 +62,7 @@ public class OrbitEnhancer : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         // --- 3. バフ終了処理 ---
-        Debug.Log("オービット強化終了。クールダウン開始。");
+        //Debug.Log("オービット強化終了。クールダウン開始。");
         orbitManager.orbitSpeed = originalSpeed;
         orbitManager.RestartLifecycle();
     }

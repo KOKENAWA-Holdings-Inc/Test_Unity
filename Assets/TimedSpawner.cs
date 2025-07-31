@@ -57,7 +57,7 @@ public class TimedSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
         }
-        Debug.Log("ボスを発見！TimedSpawnerの処理を開始します。");
+        //Debug.Log("ボスを発見！TimedSpawnerの処理を開始します。");
         StartCoroutine(SpawningLoopCoroutine());
     }
 
@@ -75,7 +75,7 @@ public class TimedSpawner : MonoBehaviour
     {
         if (objectPrefab == null || markerUiPrefab == null)
         {
-            Debug.LogError("Object Prefab または Marker Ui Prefab が設定されていません！");
+            //Debug.LogError("Object Prefab または Marker Ui Prefab が設定されていません！");
             return;
         }
 

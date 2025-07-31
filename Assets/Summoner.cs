@@ -35,7 +35,7 @@ public class Summoner : MonoBehaviour
     /// </summary>
     private IEnumerator FindBossAndStartSummoning()
     {
-        Debug.Log("ボスを探しています...");
+        //Debug.Log("ボスを探しています...");
 
         // ボスが見つかるまで1秒ごとに探し続ける
         while (GameObject.FindGameObjectWithTag("Boss") == null)
@@ -44,7 +44,7 @@ public class Summoner : MonoBehaviour
         }
 
         // --- ボスが見つかったら、ここから下の初期設定が実行される ---
-        Debug.Log("ボスを発見！召喚処理を開始します。");
+        //Debug.Log("ボスを発見！召喚処理を開始します。");
 
         if (markerCanvas != null)
         {
@@ -52,7 +52,7 @@ public class Summoner : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Marker CanvasがInspectorから設定されていません！");
+            //Debug.LogError("Marker CanvasがInspectorから設定されていません！");
         }
 
         // メインの召喚ループを開始する
@@ -79,7 +79,7 @@ public class Summoner : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj == null)
         {
-            Debug.LogError("Playerが見つからなかったため、召喚シーケンスを中断します。");
+            //Debug.LogError("Playerが見つからなかったため、召喚シーケンスを中断します。");
             yield break;
         }
 
@@ -88,7 +88,7 @@ public class Summoner : MonoBehaviour
         // --- UIマーカーの表示処理 ---
         markerCanvas.transform.position = summonPosition;
         markerCanvas.gameObject.SetActive(true);
-        Debug.Log("プレイヤーをターゲットに設定しました。");
+        //Debug.Log("プレイヤーをターゲットに設定しました。");
 
         yield return new WaitForSeconds(0.5f);
 
@@ -98,6 +98,6 @@ public class Summoner : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Instantiate(ballPrefab, summonPosition, Quaternion.identity);
-        Debug.Log("プレイヤーの位置に球を召喚しました。");
+        //Debug.Log("プレイヤーの位置に球を召喚しました。");
     }
 }

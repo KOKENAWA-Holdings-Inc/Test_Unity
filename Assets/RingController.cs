@@ -32,7 +32,7 @@ public class RingController : MonoBehaviour
         else
         {
             // プレイヤーが見つからなかった場合のエラー処理
-            Debug.LogError("Tag 'Player' not found in scene! Destroying ring.");
+            //Debug.LogError("Tag 'Player' not found in scene! Destroying ring.");
             Destroy(gameObject);
             return;
         }
@@ -108,7 +108,7 @@ public class RingController : MonoBehaviour
         string tag = other.tag;
         if ((tag == "Enemy" || tag == "Boss") && !hitEnemies.Contains(other.gameObject))
         {
-            Debug.Log(other.name + "に攻撃がヒット！");
+            //Debug.Log(other.name + "に攻撃がヒット！");
             hitEnemies.Add(other.gameObject);
         }
     }

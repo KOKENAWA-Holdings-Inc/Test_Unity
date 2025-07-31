@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412fabdacacf55843bd72269e18d6481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePopupPrefab: {fileID: 2472530067132266711, guid: 31c69438c09deda4ea27b31d57f2c32a, type: 3}
   EliteHP: 50
   EliteMaxHP: 150
   Attack: 5

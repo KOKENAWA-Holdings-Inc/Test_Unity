@@ -11,9 +11,9 @@ public class PlayerUltShooter : MonoBehaviour
     public float projectileSpeed = 15f;
 
     [Header("必殺技チャージ設定")]
-    public float maxUltCharge = 500f; // チャージの最大値
-    public float passiveChargeRate = 2f;  // 1秒あたりの自然増加量
-    public float hitChargeAmount = 3f;    // 1ヒットあたりの増加量
+    public float maxUltCharge = 1500f; // チャージの最大値
+    public float passiveChargeRate = 1f;  // 1秒あたりの自然増加量
+    public float hitChargeAmount = 0.1f;    // 1ヒットあたりの増加量
     public float currentUltCharge = 0f;  // 現在のチャージ量
 
     private GameManager gameManager;

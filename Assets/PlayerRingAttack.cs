@@ -20,7 +20,7 @@ public class PlayerRingAttack : MonoBehaviour
         GameObject nearestTarget = FindNearestTarget();
         if (nearestTarget == null)
         {
-            Debug.Log("UŒ‚‘ÎÛ‚Ì“G‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            //Debug.Log("UŒ‚‘ÎÛ‚Ì“G‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
             return;
         }
 

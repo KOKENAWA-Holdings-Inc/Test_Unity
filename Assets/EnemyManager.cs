@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
+    
+    public GameObject damagePopupPrefab;
     private Transform playerTransform; // プレイヤー追従用のTransform
     public float EnemyHP = 10f;
     public float EnemyMaxHP = 10f;
@@ -19,6 +21,11 @@ public class EnemyManager : MonoBehaviour
 
     public static event Action OnEnemyDied;
 
+    public void InitializeStats(float newMaxHp)
+    {
+        EnemyMaxHP = newMaxHp;
+        EnemyHP = EnemyMaxHP; // HPも最大値に設定
+    }
     private void Awake()
     {
         EnemyHP = EnemyMaxHP;
@@ -61,6 +68,21 @@ public class EnemyManager : MonoBehaviour
             {
                 healthSlider.value = EnemyHP;
             }
+            if (damagePopupPrefab != null)
+            {
+                float damage = previousHP - EnemyHP;
+
+                // ★変更: 敵の頭上に直接生成する
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // 敵の1ユニット上に表示
+                GameObject popup = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity);
+
+                // ▼▼▼ 問題の原因なので、この行を完全に削除 ▼▼▼
+                // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
+
+                // 生成したポップアップにダメージ量を設定
+                popup.GetComponent<DamagePopup>().Setup(damage);
+            }
+
 
             // 現在のHPを「直前のHP」として保存し、次回のフレームで比較できるようにする
             previousHP = EnemyHP;

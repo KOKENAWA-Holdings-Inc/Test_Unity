@@ -21,7 +21,7 @@ public class StartManager : MonoBehaviour
 
     public void StartButto()
     {
-        Debug.Log("ok");
+        //Debug.Log("ok");
         SceneManager.LoadScene("Game Main Scene");
         //GameManager.ResumeGame();
     }

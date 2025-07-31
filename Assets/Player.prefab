@@ -228,9 +228,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6598770115839735500, guid: 7c6ce82c0640e3a43b0e41eb7fdf194f, type: 3}
   projectileSpeed: 15
-  maxUltCharge: 500
-  passiveChargeRate: 2
-  hitChargeAmount: 3
+  maxUltCharge: 1500
+  passiveChargeRate: 1
+  hitChargeAmount: 0.1
   currentUltCharge: 0
 --- !u!114 &-1309117862448685614
 MonoBehaviour:
@@ -263,8 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitingObjectPrefab: {fileID: 3961423459727996009, guid: 40ebfb15597697e4788cef742333a435, type: 3}
   numberOfObjects: 8
-  radius: 3
-  orbitSpeed: 50
+  radius: 2
+  orbitSpeed: 70
   initialSpawnDelay: 2
   lifeTime: 10
   respawnDelay: 5

@@ -16,7 +16,7 @@ public class ultCoolTimeManager : MonoBehaviour
         // ★追加: もし見つからなかった場合のエラー処理
         if (PlayerUltShooter == null)
         {
-            Debug.LogError("シーンにPlayerUltShooterコンポーネントが見つかりません！");
+            //Debug.LogError("シーンにPlayerUltShooterコンポーネントが見つかりません！");
             return; // 処理を中断
         }
 

@@ -18,7 +18,7 @@ public class PlayerLanceShooter : MonoBehaviour
             lastShotTime = Time.time;
             Shoot();
         }
-        Debug.Log("Current Bullet Speed: " + this.bulletSpeed);
+        //Debug.Log("Current Bullet Speed: " + this.bulletSpeed);
     }
 
     void Shoot()
@@ -27,7 +27,7 @@ public class PlayerLanceShooter : MonoBehaviour
 
         if (nearestEnemy == null)
         {
-            Debug.LogWarning("シーンにEnemyまたはBossがいません。");
+            //Debug.LogWarning("シーンにEnemyまたはBossがいません。");
             return;
         }
 

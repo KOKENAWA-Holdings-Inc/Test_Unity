@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         // --- 2. プレイヤーが見つかったら初期設定を行う ---
         playerLvre = (int)targetPlayer.PlayerLv;
         ResetRemainingChoices();
-        Debug.Log("プレイヤーを検出しました。レベル監視を開始します。");
+        //Debug.Log("プレイヤーを検出しました。レベル監視を開始します。");
 
         // --- 3. レベルアップの監視ループ（Updateの代わり） ---
         while (true)

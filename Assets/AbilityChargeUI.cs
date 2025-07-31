@@ -18,13 +18,13 @@ public class AbilityChargeUI : MonoBehaviour
         // スクリプトまたはスライダーが見つからない場合はエラーを出す
         if (speedAbility == null)
         {
-            Debug.LogError("シーンにPlayerMoveSpeedAbilityコンポーネントが見つかりません！");
+            //Debug.LogError("シーンにPlayerMoveSpeedAbilityコンポーネントが見つかりません！");
             this.enabled = false; // スクリプトを無効化
             return;
         }
         if (chargeSlider == null)
         {
-            Debug.LogError("Charge SliderがInspectorから設定されていません！");
+            //Debug.LogError("Charge SliderがInspectorから設定されていません！");
             this.enabled = false;
             return;
         }

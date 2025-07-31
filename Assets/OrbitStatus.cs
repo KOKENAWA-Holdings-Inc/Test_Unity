@@ -65,11 +65,11 @@ public class OrbitStatus : MonoBehaviour
         if (other.gameObject.CompareTag("Boss"))
         {
             // 注意: BossコンポーネントがBossManagerを指しているか確認してください
-            BossManager BossComponent = other.gameObject.GetComponent<BossManager>();
+            Boss BossComponent = other.gameObject.GetComponent<Boss>();
             if (BossComponent != null)
             {
                 // 注意: BossManagerにBossHPという変数があるか確認してください
-                // BossComponent.BossHP = BossComponent.BossHP - OrbitAttack; 
+                BossComponent.BossHP = BossComponent.BossHP - OrbitAttack; 
             }
         }
         if (attacked == true)

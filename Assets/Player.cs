@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
         if (ExperiencePoint/ExperiencePool >= 1)
         {
             PlayerLv++;
+            Attack = Attack * 1.05f;
+            Defence = Defence * 1.01f;
             ExperiencePoint = ExperiencePoint - ExperiencePool;
             ExperiencePool = (int)(Mathf.Pow(5,PlayerLv)/Mathf.Pow(4, PlayerLv) + 10 * PlayerLv);
             //Debug.Log("Now ExperiencePool Is"+ExperiencePool+".");
