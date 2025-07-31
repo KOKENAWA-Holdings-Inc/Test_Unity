@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     private Transform playerTransform; // プレイヤー追従用のTransform
+    public GameObject damagePopupPrefab;
     public float EnemyHP = 10f;
     public float EnemyMaxHP = 10f;
     public float Attack = 1f;
@@ -60,6 +61,15 @@ public class EnemyManager : MonoBehaviour
             if (healthSlider != null)
             {
                 healthSlider.value = EnemyHP;
+            }
+
+            if (damagePopupPrefab != null)
+            {
+                float damage = previousHP - EnemyHP;
+                // ダメージポップアップを生成
+                GameObject popup = Instantiate(damagePopupPrefab, transform.position, Quaternion.identity);
+                popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false); // Canvasの子にする
+                popup.GetComponent<DamagePopup>().Setup(damage);
             }
 
             // 現在のHPを「直前のHP」として保存し、次回のフレームで比較できるようにする
