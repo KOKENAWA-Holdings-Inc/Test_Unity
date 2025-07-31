@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class OrbitEnhancer : MonoBehaviour
 {
-    [Header("”\—Íİ’è")]
+    [Header("èƒ½åŠ›è¨­å®š")]
     [SerializeField] private float duration = 10.0f;
     [SerializeField] private float attackMultiplier = 1.5f;
     [SerializeField] private float speedMultiplier = 3.0f;
 
-    // š’Ç‰Á: “Æ—§‚µ‚½ƒN[ƒ‹ƒ_ƒEƒ“ŠÔ‚ğİ’è‚·‚é•Ï”
+    // â˜…è¿½åŠ : ç‹¬ç«‹ã—ãŸã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³æ™‚é–“ã‚’è¨­å®šã™ã‚‹å¤‰æ•°
     [SerializeField] private float cooldown = 30.0f;
 
     private OrbitManager orbitManager;
     private float abilityReadyTime = 0f;
 
-    // š•ÏX: UI—p‚ÌƒvƒƒpƒeƒB‚ªV‚µ‚¢cooldown•Ï”‚ğ•Ô‚·‚æ‚¤‚É‚·‚é
+    // â˜…å¤‰æ›´: UIç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãŒæ–°ã—ã„cooldownå¤‰æ•°ã‚’è¿”ã™ã‚ˆã†ã«ã™ã‚‹
     public float AbilityReadyTime => abilityReadyTime;
     public float CooldownDuration => cooldown;
 
@@ -25,7 +25,11 @@ public class OrbitEnhancer : MonoBehaviour
         orbitManager = GetComponent<OrbitManager>();
         if (orbitManager == null)
         {
+<<<<<<< HEAD
             //Debug.LogError("OrbitManager‚ª“¯‚¶ƒIƒuƒWƒFƒNƒg‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+=======
+            Debug.LogError("OrbitManagerãŒåŒã˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
+>>>>>>> 06cf35643ef73d7b82988806f5780709285f365b
             this.enabled = false;
         }
     }
@@ -40,10 +44,14 @@ public class OrbitEnhancer : MonoBehaviour
 
     private IEnumerator ActivateOrbitBuffCoroutine()
     {
-        // --- 1. ƒoƒtŠJnˆ— ---
-        // š•ÏX: Ÿ‚Ég—p‰Â”\‚É‚È‚é‚ğuŒ»İ + ƒN[ƒ‹ƒ_ƒEƒ“v‚Éİ’è
+        // --- 1. ãƒãƒ•é–‹å§‹å‡¦ç† ---
+        // â˜…å¤‰æ›´: æ¬¡ã«ä½¿ç”¨å¯èƒ½ã«ãªã‚‹æ™‚åˆ»ã‚’ã€Œç¾åœ¨æ™‚åˆ» + ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ã€ã«è¨­å®š
         abilityReadyTime = Time.time + duration + cooldown;
+<<<<<<< HEAD
         //Debug.Log("ƒI[ƒrƒbƒg‹­‰»I");
+=======
+        Debug.Log("ã‚ªãƒ¼ãƒ“ãƒƒãƒˆå¼·åŒ–ï¼");
+>>>>>>> 06cf35643ef73d7b82988806f5780709285f365b
 
         float originalSpeed = orbitManager.orbitSpeed;
         orbitManager.orbitSpeed *= speedMultiplier;
@@ -58,11 +66,16 @@ public class OrbitEnhancer : MonoBehaviour
         }
         orbitManager.StopLifecycle();
 
-        // --- 2. ƒoƒtŒp‘±ŠÔ‚¾‚¯‘Ò‹@ ---
+        // --- 2. ãƒãƒ•ç¶™ç¶šæ™‚é–“ã ã‘å¾…æ©Ÿ ---
         yield return new WaitForSeconds(duration);
 
+<<<<<<< HEAD
         // --- 3. ƒoƒtI—¹ˆ— ---
         //Debug.Log("ƒI[ƒrƒbƒg‹­‰»I—¹BƒN[ƒ‹ƒ_ƒEƒ“ŠJnB");
+=======
+        // --- 3. ãƒãƒ•çµ‚äº†å‡¦ç† ---
+        Debug.Log("ã‚ªãƒ¼ãƒ“ãƒƒãƒˆå¼·åŒ–çµ‚äº†ã€‚ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³é–‹å§‹ã€‚");
+>>>>>>> 06cf35643ef73d7b82988806f5780709285f365b
         orbitManager.orbitSpeed = originalSpeed;
         orbitManager.RestartLifecycle();
     }
