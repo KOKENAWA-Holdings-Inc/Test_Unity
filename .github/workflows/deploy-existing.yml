@@ -2,7 +2,7 @@ name: Deploy Existing Build to GitHub Pages
 
 on:
   push:
-    branches: [ web ]
+    branches: [ main ]
     paths:
       - 'web/**'
 
