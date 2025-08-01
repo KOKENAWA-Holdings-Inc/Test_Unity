@@ -19,21 +19,13 @@ public class OrbitEnhanceUIManager : MonoBehaviour
 
         if (orbitEnhancer == null)
         {
-<<<<<<< HEAD
-            //Debug.LogError("ƒV[ƒ“‚ÉOrbitEnhancerƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-=======
             Debug.LogError("ã‚·ãƒ¼ãƒ³ã«OrbitEnhancerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
->>>>>>> 06cf35643ef73d7b82988806f5780709285f365b
             this.enabled = false;
             return;
         }
         if (cooldownSlider == null)
         {
-<<<<<<< HEAD
-            //Debug.LogError("Cooldown Slider‚ªInspector‚©‚çÝ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
-=======
             Debug.LogError("Cooldown SliderãŒInspectorã‹ã‚‰è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
->>>>>>> 06cf35643ef73d7b82988806f5780709285f365b
             this.enabled = false;
             return;
         }

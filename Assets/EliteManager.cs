@@ -68,6 +68,7 @@ public class EliteManager : MonoBehaviour
                 // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
 
                 // 生成したポップアップにダメージ量を設定
+                Debug.Log(damage);
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
 

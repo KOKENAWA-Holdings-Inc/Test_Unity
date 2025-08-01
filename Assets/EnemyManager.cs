@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
-    
+
     public GameObject damagePopupPrefab;
-    private Transform playerTransform; // ƒvƒŒƒCƒ„[’Ç]—p‚ÌTransform
-    public GameObject damagePopupPrefab;
+    private Transform playerTransform; // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ç]ï¿½pï¿½ï¿½Transform
     public float EnemyHP = 10f;
     public float EnemyMaxHP = 10f;
     public float Attack = 1f;
@@ -17,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private UnityEngine.UI.Slider healthSlider;
 
-    // š’Ç‰Á: HP‚Ì•Ï‰»‚ğŒŸ’m‚·‚é‚½‚ß‚ÉA’¼‘O‚ÌHP‚ğ•Û‘¶‚·‚é•Ï”
+    // ï¿½ï¿½ï¿½Ç‰ï¿½: HPï¿½Ì•Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½é‚½ï¿½ß‚ÉAï¿½ï¿½ï¿½Oï¿½ï¿½HPï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½ï¿½Ïï¿½
     private float previousHP;
 
     public static event Action OnEnemyDied;
@@ -25,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     public void InitializeStats(float newMaxHp)
     {
         EnemyMaxHP = newMaxHp;
-        EnemyHP = EnemyMaxHP; // HP‚àÅ‘å’l‚Éİ’è
+        EnemyHP = EnemyMaxHP; // HPï¿½ï¿½ï¿½Å‘ï¿½lï¿½Éİ’ï¿½
     }
     private void Awake()
     {
@@ -34,37 +33,37 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        // ’Ç]‚·‚é‚½‚ß‚ÉƒvƒŒƒCƒ„[‚ÌTransform‚ğ•Û
+        // ï¿½Ç]ï¿½ï¿½ï¿½é‚½ï¿½ß‚Éƒvï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½Transformï¿½ï¿½Ûï¿½
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
         }
 
-        // š’Ç‰Á: ’¼‘O‚ÌHP‚ğ‰Šú‰»
+        // ï¿½ï¿½ï¿½Ç‰ï¿½: ï¿½ï¿½ï¿½Oï¿½ï¿½HPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         previousHP = EnemyHP;
 
         if (healthSlider != null)
         {
             healthSlider.maxValue = EnemyMaxHP;
             healthSlider.value = EnemyHP;
-            // ‰Šúó‘Ô‚Å‚Í”ñ•\¦‚É‚·‚é
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚Å‚Í”ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
             healthSlider.gameObject.SetActive(false);
         }
     }
 
     void Update()
     {
-        // š•ÏX“_: HP‚ª•Ï‰»‚µ‚½‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+        // ï¿½ï¿½ï¿½ÏXï¿½_: HPï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½N
         if (EnemyHP != previousHP)
         {
-            // HPƒo[‚ª”ñ•\¦‚È‚çAÅ‰‚É•\¦‚·‚é
+            // HPï¿½oï¿½[ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½È‚ï¿½Aï¿½Åï¿½ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (healthSlider != null && !healthSlider.gameObject.activeSelf)
             {
                 healthSlider.gameObject.SetActive(true);
             }
 
-            // Slider‚Ì’l‚ğXV
+            // Sliderï¿½Ì’lï¿½ï¿½ï¿½Xï¿½V
             if (healthSlider != null)
             {
                 healthSlider.value = EnemyHP;
@@ -73,14 +72,14 @@ public class EnemyManager : MonoBehaviour
             {
                 float damage = previousHP - EnemyHP;
 
-                // š•ÏX: “G‚Ì“ªã‚É’¼Ú¶¬‚·‚é
-                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // “G‚Ì1ƒ†ƒjƒbƒgã‚É•\¦
+                // ï¿½ï¿½ï¿½ÏX: ï¿½Gï¿½Ì“ï¿½ï¿½ï¿½É’ï¿½ï¿½Úï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // ï¿½Gï¿½ï¿½1ï¿½ï¿½ï¿½jï¿½bï¿½gï¿½ï¿½É•\ï¿½ï¿½
                 GameObject popup = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity);
 
-                // ¥¥¥ –â‘è‚ÌŒ´ˆö‚È‚Ì‚ÅA‚±‚Ìs‚ğŠ®‘S‚Éíœ ¥¥¥
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½È‚Ì‚ÅAï¿½ï¿½ï¿½Ìsï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½Éíœ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
 
-                // ¶¬‚µ‚½ƒ|ƒbƒvƒAƒbƒv‚Éƒ_ƒ[ƒW—Ê‚ğİ’è
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½bï¿½vï¿½Aï¿½bï¿½vï¿½Éƒ_ï¿½ï¿½ï¿½[ï¿½Wï¿½Ê‚ï¿½İ’ï¿½
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
 
@@ -88,25 +87,25 @@ public class EnemyManager : MonoBehaviour
             if (damagePopupPrefab != null)
             {
                 float damage = previousHP - EnemyHP;
-                // ƒ_ƒ[ƒWƒ|ƒbƒvƒAƒbƒv‚ğ¶¬
+                // ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½|ï¿½bï¿½vï¿½Aï¿½bï¿½vï¿½ğ¶ï¿½
                 GameObject popup = Instantiate(damagePopupPrefab, transform.position, Quaternion.identity);
-                popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false); // Canvas‚Ìq‚É‚·‚é
+                popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false); // Canvasï¿½Ìqï¿½É‚ï¿½ï¿½ï¿½
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
 
-            // Œ»İ‚ÌHP‚ğu’¼‘O‚ÌHPv‚Æ‚µ‚Ä•Û‘¶‚µAŸ‰ñ‚ÌƒtƒŒ[ƒ€‚Å”äŠr‚Å‚«‚é‚æ‚¤‚É‚·‚é
+            // ï¿½ï¿½ï¿½İ‚ï¿½HPï¿½ï¿½ï¿½uï¿½ï¿½ï¿½Oï¿½ï¿½HPï¿½vï¿½Æ‚ï¿½ï¿½Ä•Û‘ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Å”ï¿½rï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
             previousHP = EnemyHP;
         }
 
-        // ©g‚ÌHP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚©‚ğ–ˆƒtƒŒ[ƒ€ŠÄ‹‚·‚é
+        // ï¿½ï¿½ï¿½gï¿½ï¿½HPï¿½ï¿½0ï¿½È‰ï¿½ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ğ–ˆƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½
         if (EnemyHP <= 0)
         {
-            Die(); // ƒCƒxƒ“ƒg‚ğ”­s
+            Die(); // ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ğ”­s
 
-            // ƒV[ƒ“‚©‚ç "Player" ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ğ’T‚·
+            // ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "Player" ï¿½^ï¿½Oï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Tï¿½ï¿½
             GameObject playerToReward = GameObject.FindGameObjectWithTag("Player");
 
-            // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚½ê‡‚Ì‚İŒoŒ±’l‚ğ—^‚¦‚é
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Ì‚İŒoï¿½ï¿½ï¿½lï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½
             if (playerToReward != null)
             {
                 Player playerComponent = playerToReward.GetComponent<Player>();
@@ -117,25 +116,25 @@ public class EnemyManager : MonoBehaviour
                 }
             }
 
-            // ©g‚ğ”j‰ó‚·‚é
+            // ï¿½ï¿½ï¿½gï¿½ï¿½jï¿½ó‚·‚ï¿½
             Destroy(this.gameObject);
         }
     }
 
-    // š’Ç‰Á: HPƒo[‚ÌˆÊ’u‚ğ“G‚É’Ç]‚³‚¹‚é‚½‚ß‚Ìˆ—
+    // ï¿½ï¿½ï¿½Ç‰ï¿½: HPï¿½oï¿½[ï¿½ÌˆÊ’uï¿½ï¿½Gï¿½É’Ç]ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚Ìï¿½ï¿½ï¿½
     private void LateUpdate()
     {
-        // HPƒo[‚ª•\¦‚³‚ê‚Ä‚¢‚éê‡‚Ì‚İAˆÊ’u‚ğXV‚·‚é
+        // HPï¿½oï¿½[ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Ì‚İAï¿½Ê’uï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
         if (healthSlider != null && healthSlider.gameObject.activeSelf)
         {
-            // “G–{‘Ì‚ÌˆÊ’u‚©‚ç^ã‚É0.5‚¸‚ç‚µ‚½ˆÊ’u‚ÉHPƒo[‚ğ”z’u‚·‚é
+            // ï¿½Gï¿½{ï¿½Ì‚ÌˆÊ’uï¿½ï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½0.5ï¿½ï¿½ï¿½ç‚µï¿½ï¿½ï¿½Ê’uï¿½ï¿½HPï¿½oï¿½[ï¿½ï¿½zï¿½uï¿½ï¿½ï¿½ï¿½
             healthSlider.transform.position = this.transform.position + new Vector3(0, 0.5f, 0);
         }
     }
 
     private void FixedUpdate()
     {
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚éê‡‚Ì‚İ’Ç]
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Ì‚İ’Ç]
         if (playerTransform != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);

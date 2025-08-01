@@ -47,8 +47,8 @@ public class Boss : MonoBehaviour
                 // 生成したポップアップにダメージ量を設定
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
+            previousHP = BossHP;
         }
-        previousHP = BossHP;
         // 自身のHPが0以下になったかを毎フレーム監視する
         if (BossHP <= 0)
         {
