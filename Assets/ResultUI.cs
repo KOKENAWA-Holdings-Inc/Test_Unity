@@ -12,6 +12,7 @@ public class ResultUI : MonoBehaviour
     public Image BackGround;
     public TotalEnemyKill TotalEnemyKill;
     public TotalExperienceUI TotalExperienceUI;
+    public ResultPlayerLvUI ResultPlayerLvUI;
     public TitleManager Title;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class ResultUI : MonoBehaviour
         BackGround.enabled = true;
         TotalEnemyKill.ResultKilledEnemyText.enabled = true;
         TotalExperienceUI.TotalExperienceText.enabled = true;
+        ResultPlayerLvUI.ResultLvText.enabled = true;
         Title.titletext.enabled = true;
         ResultText.text = ("Stage Fail");
             GameManager.PauseGame();

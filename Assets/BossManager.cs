@@ -23,7 +23,7 @@ public class BossManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SpawnBoss", 420f);
+        Invoke("SpawnBoss", 0f);
     }
 
     // Update is called once per frame

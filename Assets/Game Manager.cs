@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject passiveChoiceUIParent;
     public TextMeshProUGUI RandomPassive1;
     public TextMeshProUGUI RandomPassive2;
+    public TextMeshProUGUI Choice;
 
     [Header("‘I‘ğˆ‚ÌŠÇ—")]
     public string[] masterItemChoices = { "Attack+10%", "Defence+5%", "MaxHP+5%", "MoveSpeed+0.1", "Cool Time-2%", "Weapon Speed+3%" };

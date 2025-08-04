@@ -11,9 +11,9 @@ public class BossAttackBalletShooter : MonoBehaviour
     public float bulletSpeed = 15f;
 
     // ★追加: 射撃のクールダウンタイム（3秒）
-    private float shootCooldown = 3f;
+    private float shootCooldown = 1f;
     // ★追加: 最後に撃った時間を記録する変数
-    private float lastShotTime = -3f; // 最初にすぐ撃てるようにマイナス値で初期化
+    private float lastShotTime = -1f; // 最初にすぐ撃てるようにマイナス値で初期化
 
     void Update()
     {
