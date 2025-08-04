@@ -10,26 +10,26 @@ public class CoolTimeUI : MonoBehaviour
 
     void Update()
     {
-        // QÆ‚ªØ‚ê‚Ä‚¢‚½‚çA’T‚µ‚És‚­
+        // å‚ç…§ãŒåˆ‡ã‚Œã¦ã„ãŸã‚‰ã€æ¢ã—ã«è¡Œã
         if (targetPlayer == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
-                // ‚±‚±‚ÅGetComponent‚ğ‚İ‚é
+                // ã“ã“ã§GetComponentã‚’è©¦ã¿ã‚‹
                 targetPlayer = playerObj.GetComponent<PlayerLanceShooter>();
             }
         }
 
-        // š•ÏX: Ä“xƒ`ƒFƒbƒN‚ğ’Ç‰Á
-        // ÅI“I‚ÉtargetPlayer‚ª—LŒø‚ÈQÆ‚ğ‚Á‚Ä‚¢‚éê‡‚Ì‚İAUI‚ğXV‚·‚é
+        // â˜…å¤‰æ›´: å†åº¦ãƒã‚§ãƒƒã‚¯ã‚’è¿½åŠ 
+        // æœ€çµ‚çš„ã«targetPlayerãŒæœ‰åŠ¹ãªå‚ç…§ã‚’æŒã£ã¦ã„ã‚‹å ´åˆã®ã¿ã€UIã‚’æ›´æ–°ã™ã‚‹
         if (targetPlayer != null)
         {
             UpdateCoolTimeUI();
         }
         // else
         // {
-        //     // ƒvƒŒƒCƒ„[‚ª‚¢‚È‚¢ê‡‚ÍƒXƒ‰ƒCƒ_[‚ğ”ñ•\¦‚É‚·‚é‚È‚Ç
+        //     // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãªã„å ´åˆã¯ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹ãªã©
         //     CoolTimeslider.gameObject.SetActive(false);
         // }
     }

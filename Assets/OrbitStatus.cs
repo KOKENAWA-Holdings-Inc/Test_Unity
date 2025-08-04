@@ -22,7 +22,7 @@ public class OrbitStatus : MonoBehaviour
         // ...
     }
 
-    // š•ÏX: ƒƒ\ƒbƒh–¼‚Æˆø”‚ÌŒ^‚ğƒgƒŠƒK[—p‚É•ÏX
+    // â˜…å¤‰æ›´: ãƒ¡ã‚½ãƒƒãƒ‰åã¨å¼•æ•°ã®å‹ã‚’ãƒˆãƒªã‚¬ãƒ¼ç”¨ã«å¤‰æ›´
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerUltShooter.RaiseOnEnemyHit();
@@ -64,11 +64,11 @@ public class OrbitStatus : MonoBehaviour
 
         if (other.gameObject.CompareTag("Boss"))
         {
-            // ’ˆÓ: BossƒRƒ“ƒ|[ƒlƒ“ƒg‚ªBossManager‚ğw‚µ‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢
+            // æ³¨æ„: Bossã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒBossManagerã‚’æŒ‡ã—ã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„
             Boss BossComponent = other.gameObject.GetComponent<Boss>();
             if (BossComponent != null)
             {
-                // ’ˆÓ: BossManager‚ÉBossHP‚Æ‚¢‚¤•Ï”‚ª‚ ‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢
+                // æ³¨æ„: BossManagerã«BossHPã¨ã„ã†å¤‰æ•°ãŒã‚ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„
                 BossComponent.BossHP = BossComponent.BossHP - OrbitAttack * (playerComponent.Attack * 0.2f); 
             }
         }

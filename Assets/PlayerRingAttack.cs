@@ -20,7 +20,7 @@ public class PlayerRingAttack : MonoBehaviour
         GameObject nearestTarget = FindNearestTarget();
         if (nearestTarget == null)
         {
-            //Debug.Log("UŒ‚‘ÎÛ‚Ì“G‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            //Debug.Log("æ”»æ’ƒå¯¾è±¡ã®æ•µãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
             return;
         }
 
@@ -29,12 +29,12 @@ public class PlayerRingAttack : MonoBehaviour
 
         if (ringController != null)
         {
-            // š•ÏX“_: Initialize‚É“n‚·ˆø”‚©‚ç©g‚Ìtransform‚ğíœ
+            // â˜…å¤‰æ›´ç‚¹: Initializeã«æ¸¡ã™å¼•æ•°ã‹ã‚‰è‡ªèº«ã®transformã‚’å‰Šé™¤
             ringController.Initialize(nearestTarget.transform);
         }
     }
 
-    // (FindNearestTargetƒƒ\ƒbƒh‚Í•ÏX‚ ‚è‚Ü‚¹‚ñ)
+    // (FindNearestTargetãƒ¡ã‚½ãƒƒãƒ‰ã¯å¤‰æ›´ã‚ã‚Šã¾ã›ã‚“)
     private GameObject FindNearestTarget()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class ResultPlayerLvUI : MonoBehaviour
 {
-    public TextMeshProUGUI ResultLvText; // šSerializeField‚É‚µ‚ÄƒCƒ“ƒXƒyƒNƒ^[‚©‚çİ’è
-    private Player targetPlayer; // QÆ‚·‚éPlayerƒXƒNƒŠƒvƒg
+    public TextMeshProUGUI ResultLvText; // â˜…SerializeFieldã«ã—ã¦ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã‹ã‚‰è¨­å®š
+    private Player targetPlayer; // å‚ç…§ã™ã‚‹Playerã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 
-    // Œ»İ•\¦‚µ‚Ä‚¢‚éƒŒƒxƒ‹‚ğ‹L˜^‚µ‚Ä‚¨‚­•Ï”
+    // ç¾åœ¨è¡¨ç¤ºã—ã¦ã„ã‚‹ãƒ¬ãƒ™ãƒ«ã‚’è¨˜éŒ²ã—ã¦ãŠãå¤‰æ•°
     private int currentDisplayedLv = -1;
 
 
@@ -18,7 +18,7 @@ public class ResultPlayerLvUI : MonoBehaviour
     }
     void Update()
     {
-        // ƒ^[ƒQƒbƒg‚ÌƒvƒŒƒCƒ„[‚ğ‚Ü‚¾Œ©‚Â‚¯‚Ä‚¢‚È‚¢ê‡A’T‚·
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã¾ã è¦‹ã¤ã‘ã¦ã„ãªã„å ´åˆã€æ¢ã™
         if (targetPlayer == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -28,32 +28,32 @@ public class ResultPlayerLvUI : MonoBehaviour
             }
         }
 
-        // ƒ^[ƒQƒbƒg‚ÌƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍUI‚ğ”ñ•\¦‚É‚µ‚Äˆ—‚ğI‚¦‚é
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯UIã‚’éè¡¨ç¤ºã«ã—ã¦å‡¦ç†ã‚’çµ‚ãˆã‚‹
         if (targetPlayer == null)
         {
             ResultLvText.gameObject.SetActive(false);
             return;
         }
 
-        // --- ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚½ê‡‚Ìˆ— ---
+        // --- ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ãŸå ´åˆã®å‡¦ç† ---
 
-        // UI‚ğŠmÀ‚É•\¦ó‘Ô‚É‚·‚é
+        // UIã‚’ç¢ºå®Ÿã«è¡¨ç¤ºçŠ¶æ…‹ã«ã™ã‚‹
         ResultLvText.gameObject.SetActive(true);
 
-        // šƒvƒŒƒCƒ„[‚ÌƒŒƒxƒ‹‚ªAŒ»İ•\¦‚µ‚Ä‚¢‚éƒŒƒxƒ‹‚ÆˆÙ‚È‚éê‡‚Ì‚İƒeƒLƒXƒg‚ğXV
+        // â˜…ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¬ãƒ™ãƒ«ãŒã€ç¾åœ¨è¡¨ç¤ºã—ã¦ã„ã‚‹ãƒ¬ãƒ™ãƒ«ã¨ç•°ãªã‚‹å ´åˆã®ã¿ãƒ†ã‚­ã‚¹ãƒˆã‚’æ›´æ–°
         if (targetPlayer.PlayerLv != currentDisplayedLv)
         {
             UpdateLvText();
         }
     }
 
-    // ƒeƒLƒXƒg‚ğXV‚·‚éˆ—
+    // ãƒ†ã‚­ã‚¹ãƒˆã‚’æ›´æ–°ã™ã‚‹å‡¦ç†
     private void UpdateLvText()
     {
-        // ƒeƒLƒXƒg‚ğƒvƒŒƒCƒ„[‚ÌŒ»İ‚ÌƒŒƒxƒ‹‚ÅXV
+        // ãƒ†ã‚­ã‚¹ãƒˆã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç¾åœ¨ã®ãƒ¬ãƒ™ãƒ«ã§æ›´æ–°
         ResultLvText.text = "Final Lv:" + targetPlayer.PlayerLv;
 
-        // Œ»İ•\¦‚µ‚Ä‚¢‚éƒŒƒxƒ‹‚Ì’l‚ğXV
+        // ç¾åœ¨è¡¨ç¤ºã—ã¦ã„ã‚‹ãƒ¬ãƒ™ãƒ«ã®å€¤ã‚’æ›´æ–°
         currentDisplayedLv = (int)targetPlayer.PlayerLv;
     }
 }

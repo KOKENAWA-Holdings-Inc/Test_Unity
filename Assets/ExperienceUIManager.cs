@@ -1,46 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // UI‚ğˆµ‚¤‚½‚ß‚É•K—v
+using UnityEngine.UI; // UIã‚’æ‰±ã†ãŸã‚ã«å¿…è¦
 
 public class ExperienceUIManager : MonoBehaviour
 {
-    [Header("UIQÆ")]
-    [SerializeField] private Slider experienceSlider; // Inspector‚©‚çİ’è‚·‚éŒoŒ±’lƒXƒ‰ƒCƒ_[
+    [Header("UIå‚ç…§")]
+    [SerializeField] private Slider experienceSlider; // Inspectorã‹ã‚‰è¨­å®šã™ã‚‹çµŒé¨“å€¤ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 
-    [Header("ŠÄ‹‘ÎÛ")]
-    private Player targetPlayer; // ƒV[ƒ““à‚ÌƒvƒŒƒCƒ„[‚ğŠi”[‚·‚é•Ï”
+    [Header("ç›£è¦–å¯¾è±¡")]
+    private Player targetPlayer; // ã‚·ãƒ¼ãƒ³å†…ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
 
     void Start()
     {
-        // ƒV[ƒ““à‚É‘¶İ‚·‚éPlayerƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’T‚µ‚ÄAtargetPlayer•Ï”‚ÉŠi”[‚·‚é
+        // ã‚·ãƒ¼ãƒ³å†…ã«å­˜åœ¨ã™ã‚‹Playerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æ¢ã—ã¦ã€targetPlayerå¤‰æ•°ã«æ ¼ç´ã™ã‚‹
         targetPlayer = FindObjectOfType<Player>();
 
-        // Player‚Ü‚½‚ÍSlider‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍAƒGƒ‰[ƒƒO‚ğo‚µ‚Äˆ—‚ğ~‚ß‚é
+        // Playerã¾ãŸã¯SliderãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’å‡ºã—ã¦å‡¦ç†ã‚’æ­¢ã‚ã‚‹
         if (targetPlayer == null)
         {
-            //Debug.LogError("ƒV[ƒ“‚ÉPlayerƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‚ÂƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-            this.enabled = false; // ‚±‚ÌƒXƒNƒŠƒvƒg‚ğ–³Œø‚É‚·‚é
+            //Debug.LogError("ã‚·ãƒ¼ãƒ³ã«Playerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+            this.enabled = false; // ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ç„¡åŠ¹ã«ã™ã‚‹
             return;
         }
 
         if (experienceSlider == null)
         {
-            //Debug.LogError("Experience Slider‚ªInspector‚©‚çİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
-            this.enabled = false; // ‚±‚ÌƒXƒNƒŠƒvƒg‚ğ–³Œø‚É‚·‚é
+            //Debug.LogError("Experience SliderãŒInspectorã‹ã‚‰è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
+            this.enabled = false; // ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ç„¡åŠ¹ã«ã™ã‚‹
             return;
         }
     }
 
     void Update()
     {
-        // Player‚ÆSlider‚ª³í‚Éİ’è‚³‚ê‚Ä‚¢‚éê‡‚Ì‚İA–ˆƒtƒŒ[ƒ€’l‚ğXV‚·‚é
+        // Playerã¨SliderãŒæ­£å¸¸ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã®ã¿ã€æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å€¤ã‚’æ›´æ–°ã™ã‚‹
         if (targetPlayer != null && experienceSlider != null)
         {
-            // ƒXƒ‰ƒCƒ_[‚ÌÅ‘å’l‚ğAƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l—Ê(ExperiencePool)‚Éİ’è
+            // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®æœ€å¤§å€¤ã‚’ã€ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã«å¿…è¦ãªçµŒé¨“å€¤é‡(ExperiencePool)ã«è¨­å®š
             experienceSlider.maxValue = targetPlayer.ExperiencePool;
 
-            // ƒXƒ‰ƒCƒ_[‚ÌŒ»İ‚Ì’l‚ğAŒ»İ—­‚Ü‚Á‚Ä‚¢‚éŒoŒ±’l—Ê(ExperiencePoint)‚Éİ’è
+            // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®ç¾åœ¨ã®å€¤ã‚’ã€ç¾åœ¨æºœã¾ã£ã¦ã„ã‚‹çµŒé¨“å€¤é‡(ExperiencePoint)ã«è¨­å®š
             experienceSlider.value = targetPlayer.ExperiencePoint;
         }
     }

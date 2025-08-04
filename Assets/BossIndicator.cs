@@ -15,7 +15,7 @@ public class BossIndicator : MonoBehaviour
     public Vector2 hideArea = new Vector2(9f, 5f);
     public float screenPadding = 100f;
 
-    // ššš UI‚ğ‰æ–Ê’[‚©‚ç“à‘¤‚ÖˆÚ“®‚³‚¹‚é‹——£‚ğ’Ç‰Á ššš
+    // â˜…â˜…â˜… UIã‚’ç”»é¢ç«¯ã‹ã‚‰å†…å´ã¸ç§»å‹•ã•ã›ã‚‹è·é›¢ã‚’è¿½åŠ  â˜…â˜…â˜…
     public float inwardOffset = 30f;
 
     void Start()
@@ -29,22 +29,22 @@ public class BossIndicator : MonoBehaviour
 
         if (boss == null)
         {
-            Debug.Log("Start“_‚Å‚ÍAboss‚Ínull‚Å‚·B‚±‚ê‚Í³í‚Èó‘Ô‚Å‚·B");
+            Debug.Log("Startæ™‚ç‚¹ã§ã¯ã€bossã¯nullã§ã™ã€‚ã“ã‚Œã¯æ­£å¸¸ãªçŠ¶æ…‹ã§ã™ã€‚");
         }
         else
         {
-            Debug.Log("Œx: Start“_‚ÅAboss‚É‰½‚ç‚©‚Ì’l‚ª“ü‚Á‚Ä‚¢‚Ü‚·I‚±‚ê‚ªŒ´ˆö‚Å‚·B");
+            Debug.Log("è­¦å‘Š: Startæ™‚ç‚¹ã§ã€bossã«ä½•ã‚‰ã‹ã®å€¤ãŒå…¥ã£ã¦ã„ã¾ã™ï¼ã“ã‚ŒãŒåŸå› ã§ã™ã€‚");
         }
     }
 
     void Update()
     {
-        // ƒvƒŒƒCƒ„[‚Æƒ{ƒX‚ğ’T‚·ˆ— (•ÏX‚È‚µ)
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ãƒœã‚¹ã‚’æ¢ã™å‡¦ç† (å¤‰æ›´ãªã—)
         if (player == null)
         {
-            // ššš ‚±‚ÌƒƒO‚ª•\¦‚³‚ê‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢ ššš
-            //Debug.LogError("Player‚ªŒ©‚Â‚©‚ç‚È‚¢‚½‚ßAƒCƒ“ƒWƒP[ƒ^[‚Ìˆ—‚ğ’†’f‚µ‚Ü‚·BPlayer‚Ìƒ^ƒO‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B");
-            player = GameObject.FindGameObjectWithTag("Player")?.transform; // –ˆƒtƒŒ[ƒ€’T‚µ‚És‚­‚æ‚¤‚ÉC³
+            // â˜…â˜…â˜… ã“ã®ãƒ­ã‚°ãŒè¡¨ç¤ºã•ã‚Œã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„ â˜…â˜…â˜…
+            //Debug.LogError("PlayerãŒè¦‹ã¤ã‹ã‚‰ãªã„ãŸã‚ã€ã‚¤ãƒ³ã‚¸ã‚±ãƒ¼ã‚¿ãƒ¼ã®å‡¦ç†ã‚’ä¸­æ–­ã—ã¾ã™ã€‚Playerã®ã‚¿ã‚°ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
+            player = GameObject.FindGameObjectWithTag("Player")?.transform; // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ¢ã—ã«è¡Œãã‚ˆã†ã«ä¿®æ­£
             return;
         }
         if (boss == null)
@@ -55,7 +55,7 @@ public class BossIndicator : MonoBehaviour
             Debug.Log("Boss Spawned");
         }
 
-        // •\¦/”ñ•\¦‚Ì”»’è (•ÏX‚È‚µ)
+        // è¡¨ç¤º/éè¡¨ç¤ºã®åˆ¤å®š (å¤‰æ›´ãªã—)
         Vector2 relativePosition = boss.position - player.position;
         bool isBossInsideArea = Mathf.Abs(relativePosition.x) <= hideArea.x &&
                                 Mathf.Abs(relativePosition.y) <= hideArea.y;
@@ -63,11 +63,11 @@ public class BossIndicator : MonoBehaviour
 
         if (uiText.enabled)
         {
-            // --- UI‚ÌŒü‚«‚ğŒvZ ---
+            // --- UIã®å‘ãã‚’è¨ˆç®— ---
             transform.up = relativePosition.normalized;
 
-            // --- UI‚ÌˆÊ’u‚ğ‰æ–Ê’[‚ÉŒvZ ---
-            // (‚±‚ÌƒuƒƒbƒN‚Í‘O‰ñ‚ÌC³‚Æ“¯‚¶‚Å‚·)
+            // --- UIã®ä½ç½®ã‚’ç”»é¢ç«¯ã«è¨ˆç®— ---
+            // (ã“ã®ãƒ–ãƒ­ãƒƒã‚¯ã¯å‰å›ã®ä¿®æ­£ã¨åŒã˜ã§ã™)
             Vector3 bossScreenPos = mainCamera.WorldToScreenPoint(boss.position);
             Vector3 center = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             if (bossScreenPos.z < 0)
@@ -80,15 +80,15 @@ public class BossIndicator : MonoBehaviour
             float scale = Mathf.Min(divX, divY);
             Vector3 edgePosition = center + dir * scale;
 
-            // ššš ‚±‚±‚©‚ç‚ª’Ç‰Á‚µ‚½”÷’²®‚Ìˆ— ššš
-            // ‰æ–Ê’[‚ÌˆÊ’u(edgePosition)‚©‚çƒvƒŒƒCƒ„[‚Ì‰æ–Êã‚ÌˆÊ’u‚ÖŒü‚©‚¤ƒxƒNƒgƒ‹‚ğŒvZ
+            // â˜…â˜…â˜… ã“ã“ã‹ã‚‰ãŒè¿½åŠ ã—ãŸå¾®èª¿æ•´ã®å‡¦ç† â˜…â˜…â˜…
+            // ç”»é¢ç«¯ã®ä½ç½®(edgePosition)ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç”»é¢ä¸Šã®ä½ç½®ã¸å‘ã‹ã†ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
             Vector3 playerScreenPos = mainCamera.WorldToScreenPoint(player.position);
             Vector3 directionToPlayer = (playerScreenPos - edgePosition).normalized;
 
-            // ‰æ–Ê’[‚ÌˆÊ’u‚©‚çAƒvƒŒƒCƒ„[•ûŒü‚Ö inwardOffset •ª‚¾‚¯ˆÚ“®‚³‚¹‚é
+            // ç”»é¢ç«¯ã®ä½ç½®ã‹ã‚‰ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ–¹å‘ã¸ inwardOffset åˆ†ã ã‘ç§»å‹•ã•ã›ã‚‹
             Vector3 finalPosition = edgePosition + directionToPlayer * inwardOffset;
 
-            // ÅI“I‚ÈˆÊ’u‚ğ“K—p
+            // æœ€çµ‚çš„ãªä½ç½®ã‚’é©ç”¨
             uiRectTransform.position = finalPosition;
         }
     }

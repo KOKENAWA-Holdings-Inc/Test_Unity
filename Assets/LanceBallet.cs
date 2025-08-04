@@ -17,7 +17,7 @@ public class LanceBullet : MonoBehaviour
         attacked = true;
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         Player playerComponent = playerObj.GetComponent<Player>();
-        // š•ÏX‰ÓŠ: Õ“Ë‚µ‚½‘Šè‚ª "Enemy" ‚Ü‚½‚Í "Boss" ƒ^ƒO‚ğ‚Á‚Ä‚¢‚½‚ç
+        // â˜…å¤‰æ›´ç®‡æ‰€: è¡çªã—ãŸç›¸æ‰‹ãŒ "Enemy" ã¾ãŸã¯ "Boss" ã‚¿ã‚°ã‚’æŒã£ã¦ã„ãŸã‚‰
         if (other.CompareTag("Enemy") || other.CompareTag("Elite") || other.CompareTag("Boss"))
         {
             EnemyManager EnemyComponent = other.GetComponent<EnemyManager>();

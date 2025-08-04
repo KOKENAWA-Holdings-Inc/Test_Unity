@@ -11,9 +11,9 @@ public class PlayerSpawnManager : MonoBehaviour
 
         if (playerPrefab != null)
         {
-            // ƒvƒŒƒCƒ„[‚ğÀ•W(0, 0, 0)‚ÉA‰ñ“]‚È‚µ‚Å¶¬‚·‚é
-            // Vector3.zero ‚Í (0, 0, 0) ‚Æ“¯‚¶
-            // Quaternion.identity ‚Í‰ñ“]‚ª‚È‚¢ó‘Ô‚ğw‚·
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’åº§æ¨™(0, 0, 0)ã«ã€å›è»¢ãªã—ã§ç”Ÿæˆã™ã‚‹
+            // Vector3.zero ã¯ (0, 0, 0) ã¨åŒã˜
+            // Quaternion.identity ã¯å›è»¢ãŒãªã„çŠ¶æ…‹ã‚’æŒ‡ã™
             Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         }
     }

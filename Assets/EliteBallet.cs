@@ -5,34 +5,34 @@ using UnityEngine;
 
 public class EliteBallet : MonoBehaviour
 {
-    // š’Ç‰Á: ©•ª‚ğ”­Ë‚µ‚½EliteManager‚ğŠi”[‚·‚é‚½‚ß‚Ì•Ï”
+    // â˜…è¿½åŠ : è‡ªåˆ†ã‚’ç™ºå°„ã—ãŸEliteManagerã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®å¤‰æ•°
     public EliteManager shooter;
 
     [SerializeField] private float Attack = 5f;
 
     void Start()
     {
-        // 2•bŒã‚É’e‚ª©“®“I‚ÉÁ‚¦‚é‚æ‚¤‚É‚·‚é
+        // 2ç§’å¾Œã«å¼¾ãŒè‡ªå‹•çš„ã«æ¶ˆãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
         Destroy(gameObject, 2f);
     }
 
-    // ‰½‚©‚ÉÕ“Ë‚µ‚½‚ÉŒÄ‚Î‚ê‚é
+    // ä½•ã‹ã«è¡çªã—ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // ¥¥¥¥¥ íœ ¥¥¥¥¥
+        // â–¼â–¼â–¼â–¼â–¼ å‰Šé™¤ â–¼â–¼â–¼â–¼â–¼
         // GameObject eliteObj = GameObject.FindGameObjectWithTag("Elite");
         // EliteManager EliteComponent = eliteObj.GetComponent<EliteManager>();
-        // £££££ íœ £££££
+        // â–²â–²â–²â–²â–² å‰Šé™¤ â–²â–²â–²â–²â–²
 
-        // Õ“Ë‚µ‚½‘Šè‚ª"Player"ƒ^ƒO‚ğ‚Á‚Ä‚¢‚½‚ç
+        // è¡çªã—ãŸç›¸æ‰‹ãŒ"Player"ã‚¿ã‚°ã‚’æŒã£ã¦ã„ãŸã‚‰
         if (other.CompareTag("Player"))
         {
             Player PlayerComponent = other.GetComponent<Player>();
 
-            // shooter‚ªƒZƒbƒg‚³‚ê‚Ä‚¨‚èAPlayer‚ªŒ©‚Â‚©‚Á‚½ê‡
+            // shooterãŒã‚»ãƒƒãƒˆã•ã‚Œã¦ãŠã‚Šã€PlayerãŒè¦‹ã¤ã‹ã£ãŸå ´åˆ
             if (PlayerComponent != null && shooter != null)
             {
-                // š•ÏX: EliteComponent‚Ì‘ã‚í‚è‚ÉA•Û‚µ‚Ä‚¨‚¢‚½shooter‚ğg‚¤
+                // â˜…å¤‰æ›´: EliteComponentã®ä»£ã‚ã‚Šã«ã€ä¿æŒã—ã¦ãŠã„ãŸshooterã‚’ä½¿ã†
                 if (Attack * (shooter.Attack * 0.5f) - PlayerComponent.Defence >= 1)
                 {
                     PlayerComponent.PlayerHP = PlayerComponent.PlayerHP - (Attack * (shooter.Attack * 0.5f) - PlayerComponent.Defence);

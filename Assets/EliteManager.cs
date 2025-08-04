@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EliteManager : MonoBehaviour
 {
-    private Transform playerTransform; // ƒvƒŒƒCƒ„[’Ç]—p‚ÌTransform
+    private Transform playerTransform; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼è¿½å¾“ç”¨ã®Transform
     public GameObject damagePopupPrefab;
     public float EliteHP = 100f;
     public float EliteMaxHP = 100f;
@@ -21,7 +21,7 @@ public class EliteManager : MonoBehaviour
     public void InitializeStats(float newMaxHp)
     {
         EliteMaxHP = newMaxHp;
-        EliteHP = EliteMaxHP; // HP‚àÅ‘å’l‚Éİ’è
+        EliteHP = EliteMaxHP; // HPã‚‚æœ€å¤§å€¤ã«è¨­å®š
     }
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class EliteManager : MonoBehaviour
     }
     void Start()
     {
-        // ’Ç]‚·‚é‚½‚ß‚ÉƒvƒŒƒCƒ„[‚ÌTransform‚ğ•Û
+        // è¿½å¾“ã™ã‚‹ãŸã‚ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transformã‚’ä¿æŒ
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -41,7 +41,7 @@ public class EliteManager : MonoBehaviour
         {
             healthSlider.maxValue = EliteMaxHP;
             healthSlider.value = EliteHP;
-            // ‰Šúó‘Ô‚Å‚Í”ñ•\¦‚É‚·‚é
+            // åˆæœŸçŠ¶æ…‹ã§ã¯éè¡¨ç¤ºã«ã™ã‚‹
             healthSlider.gameObject.SetActive(false);
         }
     }
@@ -50,13 +50,13 @@ public class EliteManager : MonoBehaviour
     {
         if (EliteHP != previousHP)
         {
-            // HPƒo[‚ª”ñ•\¦‚È‚çAÅ‰‚É•\¦‚·‚é
+            // HPãƒãƒ¼ãŒéè¡¨ç¤ºãªã‚‰ã€æœ€åˆã«è¡¨ç¤ºã™ã‚‹
             if (healthSlider != null && !healthSlider.gameObject.activeSelf)
             {
                 healthSlider.gameObject.SetActive(true);
             }
 
-            // Slider‚Ì’l‚ğXV
+            // Sliderã®å€¤ã‚’æ›´æ–°
             if (healthSlider != null)
             {
                 healthSlider.value = EliteHP;
@@ -65,35 +65,35 @@ public class EliteManager : MonoBehaviour
             {
                 float damage = previousHP - EliteHP;
 
-                // š•ÏX: “G‚Ì“ªã‚É’¼Ú¶¬‚·‚é
-                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // “G‚Ì1ƒ†ƒjƒbƒgã‚É•\¦
+                // â˜…å¤‰æ›´: æ•µã®é ­ä¸Šã«ç›´æ¥ç”Ÿæˆã™ã‚‹
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // æ•µã®1ãƒ¦ãƒ‹ãƒƒãƒˆä¸Šã«è¡¨ç¤º
                 GameObject popup = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity);
 
-                // ¥¥¥ –â‘è‚ÌŒ´ˆö‚È‚Ì‚ÅA‚±‚Ìs‚ğŠ®‘S‚Éíœ ¥¥¥
+                // â–¼â–¼â–¼ å•é¡Œã®åŸå› ãªã®ã§ã€ã“ã®è¡Œã‚’å®Œå…¨ã«å‰Šé™¤ â–¼â–¼â–¼
                 // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
 
-                // ¶¬‚µ‚½ƒ|ƒbƒvƒAƒbƒv‚Éƒ_ƒ[ƒW—Ê‚ğİ’è
+                // ç”Ÿæˆã—ãŸãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã«ãƒ€ãƒ¡ãƒ¼ã‚¸é‡ã‚’è¨­å®š
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
 
-            // Œ»İ‚ÌHP‚ğu’¼‘O‚ÌHPv‚Æ‚µ‚Ä•Û‘¶‚µAŸ‰ñ‚ÌƒtƒŒ[ƒ€‚Å”äŠr‚Å‚«‚é‚æ‚¤‚É‚·‚é
+            // ç¾åœ¨ã®HPã‚’ã€Œç›´å‰ã®HPã€ã¨ã—ã¦ä¿å­˜ã—ã€æ¬¡å›ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§æ¯”è¼ƒã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
             previousHP = EliteHP;
         }
-        // ©g‚ÌHP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚©‚ğ–ˆƒtƒŒ[ƒ€ŠÄ‹‚·‚é
+        // è‡ªèº«ã®HPãŒ0ä»¥ä¸‹ã«ãªã£ãŸã‹ã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ç›£è¦–ã™ã‚‹
         if (EliteHP <= 0)
         {
-            Die(); // ƒCƒxƒ“ƒg‚ğ”­s
+            Die(); // ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œ
 
-            // ¥¥¥¥¥ íœ ¥¥¥¥¥
-            // // ƒV[ƒ“‚©‚ç "Player" ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ğ’T‚·
+            // â–¼â–¼â–¼â–¼â–¼ å‰Šé™¤ â–¼â–¼â–¼â–¼â–¼
+            // // ã‚·ãƒ¼ãƒ³ã‹ã‚‰ "Player" ã‚¿ã‚°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã™
             // GameObject playerToReward = GameObject.FindGameObjectWithTag("Player");
-            // £££££ íœ £££££
+            // â–²â–²â–²â–²â–² å‰Šé™¤ â–²â–²â–²â–²â–²
 
 
-            // š•ÏX: •Û‚µ‚Ä‚¢‚éplayerTransform‚ğg‚¢AƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚½ê‡‚Ì‚İŒoŒ±’l‚ğ—^‚¦‚é
+            // â˜…å¤‰æ›´: ä¿æŒã—ã¦ã„ã‚‹playerTransformã‚’ä½¿ã„ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ãŸå ´åˆã®ã¿çµŒé¨“å€¤ã‚’ä¸ãˆã‚‹
             if (playerTransform != null)
             {
-                // š•ÏX: playerTransform‚©‚çƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
+                // â˜…å¤‰æ›´: playerTransformã‹ã‚‰ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
                 Player playerComponent = playerTransform.GetComponent<Player>();
                 if (playerComponent != null)
                 {
@@ -102,23 +102,23 @@ public class EliteManager : MonoBehaviour
                 }
             }
 
-            // ©g‚ğ”j‰ó‚·‚é
+            // è‡ªèº«ã‚’ç ´å£Šã™ã‚‹
             Destroy(this.gameObject);
         }
     }
     private void LateUpdate()
     {
-        // HPƒo[‚ª•\¦‚³‚ê‚Ä‚¢‚éê‡‚Ì‚İAˆÊ’u‚ğXV‚·‚é
+        // HPãƒãƒ¼ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹å ´åˆã®ã¿ã€ä½ç½®ã‚’æ›´æ–°ã™ã‚‹
         if (healthSlider != null && healthSlider.gameObject.activeSelf)
         {
-            // “G–{‘Ì‚ÌˆÊ’u‚©‚ç^ã‚É0.5‚¸‚ç‚µ‚½ˆÊ’u‚ÉHPƒo[‚ğ”z’u‚·‚é
+            // æ•µæœ¬ä½“ã®ä½ç½®ã‹ã‚‰çœŸä¸Šã«0.5ãšã‚‰ã—ãŸä½ç½®ã«HPãƒãƒ¼ã‚’é…ç½®ã™ã‚‹
             healthSlider.transform.position = this.transform.position + new Vector3(0, 0.5f, 0);
         }
     }
 
     private void FixedUpdate()
     {
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚éê‡‚Ì‚İ’Ç]
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ã¦ã„ã‚‹å ´åˆã®ã¿è¿½å¾“
         if (playerTransform != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);

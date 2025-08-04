@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class UIPanelController : MonoBehaviour
 {
-    // w’è‚³‚ê‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgiUIƒpƒlƒ‹j‚ğƒAƒNƒeƒBƒu‚É‚·‚éƒƒ\ƒbƒh
+    // æŒ‡å®šã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆUIãƒ‘ãƒãƒ«ï¼‰ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void OpenPanel(GameObject panel)
     {
         panel.SetActive(true);
     }
 
-    // w’è‚³‚ê‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgiUIƒpƒlƒ‹j‚ğ”ñƒAƒNƒeƒBƒu‚É‚·‚éƒƒ\ƒbƒh
+    // æŒ‡å®šã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆUIãƒ‘ãƒãƒ«ï¼‰ã‚’éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void ClosePanel(GameObject panel)
     {
         panel.SetActive(false);
     }
 
-    // w’è‚³‚ê‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgiUIƒpƒlƒ‹j‚Ì•\¦E”ñ•\¦‚ğØ‚è‘Ö‚¦‚éƒƒ\ƒbƒh
+    // æŒ‡å®šã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆUIãƒ‘ãƒãƒ«ï¼‰ã®è¡¨ç¤ºãƒ»éè¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void TogglePanel(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);

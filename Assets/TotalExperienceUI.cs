@@ -11,31 +11,31 @@ public class TotalExperienceUI : MonoBehaviour
     {
         TotalExperienceText.enabled = false;
     }
-    // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª—LŒø‚É‚È‚Á‚½‚ÉŒÄ‚Î‚ê‚é
+    // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒæœ‰åŠ¹ã«ãªã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void OnEnable()
     {
-        // Player‚ÌÃ“IƒCƒxƒ“ƒg‚ÉA©•ª‚ÌUI•\¦ƒƒ\ƒbƒh‚ğ“o˜^iw“Çj‚·‚é
+        // Playerã®é™çš„ã‚¤ãƒ™ãƒ³ãƒˆã«ã€è‡ªåˆ†ã®UIè¡¨ç¤ºãƒ¡ã‚½ãƒƒãƒ‰ã‚’ç™»éŒ²ï¼ˆè³¼èª­ï¼‰ã™ã‚‹
         Player.OnPlayerDied += ShowFinalExperience;
     }
 
-    // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª–³Œø‚É‚È‚Á‚½‚ÉŒÄ‚Î‚ê‚é
+    // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç„¡åŠ¹ã«ãªã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void OnDisable()
     {
-        // “o˜^‚ğ‰ğœ‚·‚éiƒƒ‚ƒŠƒŠ[ƒN–h~‚Ì‚½‚ßd—vj
+        // ç™»éŒ²ã‚’è§£é™¤ã™ã‚‹ï¼ˆãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯é˜²æ­¢ã®ãŸã‚é‡è¦ï¼‰
         Player.OnPlayerDied -= ShowFinalExperience;
     }
 
     /// <summary>
-    /// Player.OnPlayerDiedƒCƒxƒ“ƒg‚ª”­¶‚µ‚½‚ÉŒÄ‚Ño‚³‚ê‚éƒƒ\ƒbƒh
+    /// Player.OnPlayerDiedã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿã—ãŸæ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     /// </summary>
-    /// <param name="finalExperience">Player‚©‚ç“n‚³‚ê‚½‘Šl“¾ŒoŒ±’l</param>
+    /// <param name="finalExperience">Playerã‹ã‚‰æ¸¡ã•ã‚ŒãŸç·ç²å¾—çµŒé¨“å€¤</param>
     public void ShowFinalExperience(float finalExperience)
     {
-        // ƒeƒLƒXƒgUI‚ğ—LŒø‚É‚·‚é
+        // ãƒ†ã‚­ã‚¹ãƒˆUIã‚’æœ‰åŠ¹ã«ã™ã‚‹
         if (TotalExperienceText != null)
         {
             //TotalExperienceText.enabled = true;
-            // “n‚³‚ê‚½ŒoŒ±’l‚ğ®”‚É‚µ‚ÄƒeƒLƒXƒg‚Éİ’è
+            // æ¸¡ã•ã‚ŒãŸçµŒé¨“å€¤ã‚’æ•´æ•°ã«ã—ã¦ãƒ†ã‚­ã‚¹ãƒˆã«è¨­å®š
             TotalExperienceText.text = "Total Experience: " + Mathf.FloorToInt(finalExperience);
         }
     }

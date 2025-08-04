@@ -21,14 +21,14 @@ public class TotalEnemyKill : MonoBehaviour
     }
     void OnEnable()
     {
-        // Boss‚ÌÃ“IƒCƒxƒ“ƒg‚ÉA©•ª‚ÌUI•\¦ƒƒ\ƒbƒh‚ğ“o˜^iw“Çj‚·‚é
+        // Bossã®é™çš„ã‚¤ãƒ™ãƒ³ãƒˆã«ã€è‡ªåˆ†ã®UIè¡¨ç¤ºãƒ¡ã‚½ãƒƒãƒ‰ã‚’ç™»éŒ²ï¼ˆè³¼èª­ï¼‰ã™ã‚‹
         EnemyManager.OnEnemyDied += TotalKilledEnemy;
     }
 
-    // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª–³Œø‚É‚È‚Á‚½‚ÉŒÄ‚Î‚ê‚é
+    // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç„¡åŠ¹ã«ãªã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void OnDisable()
     {
-        // “o˜^‚ğ‰ğœ‚·‚éiƒƒ‚ƒŠƒŠ[ƒN–h~‚Ì‚½‚ßd—vj
+        // ç™»éŒ²ã‚’è§£é™¤ã™ã‚‹ï¼ˆãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯é˜²æ­¢ã®ãŸã‚é‡è¦ï¼‰
         EnemyManager.OnEnemyDied -= TotalKilledEnemy;
     }
 

@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class BackgroundLoop : MonoBehaviour
 {
-    // ƒJƒƒ‰‚ÌTransform
+    // ã‚«ãƒ¡ãƒ©ã®Transform
     private Transform cameraTransform;
 
-    // ƒXƒvƒ‰ƒCƒg‚Ì•‚Æ‚‚³
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å¹…ã¨é«˜ã•
     private float spriteWidth;
     private float spriteHeight;
 
-    // ƒOƒŠƒbƒh‚Ì‘å‚«‚³i¡‰ñ‚Í3x3j
+    // ã‚°ãƒªãƒƒãƒ‰ã®å¤§ãã•ï¼ˆä»Šå›ã¯3x3ï¼‰
     private const int GridSize = 3;
 
     void Start()
     {
-        // ƒƒCƒ“ƒJƒƒ‰‚ÌTransform‚ğæ“¾
+        // ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã®Transformã‚’å–å¾—
         cameraTransform = Camera.main.transform;
 
-        // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÌƒXƒvƒ‰ƒCƒg‚Ì•‚Æ‚‚³‚ğæ“¾
+        // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å¹…ã¨é«˜ã•ã‚’å–å¾—
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteWidth = spriteRenderer.sprite.bounds.size.x;
         spriteHeight = spriteRenderer.sprite.bounds.size.y;
@@ -27,31 +27,31 @@ public class BackgroundLoop : MonoBehaviour
 
     void LateUpdate()
     {
-        // === …•½•ûŒü‚Ìƒ‹[ƒvƒ`ƒFƒbƒN ===
-        // ƒJƒƒ‰‚ª‚±‚Ì”wŒi‚æ‚è‚à‰E‚É‘å‚«‚­ˆÚ“®‚µ‚½‚ç
+        // === æ°´å¹³æ–¹å‘ã®ãƒ«ãƒ¼ãƒ—ãƒã‚§ãƒƒã‚¯ ===
+        // ã‚«ãƒ¡ãƒ©ãŒã“ã®èƒŒæ™¯ã‚ˆã‚Šã‚‚å³ã«å¤§ããç§»å‹•ã—ãŸã‚‰
         if (transform.position.x + spriteWidth < cameraTransform.position.x)
         {
-            // ”wŒi‚ğ‰E’[‚ÉˆÚ“®‚³‚¹‚é
+            // èƒŒæ™¯ã‚’å³ç«¯ã«ç§»å‹•ã•ã›ã‚‹
             transform.position += new Vector3(spriteWidth * GridSize, 0, 0);
         }
-        // ƒJƒƒ‰‚ª‚±‚Ì”wŒi‚æ‚è‚à¶‚É‘å‚«‚­ˆÚ“®‚µ‚½‚ç
+        // ã‚«ãƒ¡ãƒ©ãŒã“ã®èƒŒæ™¯ã‚ˆã‚Šã‚‚å·¦ã«å¤§ããç§»å‹•ã—ãŸã‚‰
         else if (transform.position.x - spriteWidth > cameraTransform.position.x)
         {
-            // ”wŒi‚ğ¶’[‚ÉˆÚ“®‚³‚¹‚é
+            // èƒŒæ™¯ã‚’å·¦ç«¯ã«ç§»å‹•ã•ã›ã‚‹
             transform.position -= new Vector3(spriteWidth * GridSize, 0, 0);
         }
 
-        // === ‚’¼•ûŒü‚Ìƒ‹[ƒvƒ`ƒFƒbƒN (’Ç‰Á) ===
-        // ƒJƒƒ‰‚ª‚±‚Ì”wŒi‚æ‚è‚àã‚É‘å‚«‚­ˆÚ“®‚µ‚½‚ç
+        // === å‚ç›´æ–¹å‘ã®ãƒ«ãƒ¼ãƒ—ãƒã‚§ãƒƒã‚¯ (è¿½åŠ ) ===
+        // ã‚«ãƒ¡ãƒ©ãŒã“ã®èƒŒæ™¯ã‚ˆã‚Šã‚‚ä¸Šã«å¤§ããç§»å‹•ã—ãŸã‚‰
         if (transform.position.y + spriteHeight < cameraTransform.position.y)
         {
-            // ”wŒi‚ğã’[‚ÉˆÚ“®‚³‚¹‚é
+            // èƒŒæ™¯ã‚’ä¸Šç«¯ã«ç§»å‹•ã•ã›ã‚‹
             transform.position += new Vector3(0, spriteHeight * GridSize, 0);
         }
-        // ƒJƒƒ‰‚ª‚±‚Ì”wŒi‚æ‚è‚à‰º‚É‘å‚«‚­ˆÚ“®‚µ‚½‚ç
+        // ã‚«ãƒ¡ãƒ©ãŒã“ã®èƒŒæ™¯ã‚ˆã‚Šã‚‚ä¸‹ã«å¤§ããç§»å‹•ã—ãŸã‚‰
         else if (transform.position.y - spriteHeight > cameraTransform.position.y)
         {
-            // ”wŒi‚ğ‰º’[‚ÉˆÚ“®‚³‚¹‚é
+            // èƒŒæ™¯ã‚’ä¸‹ç«¯ã«ç§»å‹•ã•ã›ã‚‹
             transform.position -= new Vector3(0, spriteHeight * GridSize, 0);
         }
     }

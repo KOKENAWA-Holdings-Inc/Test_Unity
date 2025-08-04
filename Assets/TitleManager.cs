@@ -22,14 +22,14 @@ public class TitleManager : MonoBehaviour
 
     void OnEnable()
     {
-        // Boss‚ÌÃ“IƒCƒxƒ“ƒg‚ÉAŽ©•ª‚ÌUI•\Ž¦ƒƒ\ƒbƒh‚ð“o˜^iw“Çj‚·‚é
+        // Bossã®é™çš„ã‚¤ãƒ™ãƒ³ãƒˆã«ã€è‡ªåˆ†ã®UIè¡¨ç¤ºãƒ¡ã‚½ãƒƒãƒ‰ã‚’ç™»éŒ²ï¼ˆè³¼èª­ï¼‰ã™ã‚‹
         Boss.OnBossDied += TitleUI;
     }
 
-    // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª–³Œø‚É‚È‚Á‚½Žž‚ÉŒÄ‚Î‚ê‚é
+    // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç„¡åŠ¹ã«ãªã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void OnDisable()
     {
-        // “o˜^‚ð‰ðœ‚·‚éiƒƒ‚ƒŠƒŠ[ƒN–hŽ~‚Ì‚½‚ßd—vj
+        // ç™»éŒ²ã‚’è§£é™¤ã™ã‚‹ï¼ˆãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯é˜²æ­¢ã®ãŸã‚é‡è¦ï¼‰
         Boss.OnBossDied -= TitleUI;
     }
 

@@ -19,14 +19,14 @@ public class Player : MonoBehaviour
     private float damageCooldown = 0.1f;
     private float nextDamageTime = 0f;
 
-    // š’Ç‰Á: ‹Ù‹}–³“G‚ªˆê“x”­“®‚µ‚½‚©‚ğ‹L˜^‚·‚é‚½‚ß‚Ìƒtƒ‰ƒO
+    // â˜…è¿½åŠ : ç·Šæ€¥ç„¡æ•µãŒä¸€åº¦ç™ºå‹•ã—ãŸã‹ã‚’è¨˜éŒ²ã™ã‚‹ãŸã‚ã®ãƒ•ãƒ©ã‚°
     private bool emergencyInvincibilityTriggered = false;
 
     public static event Action<float> OnPlayerDied;
     //public static event Action OnPlayerDied;
     private Rigidbody2D rb;
     private Vector2 movement;
-    private BoxCollider2D boxCollider; // š’Ç‰Á: BoxCollider2D‚Ö‚ÌQÆ
+    private BoxCollider2D boxCollider; // â˜…è¿½åŠ : BoxCollider2Dã¸ã®å‚ç…§
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // š’Ç‰Á: ŠJn‚É©g‚ÌBoxCollider2D‚ğæ“¾‚µ‚Ä‚¨‚­
+        // â˜…è¿½åŠ : é–‹å§‹æ™‚ã«è‡ªèº«ã®BoxCollider2Dã‚’å–å¾—ã—ã¦ãŠã
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        // Õ“Ë‚µ‚½‘Šè‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ^ƒO‚ğ”äŠr
+        // è¡çªã—ãŸç›¸æ‰‹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¿ã‚°ã‚’æ¯”è¼ƒ
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Elite"))
         {
             if (Time.time >= nextDamageTime)
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
                     }
                 }
 
-                // š’Ç‰Á: ƒ_ƒ[ƒW‚ğó‚¯‚½’¼Œã‚ÉHP‚ğƒ`ƒFƒbƒN
+                // â˜…è¿½åŠ : ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸç›´å¾Œã«HPã‚’ãƒã‚§ãƒƒã‚¯
                 CheckForEmergencyInvincibility();
             }
         }
@@ -123,44 +123,44 @@ public class Player : MonoBehaviour
                     PlayerHP -= 1f;
                 }
 
-                // š’Ç‰Á: ƒ_ƒ[ƒW‚ğó‚¯‚½’¼Œã‚ÉHP‚ğƒ`ƒFƒbƒN
+                // â˜…è¿½åŠ : ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸç›´å¾Œã«HPã‚’ãƒã‚§ãƒƒã‚¯
                 CheckForEmergencyInvincibility();
             }
         }
     }
 
     /// <summary>
-    /// š’Ç‰Á: HP‚ğƒ`ƒFƒbƒN‚µ‚ÄAğŒ‚ğ–‚½‚µ‚Ä‚¢‚ê‚Î‹Ù‹}–³“G‚ğ”­“®‚·‚éƒƒ\ƒbƒh
+    /// â˜…è¿½åŠ : HPã‚’ãƒã‚§ãƒƒã‚¯ã—ã¦ã€æ¡ä»¶ã‚’æº€ãŸã—ã¦ã„ã‚Œã°ç·Šæ€¥ç„¡æ•µã‚’ç™ºå‹•ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     /// </summary>
     private void CheckForEmergencyInvincibility()
     {
-        // HP‚ª10ˆÈ‰ºA‚©‚ÂA‚Ü‚¾‚±‚Ì‹@”\‚ª”­“®‚µ‚Ä‚¢‚È‚¢ê‡
+        // HPãŒ10ä»¥ä¸‹ã€ã‹ã¤ã€ã¾ã ã“ã®æ©Ÿèƒ½ãŒç™ºå‹•ã—ã¦ã„ãªã„å ´åˆ
         if (PlayerHP <= 10f && !emergencyInvincibilityTriggered)
         {
-            // ”­“®‚µ‚½‚±‚Æ‚ğ‹L˜^
+            // ç™ºå‹•ã—ãŸã“ã¨ã‚’è¨˜éŒ²
             emergencyInvincibilityTriggered = true;
-            // ƒRƒ‹[ƒ`ƒ“‚ğŠJn
+            // ã‚³ãƒ«ãƒ¼ãƒãƒ³ã‚’é–‹å§‹
             StartCoroutine(TriggerInvincibilityCoroutine());
         }
     }
 
     /// <summary>
-    /// š’Ç‰Á: 5•bŠÔBoxCollider2D‚ğ–³Œø‰»‚·‚éƒRƒ‹[ƒ`ƒ“
+    /// â˜…è¿½åŠ : 5ç§’é–“BoxCollider2Dã‚’ç„¡åŠ¹åŒ–ã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
     /// </summary>
     private IEnumerator TriggerInvincibilityCoroutine()
     {
         if (boxCollider != null)
         {
-            Debug.Log("‹Ù‹}–³“G”­“®I 5•bŠÔ“–‚½‚è”»’è‚ğ–³Œø‰»‚µ‚Ü‚·B");
-            // ƒRƒ‰ƒCƒ_[‚ğ–³Œø‚É‚·‚é
+            Debug.Log("ç·Šæ€¥ç„¡æ•µç™ºå‹•ï¼ 5ç§’é–“å½“ãŸã‚Šåˆ¤å®šã‚’ç„¡åŠ¹åŒ–ã—ã¾ã™ã€‚");
+            // ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç„¡åŠ¹ã«ã™ã‚‹
             boxCollider.enabled = false;
 
-            // 5•bŠÔ‘Ò‹@‚·‚é
+            // 5ç§’é–“å¾…æ©Ÿã™ã‚‹
             yield return new WaitForSeconds(5f);
 
-            // 5•bŒã‚ÉƒRƒ‰ƒCƒ_[‚ğÄ“x—LŒø‚É‚·‚é
+            // 5ç§’å¾Œã«ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’å†åº¦æœ‰åŠ¹ã«ã™ã‚‹
             boxCollider.enabled = true;
-            Debug.Log("–³“GŠÔ‚ªI—¹‚µ‚Ü‚µ‚½B");
+            Debug.Log("ç„¡æ•µæ™‚é–“ãŒçµ‚äº†ã—ã¾ã—ãŸã€‚");
         }
     }
 

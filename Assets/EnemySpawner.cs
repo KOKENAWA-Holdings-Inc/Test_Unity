@@ -9,18 +9,18 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public TimeManager timeManager;
 
-    // ¥¥¥ ƒXƒ|[ƒ“ŠÔŠu‚Ìİ’è‚ğ‚±‚¿‚ç‚É•ÏX ¥¥¥
+    // â–¼â–¼â–¼ ã‚¹ãƒãƒ¼ãƒ³é–“éš”ã®è¨­å®šã‚’ã“ã¡ã‚‰ã«å¤‰æ›´ â–¼â–¼â–¼
     [Header("Spawn Interval Settings")]
-    [Tooltip("ƒQ[ƒ€ŠJn‚ÌƒXƒ|[ƒ“ŠÔŠu")]
+    [Tooltip("ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã®ã‚¹ãƒãƒ¼ãƒ³é–“éš”")]
     [SerializeField] private float initialSpawnInterval = 2.0f;
-    [Tooltip("Å’Z‚ÌƒXƒ|[ƒ“ŠÔŠu")]
+    [Tooltip("æœ€çŸ­ã®ã‚¹ãƒãƒ¼ãƒ³é–“éš”")]
     [SerializeField] private float minSpawnInterval = 0.1f;
-    [Tooltip("Å’ZŠÔŠu‚É“’B‚·‚é‚Ü‚Å‚ÌŠÔi•bj")]
-    [SerializeField] private float timeToMinInterval = 300f; // 5•ª
+    [Tooltip("æœ€çŸ­é–“éš”ã«åˆ°é”ã™ã‚‹ã¾ã§ã®æ™‚é–“ï¼ˆç§’ï¼‰")]
+    [SerializeField] private float timeToMinInterval = 300f; // 5åˆ†
 
-    // š’Ç‰Á: “G‚Ì”‚ÌãŒÀİ’è
+    // â˜…è¿½åŠ : æ•µã®æ•°ã®ä¸Šé™è¨­å®š
     [Header("Spawn Limit Settings")]
-    [Tooltip("ƒV[ƒ“ã‚Ì“G‚ÌÅ‘å”")]
+    [Tooltip("ã‚·ãƒ¼ãƒ³ä¸Šã®æ•µã®æœ€å¤§æ•°")]
     [SerializeField] private int maxEnemies = 500;
 
     private float spawnTimer = 0f;
@@ -28,9 +28,9 @@ public class EnemySpawner : MonoBehaviour
     private bool isSpawningActive = true;
 
     [Header("HP Scaling Settings")]
-    [Tooltip("“G‚ÌŠî–{“I‚ÈÅ‘åHP")]
+    [Tooltip("æ•µã®åŸºæœ¬çš„ãªæœ€å¤§HP")]
     [SerializeField] private float baseEnemyMaxHp = 10f;
-    [Tooltip("1•b‚ ‚½‚è‚É‘‰Á‚·‚éÅ‘åHP‚Ì—Ê")]
+    [Tooltip("1ç§’ã‚ãŸã‚Šã«å¢—åŠ ã™ã‚‹æœ€å¤§HPã®é‡")]
     [SerializeField] private float hpGrowthPerSecond = 0.2f;
 
     void Start()
@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            //Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI 'Player'ƒ^ƒO‚ªİ’è‚³‚ê‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢B");
+            //Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼ 'Player'ã‚¿ã‚°ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
             isSpawningActive = false;
         }
     }
@@ -53,29 +53,29 @@ public class EnemySpawner : MonoBehaviour
 
         if (isSpawningActive)
         {
-            // š’Ç‰Á: ƒV[ƒ“ã‚Ì“G‚Ì”‚ªãŒÀ‚É’B‚µ‚Ä‚¢‚½‚çAƒXƒ|[ƒ“ˆ—‚ğ’†’f
+            // â˜…è¿½åŠ : ã‚·ãƒ¼ãƒ³ä¸Šã®æ•µã®æ•°ãŒä¸Šé™ã«é”ã—ã¦ã„ãŸã‚‰ã€ã‚¹ãƒãƒ¼ãƒ³å‡¦ç†ã‚’ä¸­æ–­
             if (GameObject.FindGameObjectsWithTag("Enemy").Length >= maxEnemies)
             {
                 //Debug.Log("Upper Limited");
-                return; // ãŒÀ‚É’B‚µ‚Ä‚¢‚é‚Ì‚Å‰½‚à‚µ‚È‚¢
+                return; // ä¸Šé™ã«é”ã—ã¦ã„ã‚‹ã®ã§ä½•ã‚‚ã—ãªã„
             }
 
-            // š•ÏX: Œo‰ßŠÔ‚ÉŠî‚Ã‚¢‚ÄŒ»İ‚ÌƒXƒ|[ƒ“ŠÔŠu‚ğŒvZ
+            // â˜…å¤‰æ›´: çµŒéæ™‚é–“ã«åŸºã¥ã„ã¦ç¾åœ¨ã®ã‚¹ãƒãƒ¼ãƒ³é–“éš”ã‚’è¨ˆç®—
             float progress = Mathf.Clamp01(timeManager.elapsedTime / timeToMinInterval);
             float currentSpawnInterval = Mathf.Lerp(initialSpawnInterval, minSpawnInterval, progress);
 
             spawnTimer += Time.deltaTime;
 
-            // š•ÏX: ŒvZ‚µ‚½Œ»İ‚ÌƒXƒ|[ƒ“ŠÔŠu‚Å”»’è
+            // â˜…å¤‰æ›´: è¨ˆç®—ã—ãŸç¾åœ¨ã®ã‚¹ãƒãƒ¼ãƒ³é–“éš”ã§åˆ¤å®š
             if (spawnTimer >= currentSpawnInterval)
             {
                 SpawnEnemy();
-                spawnTimer = 0f; // ƒ^ƒCƒ}[‚ğƒŠƒZƒbƒg
+                spawnTimer = 0f; // ã‚¿ã‚¤ãƒãƒ¼ã‚’ãƒªã‚»ãƒƒãƒˆ
             }
 
             if (timeManager.elapsedTime >= 420)
             {
-                //Debug.Log("w’èŠÔ‚ğ’´‚¦‚½‚½‚ßAƒGƒlƒ~[‚ÌƒXƒ|[ƒ“‚ğ’â~‚µAŠù‘¶‚ÌƒGƒlƒ~[‚ğ‘S‚Ä”j‰ó‚µ‚Ü‚·B");
+                //Debug.Log("æŒ‡å®šæ™‚é–“ã‚’è¶…ãˆãŸãŸã‚ã€ã‚¨ãƒãƒŸãƒ¼ã®ã‚¹ãƒãƒ¼ãƒ³ã‚’åœæ­¢ã—ã€æ—¢å­˜ã®ã‚¨ãƒãƒŸãƒ¼ã‚’å…¨ã¦ç ´å£Šã—ã¾ã™ã€‚");
                 isSpawningActive = false;
                 DestroyAllEnemies();
             }
@@ -95,7 +95,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefab == null)
         {
-            //Debug.LogError("Enemy Prefab‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            //Debug.LogError("Enemy PrefabãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
             return;
         }
 
@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour
             enemyManager.InitializeStats(scaledMaxHp);
         }
 
-        // ¥¥¥ ‚±‚Ìs‚Íd•¡‚µ‚Ä“G‚ğ¶¬‚µ‚Ä‚µ‚Ü‚¤‚½‚ßíœ‚µ‚Ü‚µ‚½ ¥¥¥
+        // â–¼â–¼â–¼ ã“ã®è¡Œã¯é‡è¤‡ã—ã¦æ•µã‚’ç”Ÿæˆã—ã¦ã—ã¾ã†ãŸã‚å‰Šé™¤ã—ã¾ã—ãŸ â–¼â–¼â–¼
         // Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 }

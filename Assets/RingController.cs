@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class RingController : MonoBehaviour
 {
-    // (SerializeField‚È‚Ç‚Ì•Ï”‚Í•ÏX‚È‚µ)
+    // (SerializeFieldãªã©ã®å¤‰æ•°ã¯å¤‰æ›´ãªã—)
     [SerializeField] private float speed = 15f;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float damageInterval = 0.2f;
 
     private Transform target;
-    private Transform player; // ‚±‚Ì•Ï”‚ÉAƒ^ƒO‚Å’T‚µ‚½ƒvƒŒƒCƒ„[‚ğŠi”[‚µ‚Ü‚·
+    private Transform player; // ã“ã®å¤‰æ•°ã«ã€ã‚¿ã‚°ã§æ¢ã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ ¼ç´ã—ã¾ã™
     private Vector3 targetPosition;
     private Collider2D ringCollider;
     private List<GameObject> hitEnemies;
 
-    // š•ÏX“_: Initializeƒƒ\ƒbƒh‚©‚çƒvƒŒƒCƒ„[‚Ìˆø”‚ğíœ
+    // â˜…å¤‰æ›´ç‚¹: Initializeãƒ¡ã‚½ãƒƒãƒ‰ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼•æ•°ã‚’å‰Šé™¤
     public void Initialize(Transform targetEnemy)
     {
         this.target = targetEnemy;
         this.ringCollider = GetComponent<Collider2D>();
         this.hitEnemies = new List<GameObject>();
 
-        // š’Ç‰Á: ƒ^ƒO‚ğg‚Á‚ÄƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg‚ğŒŸõ‚µA‚»‚ÌTransform‚ğŠi”[
+        // â˜…è¿½åŠ : ã‚¿ã‚°ã‚’ä½¿ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¤œç´¢ã—ã€ãã®Transformã‚’æ ¼ç´
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
         {
@@ -31,7 +31,7 @@ public class RingController : MonoBehaviour
         }
         else
         {
-            // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚ÌƒGƒ‰[ˆ—
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã®ã‚¨ãƒ©ãƒ¼å‡¦ç†
             //Debug.LogError("Tag 'Player' not found in scene! Destroying ring.");
             Destroy(gameObject);
             return;
@@ -40,10 +40,10 @@ public class RingController : MonoBehaviour
         StartCoroutine(RingLifecycleCoroutine());
     }
 
-    // (RingLifecycleCoroutineˆÈ‰º‚Ìƒƒ\ƒbƒh‚Í•ÏX‚ ‚è‚Ü‚¹‚ñ)
+    // (RingLifecycleCoroutineä»¥ä¸‹ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯å¤‰æ›´ã‚ã‚Šã¾ã›ã‚“)
     private IEnumerator RingLifecycleCoroutine()
     {
-        // --- 1. “G‚ÉŒü‚©‚¤ƒtƒF[ƒY ---
+        // --- 1. æ•µã«å‘ã‹ã†ãƒ•ã‚§ãƒ¼ã‚º ---
         if (target != null)
         {
             targetPosition = target.position;
@@ -61,10 +61,10 @@ public class RingController : MonoBehaviour
         }
         EndAttackPhase();
 
-        // --- 2. “G‚ÌˆÊ’u‚Å’â~‚µA’èŠú“I‚ÉUŒ‚‚·‚éƒtƒF[ƒY ---
+        // --- 2. æ•µã®ä½ç½®ã§åœæ­¢ã—ã€å®šæœŸçš„ã«æ”»æ’ƒã™ã‚‹ãƒ•ã‚§ãƒ¼ã‚º ---
         yield return StartCoroutine(WaitingAttackPhase());
 
-        // --- 3. ƒvƒŒƒCƒ„[‚É–ß‚éƒtƒF[ƒY ---
+        // --- 3. ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«æˆ»ã‚‹ãƒ•ã‚§ãƒ¼ã‚º ---
         StartAttackPhase();
         if (player != null)
         {
@@ -76,7 +76,7 @@ public class RingController : MonoBehaviour
         }
         EndAttackPhase();
 
-        // --- 4. Á–Å ---
+        // --- 4. æ¶ˆæ»… ---
         Destroy(gameObject);
     }
 
@@ -108,7 +108,7 @@ public class RingController : MonoBehaviour
         string tag = other.tag;
         if ((tag == "Enemy" || tag == "Boss") && !hitEnemies.Contains(other.gameObject))
         {
-            //Debug.Log(other.name + "‚ÉUŒ‚‚ªƒqƒbƒgI");
+            //Debug.Log(other.name + "ã«æ”»æ’ƒãŒãƒ’ãƒƒãƒˆï¼");
             hitEnemies.Add(other.gameObject);
         }
     }

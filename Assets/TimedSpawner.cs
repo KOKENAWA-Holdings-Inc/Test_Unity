@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class TimedSpawner : MonoBehaviour
 {
-    [Header("oŒ»‚³‚¹‚éƒIƒuƒWƒFƒNƒg")]
+    [Header("å‡ºç¾ã•ã›ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     [SerializeField]
     private GameObject objectPrefab;
 
-    [Header("UIİ’è")]
+    [Header("UIè¨­å®š")]
     [SerializeField]
     private GameObject markerUiPrefab;
 
-    [Header("İ’è")]
+    [Header("è¨­å®š")]
     [SerializeField]
     private int numberOfObjects = 12;
     [SerializeField]
@@ -22,7 +22,7 @@ public class TimedSpawner : MonoBehaviour
     [SerializeField]
     private float spawnDelayAfterMarker = 0.5f;
 
-    [Header("Àsƒ^ƒCƒ~ƒ“ƒO")]
+    [Header("å®Ÿè¡Œã‚¿ã‚¤ãƒŸãƒ³ã‚°")]
     [SerializeField]
     private float minWaitTime = 15f;
     [SerializeField]
@@ -30,20 +30,20 @@ public class TimedSpawner : MonoBehaviour
 
     private Camera mainCamera;
 
-    // š’Ç‰Á: ƒ}[ƒJ[UI‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•ÛŠÇ‚µ‚Ä‚¨‚­‚½‚ß‚ÌƒŠƒXƒgiƒIƒuƒWƒFƒNƒgƒv[ƒ‹j
+    // â˜…è¿½åŠ : ãƒãƒ¼ã‚«ãƒ¼UIã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä¿ç®¡ã—ã¦ãŠããŸã‚ã®ãƒªã‚¹ãƒˆï¼ˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ«ï¼‰
     private List<GameObject> markerPool = new List<GameObject>();
 
     void Start()
     {
         mainCamera = Camera.main;
 
-        // š•ÏX: Å‰‚É•K—v‚È”‚Ìƒ}[ƒJ[‚ğ¶¬‚µA”ñ•\¦‚É‚µ‚Äƒv[ƒ‹‚µ‚Ä‚¨‚­
+        // â˜…å¤‰æ›´: æœ€åˆã«å¿…è¦ãªæ•°ã®ãƒãƒ¼ã‚«ãƒ¼ã‚’ç”Ÿæˆã—ã€éè¡¨ç¤ºã«ã—ã¦ãƒ—ãƒ¼ãƒ«ã—ã¦ãŠã
         if (markerUiPrefab != null)
         {
             for (int i = 0; i < numberOfObjects; i++)
             {
                 GameObject marker = Instantiate(markerUiPrefab);
-                marker.SetActive(false); // ¶¬‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ”ñ•\¦‚É
+                marker.SetActive(false); // ç”Ÿæˆã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’éè¡¨ç¤ºã«
                 markerPool.Add(marker);
             }
         }
@@ -57,7 +57,7 @@ public class TimedSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
         }
-        //Debug.Log("ƒ{ƒX‚ğ”­Œ©ITimedSpawner‚Ìˆ—‚ğŠJn‚µ‚Ü‚·B");
+        //Debug.Log("ãƒœã‚¹ã‚’ç™ºè¦‹ï¼TimedSpawnerã®å‡¦ç†ã‚’é–‹å§‹ã—ã¾ã™ã€‚");
         StartCoroutine(SpawningLoopCoroutine());
     }
 
@@ -75,7 +75,7 @@ public class TimedSpawner : MonoBehaviour
     {
         if (objectPrefab == null || markerUiPrefab == null)
         {
-            //Debug.LogError("Object Prefab ‚Ü‚½‚Í Marker Ui Prefab ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            //Debug.LogError("Object Prefab ã¾ãŸã¯ Marker Ui Prefab ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
             return;
         }
 
@@ -87,28 +87,28 @@ public class TimedSpawner : MonoBehaviour
             Vector3 screenPosition = new Vector3(randomX, randomY, 10f);
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
 
-            // š•ÏX: ƒv[ƒ‹‚ÌƒCƒ“ƒfƒbƒNƒX‚ÆÀ•W‚ğ“n‚·
+            // â˜…å¤‰æ›´: ãƒ—ãƒ¼ãƒ«ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã¨åº§æ¨™ã‚’æ¸¡ã™
             StartCoroutine(SpawnWithMarkerCoroutine(i, worldPosition));
         }
     }
 
-    // š•ÏX: ƒv[ƒ‹‚ÌƒCƒ“ƒfƒbƒNƒX‚ğó‚¯æ‚é‚æ‚¤‚Éˆø”‚ğ•ÏX
+    // â˜…å¤‰æ›´: ãƒ—ãƒ¼ãƒ«ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å—ã‘å–ã‚‹ã‚ˆã†ã«å¼•æ•°ã‚’å¤‰æ›´
     private IEnumerator SpawnWithMarkerCoroutine(int poolIndex, Vector3 spawnPosition)
     {
-        // --- UIƒ}[ƒJ[‚Ì•\¦ˆ— ---
-        // š•ÏX: ƒv[ƒ‹‚©‚çƒ}[ƒJ[‚ğæ“¾
+        // --- UIãƒãƒ¼ã‚«ãƒ¼ã®è¡¨ç¤ºå‡¦ç† ---
+        // â˜…å¤‰æ›´: ãƒ—ãƒ¼ãƒ«ã‹ã‚‰ãƒãƒ¼ã‚«ãƒ¼ã‚’å–å¾—
         GameObject markerInstance = markerPool[poolIndex];
 
-        // š•ÏX: ¶¬(Instantiate)‚Å‚Í‚È‚­AˆÊ’u‚ğƒZƒbƒg‚µ‚Ä•\¦(SetActive)
+        // â˜…å¤‰æ›´: ç”Ÿæˆ(Instantiate)ã§ã¯ãªãã€ä½ç½®ã‚’ã‚»ãƒƒãƒˆã—ã¦è¡¨ç¤º(SetActive)
         markerInstance.transform.position = spawnPosition;
         markerInstance.SetActive(true);
 
         yield return new WaitForSeconds(markerDuration);
 
-        // š•ÏX: ”jŠü(Destroy)‚Å‚Í‚È‚­A”ñ•\¦(SetActive)
+        // â˜…å¤‰æ›´: ç ´æ£„(Destroy)ã§ã¯ãªãã€éè¡¨ç¤º(SetActive)
         markerInstance.SetActive(false);
 
-        // --- ƒIƒuƒWƒFƒNƒg‚Ì¢Š«ˆ— ---
+        // --- ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å¬å–šå‡¦ç† ---
         yield return new WaitForSeconds(spawnDelayAfterMarker);
 
         GameObject spawnedObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);

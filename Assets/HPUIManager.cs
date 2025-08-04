@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class HPUIManager : MonoBehaviour
 {
     [SerializeField] private Slider HPslider;
-    private Player targetPlayer; // QÆ‚·‚éPlayerƒXƒNƒŠƒvƒg
+    private Player targetPlayer; // å‚ç…§ã™ã‚‹Playerã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 
     void Update()
     {
-        // ƒ^[ƒQƒbƒg‚ÌƒvƒŒƒCƒ„[‚ª‚¢‚È‚¢ê‡‚Ì‚İAƒV[ƒ“‚©‚ç’T‚·
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãªã„å ´åˆã®ã¿ã€ã‚·ãƒ¼ãƒ³ã‹ã‚‰æ¢ã™
         if (targetPlayer == null)
         {
-            // "Player"ƒ^ƒO‚Ì•t‚¢‚½ƒIƒuƒWƒFƒNƒg‚ğ’T‚µA‚»‚ÌƒIƒuƒWƒFƒNƒg‚©‚çPlayerƒXƒNƒŠƒvƒg‚ğæ“¾
+            // "Player"ã‚¿ã‚°ã®ä»˜ã„ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã—ã€ãã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰Playerã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å–å¾—
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
@@ -21,22 +21,22 @@ public class HPUIManager : MonoBehaviour
             }
         }
 
-        // ƒ^[ƒQƒbƒg‚ÌƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍƒXƒ‰ƒCƒ_[‚ğ”ñ•\¦
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’éè¡¨ç¤º
         if (targetPlayer == null)
         {
             HPslider.gameObject.SetActive(false);
             return;
         }
 
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚½‚çAƒXƒ‰ƒCƒ_[‚ğƒAƒNƒeƒBƒu‚É‚µ‚ÄUI‚ğXV
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ã¦ã„ãŸã‚‰ã€ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã—ã¦UIã‚’æ›´æ–°
         HPslider.gameObject.SetActive(true);
         UpdateHPUI();
     }
 
-    // UI‚ğXV‚·‚éƒƒ\ƒbƒh
+    // UIã‚’æ›´æ–°ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void UpdateHPUI()
     {
-        // targetPlayer‚ÌŒ»İ’l‚ğg‚Á‚ÄUI‚ğXV
+        // targetPlayerã®ç¾åœ¨å€¤ã‚’ä½¿ã£ã¦UIã‚’æ›´æ–°
         HPslider.maxValue = targetPlayer.PlayerMAXHP;
         HPslider.value = targetPlayer.PlayerHP;
     }

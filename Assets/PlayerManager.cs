@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (player.PlayerHP <= 0)
         {
-            // player‚ÌExperienceTotal‚ðˆø”‚Æ‚µ‚Ä“n‚·
+            // playerã®ExperienceTotalã‚’å¼•æ•°ã¨ã—ã¦æ¸¡ã™
             ResultUI.resultUIonlyPlayer(player.ExperienceTotal);
         }
     }

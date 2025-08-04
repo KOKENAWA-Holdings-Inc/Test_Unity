@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
 {
     
     public GameObject damagePopupPrefab;
-    private Transform playerTransform; // ƒvƒŒƒCƒ„[’Ç]—p‚ÌTransform
+    private Transform playerTransform; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼è¿½å¾“ç”¨ã®Transform
     public float EnemyHP = 10f;
     public float EnemyMaxHP = 10f;
     public float Attack = 1f;
@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private UnityEngine.UI.Slider healthSlider;
 
-    // š’Ç‰Á: HP‚Ì•Ï‰»‚ğŒŸ’m‚·‚é‚½‚ß‚ÉA’¼‘O‚ÌHP‚ğ•Û‘¶‚·‚é•Ï”
+    // â˜…è¿½åŠ : HPã®å¤‰åŒ–ã‚’æ¤œçŸ¥ã™ã‚‹ãŸã‚ã«ã€ç›´å‰ã®HPã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
     private float previousHP;
 
     public static event Action OnEnemyDied;
@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     public void InitializeStats(float newMaxHp)
     {
         EnemyMaxHP = newMaxHp;
-        EnemyHP = EnemyMaxHP; // HP‚àÅ‘å’l‚Éİ’è
+        EnemyHP = EnemyMaxHP; // HPã‚‚æœ€å¤§å€¤ã«è¨­å®š
     }
     private void Awake()
     {
@@ -33,37 +33,37 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        // ’Ç]‚·‚é‚½‚ß‚ÉƒvƒŒƒCƒ„[‚ÌTransform‚ğ•Û
+        // è¿½å¾“ã™ã‚‹ãŸã‚ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transformã‚’ä¿æŒ
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
         }
 
-        // š’Ç‰Á: ’¼‘O‚ÌHP‚ğ‰Šú‰»
+        // â˜…è¿½åŠ : ç›´å‰ã®HPã‚’åˆæœŸåŒ–
         previousHP = EnemyHP;
 
         if (healthSlider != null)
         {
             healthSlider.maxValue = EnemyMaxHP;
             healthSlider.value = EnemyHP;
-            // ‰Šúó‘Ô‚Å‚Í”ñ•\¦‚É‚·‚é
+            // åˆæœŸçŠ¶æ…‹ã§ã¯éè¡¨ç¤ºã«ã™ã‚‹
             healthSlider.gameObject.SetActive(false);
         }
     }
 
     void Update()
     {
-        // š•ÏX“_: HP‚ª•Ï‰»‚µ‚½‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+        // â˜…å¤‰æ›´ç‚¹: HPãŒå¤‰åŒ–ã—ãŸã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
         if (EnemyHP != previousHP)
         {
-            // HPƒo[‚ª”ñ•\¦‚È‚çAÅ‰‚É•\¦‚·‚é
+            // HPãƒãƒ¼ãŒéè¡¨ç¤ºãªã‚‰ã€æœ€åˆã«è¡¨ç¤ºã™ã‚‹
             if (healthSlider != null && !healthSlider.gameObject.activeSelf)
             {
                 healthSlider.gameObject.SetActive(true);
             }
 
-            // Slider‚Ì’l‚ğXV
+            // Sliderã®å€¤ã‚’æ›´æ–°
             if (healthSlider != null)
             {
                 healthSlider.value = EnemyHP;
@@ -72,61 +72,61 @@ public class EnemyManager : MonoBehaviour
             {
                 float damage = previousHP - EnemyHP;
 
-                // š•ÏX: “G‚Ì“ªã‚É’¼Ú¶¬‚·‚é
-                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // “G‚Ì1ƒ†ƒjƒbƒgã‚É•\¦
+                // â˜…å¤‰æ›´: æ•µã®é ­ä¸Šã«ç›´æ¥ç”Ÿæˆã™ã‚‹
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // æ•µã®1ãƒ¦ãƒ‹ãƒƒãƒˆä¸Šã«è¡¨ç¤º
                 GameObject popup = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity);
 
-                // ¥¥¥ –â‘è‚ÌŒ´ˆö‚È‚Ì‚ÅA‚±‚Ìs‚ğŠ®‘S‚Éíœ ¥¥¥
+                // â–¼â–¼â–¼ å•é¡Œã®åŸå› ãªã®ã§ã€ã“ã®è¡Œã‚’å®Œå…¨ã«å‰Šé™¤ â–¼â–¼â–¼
                 // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
 
-                // ¶¬‚µ‚½ƒ|ƒbƒvƒAƒbƒv‚Éƒ_ƒ[ƒW—Ê‚ğİ’è
+                // ç”Ÿæˆã—ãŸãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã«ãƒ€ãƒ¡ãƒ¼ã‚¸é‡ã‚’è¨­å®š
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
 
 
-            // Œ»İ‚ÌHP‚ğu’¼‘O‚ÌHPv‚Æ‚µ‚Ä•Û‘¶‚µAŸ‰ñ‚ÌƒtƒŒ[ƒ€‚Å”äŠr‚Å‚«‚é‚æ‚¤‚É‚·‚é
+            // ç¾åœ¨ã®HPã‚’ã€Œç›´å‰ã®HPã€ã¨ã—ã¦ä¿å­˜ã—ã€æ¬¡å›ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§æ¯”è¼ƒã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
             previousHP = EnemyHP;
         }
 
-        // ©g‚ÌHP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚©‚ğ–ˆƒtƒŒ[ƒ€ŠÄ‹‚·‚é
+        // è‡ªèº«ã®HPãŒ0ä»¥ä¸‹ã«ãªã£ãŸã‹ã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ç›£è¦–ã™ã‚‹
         if (EnemyHP <= 0)
         {
-            Die(); // ƒCƒxƒ“ƒg‚ğ”­s
+            Die(); // ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œ
 
-            // ƒV[ƒ“‚©‚ç "Player" ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ğ’T‚·
+            // ã‚·ãƒ¼ãƒ³ã‹ã‚‰ "Player" ã‚¿ã‚°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã™
             GameObject playerToReward = GameObject.FindGameObjectWithTag("Player");
 
-            // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚½ê‡‚Ì‚İŒoŒ±’l‚ğ—^‚¦‚é
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ãŸå ´åˆã®ã¿çµŒé¨“å€¤ã‚’ä¸ãˆã‚‹
             if (playerToReward != null)
             {
                 Player playerComponent = playerToReward.GetComponent<Player>();
                 if (playerComponent != null)
                 {
-                    // š•ÏX: Player‚ÌAddExperienceƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚ÄŒoŒ±’l‚ğ“n‚·
+                    // â˜…å¤‰æ›´: Playerã®AddExperienceãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦çµŒé¨“å€¤ã‚’æ¸¡ã™
                     playerComponent.AddExperience(EnemyExperience);
                     playerComponent.ExperienceTotal += EnemyExperience;
                 }
             }
 
-            // ©g‚ğ”j‰ó‚·‚é
+            // è‡ªèº«ã‚’ç ´å£Šã™ã‚‹
             Destroy(this.gameObject);
         }
     }
 
-    // š’Ç‰Á: HPƒo[‚ÌˆÊ’u‚ğ“G‚É’Ç]‚³‚¹‚é‚½‚ß‚Ìˆ—
+    // â˜…è¿½åŠ : HPãƒãƒ¼ã®ä½ç½®ã‚’æ•µã«è¿½å¾“ã•ã›ã‚‹ãŸã‚ã®å‡¦ç†
     private void LateUpdate()
     {
-        // HPƒo[‚ª•\¦‚³‚ê‚Ä‚¢‚éê‡‚Ì‚İAˆÊ’u‚ğXV‚·‚é
+        // HPãƒãƒ¼ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹å ´åˆã®ã¿ã€ä½ç½®ã‚’æ›´æ–°ã™ã‚‹
         if (healthSlider != null && healthSlider.gameObject.activeSelf)
         {
-            // “G–{‘Ì‚ÌˆÊ’u‚©‚ç^ã‚É0.5‚¸‚ç‚µ‚½ˆÊ’u‚ÉHPƒo[‚ğ”z’u‚·‚é
+            // æ•µæœ¬ä½“ã®ä½ç½®ã‹ã‚‰çœŸä¸Šã«0.5ãšã‚‰ã—ãŸä½ç½®ã«HPãƒãƒ¼ã‚’é…ç½®ã™ã‚‹
             healthSlider.transform.position = this.transform.position + new Vector3(0, 0.5f, 0);
         }
     }
 
     private void FixedUpdate()
     {
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚éê‡‚Ì‚İ’Ç]
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ã¦ã„ã‚‹å ´åˆã®ã¿è¿½å¾“
         if (playerTransform != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
