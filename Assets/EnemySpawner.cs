@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("“G‚ÌŠî–{“I‚ÈÅ‘åHP")]
     [SerializeField] private float baseEnemyMaxHp = 10f;
     [Tooltip("1•b‚ ‚½‚è‚É‘‰Á‚·‚éÅ‘åHP‚Ì—Ê")]
-    [SerializeField] private float hpGrowthPerSecond = 0.5f;
+    [SerializeField] private float hpGrowthPerSecond = 0.2f;
 
     void Start()
     {

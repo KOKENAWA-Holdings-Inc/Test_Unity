@@ -13,6 +13,10 @@ public class EliteSpawner : MonoBehaviour
     private float spawnTimer = 0f;
     public Vector2 spawnArea = new Vector2(9.5f, 5.5f);
     private bool isSpawningActive = true;
+    [Tooltip("敵の基本的な最大HP")]
+    [SerializeField] private float baseEliteMaxHp = 100f;
+    [Tooltip("1秒あたりに増加する最大HPの量")]
+    [SerializeField] private float hpGrowthPerSecond = 0.5f;
 
     // ★★★ ゲーム開始時に一度だけ実行されるAwakeメソッドを追加 ★★★
     void Start()
@@ -98,6 +102,12 @@ public class EliteSpawner : MonoBehaviour
         }
 
         Vector2 spawnPosition = (Vector2)player.position + offset;
-        Instantiate(ElitePrefab, spawnPosition, Quaternion.identity);
+        float scaledMaxHp = baseEliteMaxHp + (hpGrowthPerSecond * timeManager.elapsedTime);
+        GameObject enemyInstance = Instantiate(ElitePrefab, spawnPosition, Quaternion.identity);
+        EliteManager eliteManager = enemyInstance.GetComponent<EliteManager>();
+        if (eliteManager != null)
+        {
+            eliteManager.InitializeStats(scaledMaxHp);
+        }
     }
 }

@@ -13,8 +13,8 @@ public class PlayerUltShooter : MonoBehaviour
     [Header("必殺技チャージ設定")]
     public float maxUltCharge = 1500f; // チャージの最大値
     public float passiveChargeRate = 1f;  // 1秒あたりの自然増加量
-    public float hitChargeAmount = 0.1f;    // 1ヒットあたりの増加量
-    public float currentUltCharge = 0f;  // 現在のチャージ量
+    public float hitChargeAmount = 5.0f;    // 1ヒットあたりの増加量
+    public float currentUltCharge = 300f;  // 現在のチャージ量
 
     private GameManager gameManager;
 
@@ -60,7 +60,7 @@ public class PlayerUltShooter : MonoBehaviour
 
         // --- 2. 発射条件をチェック ---
         // ★変更：クリックに加えて、チャージが満タンであるかを確認
-        if (!gameManager.IsPaused && Input.GetMouseButtonDown(0) && currentUltCharge >= maxUltCharge)
+        if (!gameManager.IsPaused && Input.GetMouseButtonDown(1) && currentUltCharge >= maxUltCharge)
         {
             Vector3 targetPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;

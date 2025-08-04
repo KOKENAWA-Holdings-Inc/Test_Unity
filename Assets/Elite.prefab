@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePopupPrefab: {fileID: 2472530067132266711, guid: 31c69438c09deda4ea27b31d57f2c32a, type: 3}
   EliteHP: 50
-  EliteMaxHP: 150
+  EliteMaxHP: 100
   Attack: 5
   EliteExperience: 50
   moveSpeed: 2

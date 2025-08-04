@@ -6,46 +6,52 @@ using UnityEngine;
 public class TotalExperienceUI : MonoBehaviour
 {
     public TextMeshProUGUI TotalExperienceText;
-    public EnemyManager EnemyManager;
-    public Boss Boss;
-    private int TotalExperienceCount;
-    // Start is called before the first frame update
+
     void Start()
     {
         TotalExperienceText.enabled = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // このオブジェクトが有効になった時に呼ばれる
     void OnEnable()
     {
-        // Bossの静的イベントに、自分のUI表示メソッドを登録（購読）する
-        EnemyManager.OnEnemyDied += TotalExperience;
-        Boss.OnBossDied += BossTotalExperience;
+        // Playerの静的イベントに、自分のUI表示メソッドを登録（購読）する
+        Player.OnPlayerDied += ShowFinalExperience;
     }
 
     // このオブジェクトが無効になった時に呼ばれる
     void OnDisable()
     {
         // 登録を解除する（メモリリーク防止のため重要）
-        EnemyManager.OnEnemyDied -= TotalExperience;
-        Boss.OnBossDied -= BossTotalExperience;
+        Player.OnPlayerDied -= ShowFinalExperience;
     }
 
-    public void TotalExperience()
+    /// <summary>
+    /// Player.OnPlayerDiedイベントが発生した時に呼び出されるメソッド
+    /// </summary>
+    /// <param name="finalExperience">Playerから渡された総獲得経験値</param>
+    public void ShowFinalExperience(float finalExperience)
     {
-        TotalExperienceCount = TotalExperienceCount + EnemyManager.EnemyExperience;
-        TotalExperienceText.text = ("Total Experience:" + TotalExperienceCount);
-        //Debug.Log("now killed enemy is " + KilledEnemy);
+        // テキストUIを有効にする
+        if (TotalExperienceText != null)
+        {
+            //TotalExperienceText.enabled = true;
+            // 渡された経験値を整数にしてテキストに設定
+            TotalExperienceText.text = "Total Experience: " + Mathf.FloorToInt(finalExperience);
+        }
     }
 
-    public void BossTotalExperience() 
+    private void Update()
     {
-        TotalExperienceCount = TotalExperienceCount + Boss.BossExperience;
-        TotalExperienceText.text = ("Total Experience:" + TotalExperienceCount);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Player playerComponent = player.GetComponent<Player>();
+            TotalExperienceText.text = "Total Experience: " + playerComponent.ExperienceTotal;
+        }
+        else 
+        {
+            return;
+        }
+        
     }
 }

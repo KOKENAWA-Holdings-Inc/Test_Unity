@@ -7,10 +7,10 @@ public class EliteManager : MonoBehaviour
 {
     private Transform playerTransform; // プレイヤー追従用のTransform
     public GameObject damagePopupPrefab;
-    public float EliteHP = 10f;
-    public float EliteMaxHP = 10f;
-    public float Attack = 1f;
-    public int EliteExperience = 10;
+    public float EliteHP = 100f;
+    public float EliteMaxHP = 100f;
+    public float Attack = 5f;
+    public int EliteExperience = 50;
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private UnityEngine.UI.Slider healthSlider;
     private float previousHP;
@@ -18,6 +18,11 @@ public class EliteManager : MonoBehaviour
     public static event Action OnEnemyDied;
 
 
+    public void InitializeStats(float newMaxHp)
+    {
+        EliteMaxHP = newMaxHp;
+        EliteHP = EliteMaxHP; // HPも最大値に設定
+    }
     private void Awake()
     {
         EliteHP = EliteMaxHP;
@@ -92,7 +97,7 @@ public class EliteManager : MonoBehaviour
                 Player playerComponent = playerTransform.GetComponent<Player>();
                 if (playerComponent != null)
                 {
-                    playerComponent.ExperiencePoint += EliteExperience;
+                    playerComponent.AddExperience(EliteExperience);
                     playerComponent.ExperienceTotal += EliteExperience;
                 }
             }

@@ -19,6 +19,8 @@ public class OrbitEnhancer : MonoBehaviour
     public float AbilityReadyTime => abilityReadyTime;
     public float CooldownDuration => cooldown;
 
+    private GameManager gameManager;
+
 
     void Start()
     {
@@ -28,11 +30,12 @@ public class OrbitEnhancer : MonoBehaviour
             //Debug.LogError("OrbitManagerが同じオブジェクトにアタッチされていません！");
             this.enabled = false;
         }
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C) && Time.time >= abilityReadyTime && orbitManager.SpawnedObjects.Count > 0)
+        if (!gameManager.IsPaused && Input.GetKey(KeyCode.Space) && Time.time >= abilityReadyTime && orbitManager.SpawnedObjects.Count > 0)
         {
             StartCoroutine(ActivateOrbitBuffCoroutine());
         }

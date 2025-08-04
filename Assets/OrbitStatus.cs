@@ -41,7 +41,7 @@ public class OrbitStatus : MonoBehaviour
             Rigidbody2D enemyRb = other.gameObject.GetComponent<Rigidbody2D>();
             if (enemyRb != null)
             {
-                Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+                Vector2 knockbackDirection = (other.transform.position - playerObj.transform.position).normalized;
                 enemyRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
             }
         }
@@ -57,7 +57,7 @@ public class OrbitStatus : MonoBehaviour
             Rigidbody2D eliteRb = other.gameObject.GetComponent<Rigidbody2D>();
             if (eliteRb != null)
             {
-                Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+                Vector2 knockbackDirection = (other.transform.position - playerObj.transform.position).normalized;
                 eliteRb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
             }
         }
@@ -69,7 +69,7 @@ public class OrbitStatus : MonoBehaviour
             if (BossComponent != null)
             {
                 // íçà”: BossManagerÇ…BossHPÇ∆Ç¢Ç§ïœêîÇ™Ç†ÇÈÇ©ämîFÇµÇƒÇ≠ÇæÇ≥Ç¢
-                BossComponent.BossHP = BossComponent.BossHP - OrbitAttack; 
+                BossComponent.BossHP = BossComponent.BossHP - OrbitAttack * (playerComponent.Attack * 0.2f); 
             }
         }
         if (attacked == true)

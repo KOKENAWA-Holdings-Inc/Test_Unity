@@ -9,6 +9,7 @@ public class BossAttackBalletShooter : MonoBehaviour
     public GameObject bulletPrefab;
     // 弾の発射速度
     public float bulletSpeed = 15f;
+    private Boss bossComponent;
 
     // ★追加: 射撃のクールダウンタイム（3秒）
     private float shootCooldown = 1f;
@@ -17,6 +18,22 @@ public class BossAttackBalletShooter : MonoBehaviour
 
     void Update()
     {
+        if (bossComponent == null)
+        {
+            // "Boss"タグを持つオブジェクトを探し、そこからBossコンポーネントを取得
+            GameObject bossObj = GameObject.FindGameObjectWithTag("Boss");
+            if (bossObj != null)
+            {
+                bossComponent = bossObj.GetComponent<Boss>();
+                Debug.Log("ボスを発見しました。攻撃を開始します。");
+            }
+
+            // まだボスが見つからない場合は、射撃処理を行わずに中断
+            if (bossComponent == null)
+            {
+                return;
+            }
+        }
         // ★変更:「前回の射撃から3秒後」の条件に変更
         if (Time.time >= lastShotTime + shootCooldown)
         {

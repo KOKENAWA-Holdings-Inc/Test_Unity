@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
 {
     public float PlayerHP = 100f;
     public float PlayerMAXHP = 100f;
-    public float ExperiencePool = 10f;
+    public float ExperiencePool = 20f;
     public float ExperiencePoint = 0f;
     public float ExperienceTotal = 0f;
+    public float ExperienceBuff = 1f;
     public float PlayerLv = 1f;
     public float Attack = 10f;
     public float Defence = 1f;
@@ -21,7 +22,8 @@ public class Player : MonoBehaviour
     // ★追加: 緊急無敵が一度発動したかを記録するためのフラグ
     private bool emergencyInvincibilityTriggered = false;
 
-    public static event Action OnPlayerDied;
+    public static event Action<float> OnPlayerDied;
+    //public static event Action OnPlayerDied;
     private Rigidbody2D rb;
     private Vector2 movement;
     private BoxCollider2D boxCollider; // ★追加: BoxCollider2Dへの参照
@@ -53,6 +55,11 @@ public class Player : MonoBehaviour
             ExperiencePoint = ExperiencePoint - ExperiencePool;
             ExperiencePool = (int)(Mathf.Pow(5, PlayerLv) / Mathf.Pow(4, PlayerLv) + 10 * PlayerLv);
         }
+    }
+    public void AddExperience(float amount)
+    {
+       ExperiencePoint += amount * ExperienceBuff;
+       ExperienceTotal += amount * ExperienceBuff; 
     }
     void FixedUpdate()
     {
@@ -163,6 +170,6 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        OnPlayerDied?.Invoke();
+        OnPlayerDied?.Invoke(ExperienceTotal);
     }
 }

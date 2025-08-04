@@ -6,6 +6,13 @@ public class BossBallet : MonoBehaviour
 {
     [SerializeField] private float Attack = 5f;
 
+    private float ownerAttack = 0f;
+
+    
+    public void Initialize(float bossAttack)
+    {
+        this.ownerAttack = bossAttack;
+    }
     void Start()
     {
         // 2•bŒã‚É’e‚ªŽ©“®“I‚ÉÁ‚¦‚é‚æ‚¤‚É‚·‚é
@@ -26,9 +33,10 @@ public class BossBallet : MonoBehaviour
             // š’Ç‰Á: EnemyManager‚ªŽæ“¾‚Å‚«‚½ê‡‚Ì‚Ýƒ_ƒ[ƒW‚ð—^‚¦‚é
             if (PlayerComponent != null)
             {
-                if (Attack * (bossComponent.Attack * 0.5f) - PlayerComponent.Defence >= 1)
+                float totalDamage = Attack * (this.ownerAttack * 0.5f) - PlayerComponent.Defence;
+                if (totalDamage >= 1)
                 {
-                    PlayerComponent.PlayerHP = PlayerComponent.PlayerHP - (Attack * (bossComponent.Attack * 0.5f) - PlayerComponent.Defence);
+                    PlayerComponent.PlayerHP -= totalDamage;
                 }
                 else 
                 {

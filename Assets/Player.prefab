@@ -137,6 +137,7 @@ MonoBehaviour:
   ExperiencePool: 10
   ExperiencePoint: 0
   ExperienceTotal: 0
+  ExperienceBuff: 1
   PlayerLv: 1
   Attack: 10
   Defence: 1
@@ -230,8 +231,8 @@ MonoBehaviour:
   projectileSpeed: 15
   maxUltCharge: 1500
   passiveChargeRate: 1
-  hitChargeAmount: 0.1
-  currentUltCharge: 0
+  hitChargeAmount: 5
+  currentUltCharge: 300
 --- !u!114 &-1309117862448685614
 MonoBehaviour:
   m_ObjectHideFlags: 0

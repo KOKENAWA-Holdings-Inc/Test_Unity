@@ -68,6 +68,9 @@ public class TheWorld : MonoBehaviour
                 OrbitComponent.orbitSpeed = OrbitComponent.orbitSpeed * 1.3f;
                 lanceShooterComponent.bulletSpeed = lanceShooterComponent.bulletSpeed * 1.3f;
                 break;
+            case "Experience +10%":
+                playerComponent.ExperienceBuff = playerComponent.ExperienceBuff * 1.1f;
+                break;
         }
 
         GameManager.ResumeGame();

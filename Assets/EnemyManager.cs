@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     public float EnemyHP = 10f;
     public float EnemyMaxHP = 10f;
     public float Attack = 1f;
-    public int EnemyExperience = 1;
+    public int EnemyExperience = 5;
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private UnityEngine.UI.Slider healthSlider;
 
@@ -102,7 +102,8 @@ public class EnemyManager : MonoBehaviour
                 Player playerComponent = playerToReward.GetComponent<Player>();
                 if (playerComponent != null)
                 {
-                    playerComponent.ExperiencePoint += EnemyExperience;
+                    // ★変更: PlayerのAddExperienceメソッドを呼び出して経験値を渡す
+                    playerComponent.AddExperience(EnemyExperience);
                     playerComponent.ExperienceTotal += EnemyExperience;
                 }
             }

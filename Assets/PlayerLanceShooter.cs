@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerLanceShooter : MonoBehaviour
 {
@@ -11,30 +12,42 @@ public class PlayerLanceShooter : MonoBehaviour
     //public float shootCooldownMax = 3f;
     public float lastShotTime { get; private set; } = -3f;
 
+    private Camera mainCamera;
+    private GameManager gameManager;
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && Time.time >= lastShotTime + shootCooldown)
+        if (!gameManager.IsPaused && Input.GetMouseButtonDown(0) && Time.time >= lastShotTime + shootCooldown)
         {
+            Vector3 targetPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            targetPosition.z = 0;
             lastShotTime = Time.time;
-            Shoot();
+            Shoot(targetPosition);
         }
         //Debug.Log("Current Bullet Speed: " + this.bulletSpeed);
     }
 
-    void Shoot()
+    void Shoot(Vector3 target)
     {
-        GameObject nearestEnemy = FindNearestEnemy();
+        target.z = transform.position.z;
+        Vector2 direction = (target - transform.position).normalized;
 
-        if (nearestEnemy == null)
-        {
-            //Debug.LogWarning("シーンにEnemyまたはBossがいません。");
-            return;
-        }
-
-        Vector2 direction = (nearestEnemy.transform.position - transform.position).normalized;
+        // その方向を向くための角度を計算（Atan2を使用）
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // 画像のアセットが上向き（↑）を正面としている場合、90度オフセットを加える
         Quaternion rotation = Quaternion.Euler(0, 0, angle - 90f);
+
+        // --- 2. 弾の生成と発射 ---
+        // 計算した角度で弾を生成
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+
+        // 生成した弾のRigidbody2Dを取得
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
     }

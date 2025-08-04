@@ -27,7 +27,7 @@ public class ResultUI : MonoBehaviour
         
     }
 
-    public void resultUIonlyPlayer() 
+    public void resultUIonlyPlayer(float finalExperience) 
     {
         ResultText.enabled = true;
         BackGround.enabled = true;
@@ -65,6 +65,8 @@ public class ResultUI : MonoBehaviour
         BackGround.enabled = true;
         TotalEnemyKill.ResultKilledEnemyText.enabled = true;
         TotalExperienceUI.TotalExperienceText.enabled = true;
+        ResultPlayerLvUI.ResultLvText.enabled = true;
+        Title.titletext.enabled = true;
         ResultText.text = ("Stage Clear");
         GameManager.PauseGame();
     }

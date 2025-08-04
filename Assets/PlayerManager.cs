@@ -15,9 +15,10 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.PlayerHP <= 0) 
+        if (player.PlayerHP <= 0)
         {
-            ResultUI.resultUIonlyPlayer();
+            // player‚ÌExperienceTotal‚ðˆø”‚Æ‚µ‚Ä“n‚·
+            ResultUI.resultUIonlyPlayer(player.ExperienceTotal);
         }
     }
 }

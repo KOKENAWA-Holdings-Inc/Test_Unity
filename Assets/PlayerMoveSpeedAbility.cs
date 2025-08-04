@@ -23,6 +23,8 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
 
     private Player playerComponent; // プレイヤーコンポーネントへの参照
 
+    private GameManager gameManager;
+
     void Start()
     {
         // 最初にプレイヤーを探してコンポーネントを保持しておく（効率化）
@@ -39,12 +41,13 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
         }
 
         charge = chargeMax; // 最初はチャージ満タン
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
         // --- 1. Eキー入力の処理 ---
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!gameManager.IsPaused && Input.GetKeyDown(KeyCode.LeftShift))
         {
             // 現在ブースト中なら停止、そうでなければ開始を試みる
             if (isBoosting)
