@@ -1,50 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // UIƒRƒ“ƒ|[ƒlƒ“ƒg‚ğˆµ‚¤‚½‚ß‚É•K—v
+using UnityEngine.UI; // UIã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æ‰±ã†ãŸã‚ã«å¿…è¦
 
 public class Summoner : MonoBehaviour
 {
-    [Header("¢Š«‚·‚éƒIƒuƒWƒFƒNƒg")]
-    [Tooltip("¢Š«‚·‚é‹…‚ÌƒvƒŒƒnƒu")]
+    [Header("å¬å–šã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
+    [Tooltip("å¬å–šã™ã‚‹çƒã®ãƒ—ãƒ¬ãƒãƒ–")]
     public GameObject ballPrefab;
 
-    [Header("UIİ’è")]
-    [Tooltip("ƒ}[ƒJ[‚Æ‚µ‚Ä•\¦‚·‚éCanvas")]
+    [Header("UIè¨­å®š")]
+    [Tooltip("ãƒãƒ¼ã‚«ãƒ¼ã¨ã—ã¦è¡¨ç¤ºã™ã‚‹Canvas")]
     [SerializeField] private Canvas markerCanvas;
 
-    [Header("¢Š«ƒ^ƒCƒ~ƒ“ƒO")]
-    [Tooltip("¢Š«‚ğÀs‚·‚éÅ’ZŠÔŠui•bj")]
+    [Header("å¬å–šã‚¿ã‚¤ãƒŸãƒ³ã‚°")]
+    [Tooltip("å¬å–šã‚’å®Ÿè¡Œã™ã‚‹æœ€çŸ­é–“éš”ï¼ˆç§’ï¼‰")]
     public float minSummonInterval = 2f;
-    [Tooltip("¢Š«‚ğÀs‚·‚éÅ’·ŠÔŠui•bj")]
+    [Tooltip("å¬å–šã‚’å®Ÿè¡Œã™ã‚‹æœ€é•·é–“éš”ï¼ˆç§’ï¼‰")]
     public float maxSummonInterval = 5f;
 
     void Start()
     {
-        // š•ÏX: ƒ{ƒX‚ğ’T‚µAŒ©‚Â‚©‚Á‚½‚çƒƒCƒ“ˆ—‚ğŠJn‚·‚éƒRƒ‹[ƒ`ƒ“‚ğ‹N“®
+        // â˜…å¤‰æ›´: ãƒœã‚¹ã‚’æ¢ã—ã€è¦‹ã¤ã‹ã£ãŸã‚‰ãƒ¡ã‚¤ãƒ³å‡¦ç†ã‚’é–‹å§‹ã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³ã‚’èµ·å‹•
         StartCoroutine(FindBossAndStartSummoning());
     }
 
     void Update()
     {
-        // ‚±‚ÌƒXƒNƒŠƒvƒg‚ÍƒRƒ‹[ƒ`ƒ“‚Å“®ì‚·‚é‚½‚ßUpdate‚Í•s—v
+        // ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¯ã‚³ãƒ«ãƒ¼ãƒãƒ³ã§å‹•ä½œã™ã‚‹ãŸã‚Updateã¯ä¸è¦
     }
 
     /// <summary>
-    /// š’Ç‰Á: ƒ{ƒX‚ªoŒ»‚·‚é‚Ü‚Å‘Ò‹@‚µAoŒ»‚µ‚½‚çƒƒCƒ“ƒ‹[ƒv‚ğŠJn‚·‚éƒRƒ‹[ƒ`ƒ“
+    /// â˜…è¿½åŠ : ãƒœã‚¹ãŒå‡ºç¾ã™ã‚‹ã¾ã§å¾…æ©Ÿã—ã€å‡ºç¾ã—ãŸã‚‰ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‚’é–‹å§‹ã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
     /// </summary>
     private IEnumerator FindBossAndStartSummoning()
     {
-        //Debug.Log("ƒ{ƒX‚ğ’T‚µ‚Ä‚¢‚Ü‚·...");
+        //Debug.Log("ãƒœã‚¹ã‚’æ¢ã—ã¦ã„ã¾ã™...");
 
-        // ƒ{ƒX‚ªŒ©‚Â‚©‚é‚Ü‚Å1•b‚²‚Æ‚É’T‚µ‘±‚¯‚é
+        // ãƒœã‚¹ãŒè¦‹ã¤ã‹ã‚‹ã¾ã§1ç§’ã”ã¨ã«æ¢ã—ç¶šã‘ã‚‹
         while (GameObject.FindGameObjectWithTag("Boss") == null)
         {
             yield return new WaitForSeconds(1f);
         }
 
-        // --- ƒ{ƒX‚ªŒ©‚Â‚©‚Á‚½‚çA‚±‚±‚©‚ç‰º‚Ì‰Šúİ’è‚ªÀs‚³‚ê‚é ---
-        //Debug.Log("ƒ{ƒX‚ğ”­Œ©I¢Š«ˆ—‚ğŠJn‚µ‚Ü‚·B");
+        // --- ãƒœã‚¹ãŒè¦‹ã¤ã‹ã£ãŸã‚‰ã€ã“ã“ã‹ã‚‰ä¸‹ã®åˆæœŸè¨­å®šãŒå®Ÿè¡Œã•ã‚Œã‚‹ ---
+        //Debug.Log("ãƒœã‚¹ã‚’ç™ºè¦‹ï¼å¬å–šå‡¦ç†ã‚’é–‹å§‹ã—ã¾ã™ã€‚");
 
         if (markerCanvas != null)
         {
@@ -52,15 +52,15 @@ public class Summoner : MonoBehaviour
         }
         else
         {
-            //Debug.LogError("Marker Canvas‚ªInspector‚©‚çİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            //Debug.LogError("Marker CanvasãŒInspectorã‹ã‚‰è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
         }
 
-        // ƒƒCƒ“‚Ì¢Š«ƒ‹[ƒv‚ğŠJn‚·‚é
+        // ãƒ¡ã‚¤ãƒ³ã®å¬å–šãƒ«ãƒ¼ãƒ—ã‚’é–‹å§‹ã™ã‚‹
         StartCoroutine(SummoningLoopCoroutine());
     }
 
     /// <summary>
-    /// ¢Š«ˆ—‚ğƒ‰ƒ“ƒ_ƒ€‚ÈŠÔŠu‚Å–³ŒÀ‚ÉŒJ‚è•Ô‚·‚½‚ß‚Ìƒ‹[ƒv
+    /// å¬å–šå‡¦ç†ã‚’ãƒ©ãƒ³ãƒ€ãƒ ãªé–“éš”ã§ç„¡é™ã«ç¹°ã‚Šè¿”ã™ãŸã‚ã®ãƒ«ãƒ¼ãƒ—
     /// </summary>
     private IEnumerator SummoningLoopCoroutine()
     {
@@ -79,25 +79,25 @@ public class Summoner : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj == null)
         {
-            //Debug.LogError("Player‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½‚½‚ßA¢Š«ƒV[ƒPƒ“ƒX‚ğ’†’f‚µ‚Ü‚·B");
+            //Debug.LogError("PlayerãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸãŸã‚ã€å¬å–šã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã‚’ä¸­æ–­ã—ã¾ã™ã€‚");
             yield break;
         }
 
         Vector3 summonPosition = playerObj.transform.position;
 
-        // --- UIƒ}[ƒJ[‚Ì•\¦ˆ— ---
+        // --- UIãƒãƒ¼ã‚«ãƒ¼ã®è¡¨ç¤ºå‡¦ç† ---
         markerCanvas.transform.position = summonPosition;
         markerCanvas.gameObject.SetActive(true);
-        //Debug.Log("ƒvƒŒƒCƒ„[‚ğƒ^[ƒQƒbƒg‚Éİ’è‚µ‚Ü‚µ‚½B");
+        //Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«è¨­å®šã—ã¾ã—ãŸã€‚");
 
         yield return new WaitForSeconds(0.5f);
 
         markerCanvas.gameObject.SetActive(false);
 
-        // --- ‹…‚Ì¢Š«ˆ— ---
+        // --- çƒã®å¬å–šå‡¦ç† ---
         yield return new WaitForSeconds(0.5f);
 
         Instantiate(ballPrefab, summonPosition, Quaternion.identity);
-        //Debug.Log("ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚É‹…‚ğ¢Š«‚µ‚Ü‚µ‚½B");
+        //Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã«çƒã‚’å¬å–šã—ã¾ã—ãŸã€‚");
     }
 }
