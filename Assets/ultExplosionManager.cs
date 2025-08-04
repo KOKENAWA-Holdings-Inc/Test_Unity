@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ultExplosionManager : MonoBehaviour
@@ -10,20 +9,20 @@ public class ultExplosionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         attacked = true;
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         Player playerComponent = playerObj.GetComponent<Player>();
-        // š•ÏX‰ÓŠ: Õ“Ë‚µ‚½‘Šè‚ª "Enemy" ‚Ü‚½‚Í "Boss" ƒ^ƒO‚ğ‚Á‚Ä‚¢‚½‚ç
+        // â˜…å¤‰æ›´ç®‡æ‰€: è¡çªã—ãŸç›¸æ‰‹ãŒ "Enemy" ã¾ãŸã¯ "Boss" ã‚¿ã‚°ã‚’æŒã£ã¦ã„ãŸã‚‰
         if (other.CompareTag("Enemy") || other.CompareTag("Elite") || other.CompareTag("Boss"))
         {
             EnemyManager EnemyComponent = other.GetComponent<EnemyManager>();

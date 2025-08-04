@@ -1,28 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // TextMeshPro‚ğˆµ‚¤‚½‚ß‚É•K—v
+using TMPro; // TextMeshProã‚’æ‰±ã†ãŸã‚ã«å¿…è¦
 
 public class StatusUIManager : MonoBehaviour
 {
-    [Header("UIQÆ")]
-    [Tooltip("ƒXƒe[ƒ^ƒX‘S‘Ì‚ğˆÍ‚Şeƒpƒlƒ‹")]
+    [Header("UIå‚ç…§")]
+    [Tooltip("ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹å…¨ä½“ã‚’å›²ã‚€è¦ªãƒ‘ãƒãƒ«")]
     [SerializeField] private GameObject statusPanel;
-    [Tooltip("HP‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("HPã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI hpText;
-    [Tooltip("UŒ‚—Í‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("æ”»æ’ƒåŠ›ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI attackText;
-    [Tooltip("–hŒä—Í‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("é˜²å¾¡åŠ›ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI defenceText;
-    [Tooltip("ˆÚ“®‘¬“x‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("ç§»å‹•é€Ÿåº¦ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI moveSpeedText;
 
-    private Player targetPlayer; // QÆ‚·‚éƒvƒŒƒCƒ„[
-    private bool isPanelActive = false; // ƒpƒlƒ‹‚ª•\¦‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ìó‘Ô
+    private Player targetPlayer; // å‚ç…§ã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+    private bool isPanelActive = false; // ãƒ‘ãƒãƒ«ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã®çŠ¶æ…‹
 
     void Start()
     {
-        // ”O‚Ì‚½‚ßAŠJn‚Í•K‚¸”ñ•\¦‚É‚µ‚Ä‚¨‚­
+        // å¿µã®ãŸã‚ã€é–‹å§‹æ™‚ã¯å¿…ãšéè¡¨ç¤ºã«ã—ã¦ãŠã
         if (statusPanel != null)
         {
             statusPanel.SetActive(false);
@@ -31,10 +31,10 @@ public class StatusUIManager : MonoBehaviour
 
     void Update()
     {
-        // EscapeƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚ğŒŸ’m
+        // Escapeã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸç¬é–“ã‚’æ¤œçŸ¥
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Œ»İ‚Ìó‘Ô‚ğ”½“]‚³‚¹‚é (•\¦ -> ”ñ•\¦, ”ñ•\¦ -> •\¦)
+            // ç¾åœ¨ã®çŠ¶æ…‹ã‚’åè»¢ã•ã›ã‚‹ (è¡¨ç¤º -> éè¡¨ç¤º, éè¡¨ç¤º -> è¡¨ç¤º)
             isPanelActive = !isPanelActive;
 
             if (isPanelActive)
@@ -49,26 +49,26 @@ public class StatusUIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ğ•\¦‚µAƒQ[ƒ€‚ğˆê’â~‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¡¨ç¤ºã—ã€ã‚²ãƒ¼ãƒ ã‚’ä¸€æ™‚åœæ­¢ã™ã‚‹
     /// </summary>
     private void ShowStatus()
     {
-        // í‚ÉÅV‚ÌƒvƒŒƒCƒ„[î•ñ‚ğ’T‚·
+        // å¸¸ã«æœ€æ–°ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æƒ…å ±ã‚’æ¢ã™
         targetPlayer = FindObjectOfType<Player>();
         if (targetPlayer == null)
         {
-            Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-            isPanelActive = false; // •\¦‚Å‚«‚È‚¢‚Ì‚Åó‘Ô‚ğ–ß‚·
+            Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+            isPanelActive = false; // è¡¨ç¤ºã§ããªã„ã®ã§çŠ¶æ…‹ã‚’æˆ»ã™
             return;
         }
 
-        // ƒQ[ƒ€‚ÌŠÔ‚ğ~‚ß‚é
+        // ã‚²ãƒ¼ãƒ ã®æ™‚é–“ã‚’æ­¢ã‚ã‚‹
         Time.timeScale = 0f;
-        // ƒpƒlƒ‹‚ğ•\¦‚·‚é
+        // ãƒ‘ãƒãƒ«ã‚’è¡¨ç¤ºã™ã‚‹
         statusPanel.SetActive(true);
 
-        // ŠeƒeƒLƒXƒg‚ÉŒ»İ‚ÌƒXƒe[ƒ^ƒX‚ğ”½‰f‚³‚¹‚é
-        // ToString("F1") ‚È‚Ç‚ÍA¬”“_ˆÈ‰º‚Ì•\¦Œ…”‚ğw’è‚·‚é‘®İ’è‚Å‚·
+        // å„ãƒ†ã‚­ã‚¹ãƒˆã«ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’åæ˜ ã•ã›ã‚‹
+        // ToString("F1") ãªã©ã¯ã€å°æ•°ç‚¹ä»¥ä¸‹ã®è¡¨ç¤ºæ¡æ•°ã‚’æŒ‡å®šã™ã‚‹æ›¸å¼è¨­å®šã§ã™
         hpText.text = $"HP: {targetPlayer.PlayerHP.ToString("F0")} / {targetPlayer.PlayerMAXHP.ToString("F0")}";
         attackText.text = $"Attack: {targetPlayer.Attack.ToString("F2")}";
         defenceText.text = $"Defence: {targetPlayer.Defence.ToString("F2")}";
@@ -76,13 +76,13 @@ public class StatusUIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ğ”ñ•\¦‚É‚µAƒQ[ƒ€‚ğÄŠJ‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’éè¡¨ç¤ºã«ã—ã€ã‚²ãƒ¼ãƒ ã‚’å†é–‹ã™ã‚‹
     /// </summary>
     private void HideStatus()
     {
-        // ƒQ[ƒ€‚ÌŠÔ‚ğŒ³‚É–ß‚·
+        // ã‚²ãƒ¼ãƒ ã®æ™‚é–“ã‚’å…ƒã«æˆ»ã™
         Time.timeScale = 1f;
-        // ƒpƒlƒ‹‚ğ”ñ•\¦‚É‚·‚é
+        // ãƒ‘ãƒãƒ«ã‚’éè¡¨ç¤ºã«ã™ã‚‹
         statusPanel.SetActive(false);
     }
 }
