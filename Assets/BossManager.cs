@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    // â–¼â–¼â–¼â–¼â–¼ å‰Šé™¤ â–¼â–¼â–¼â–¼â–¼
-    // // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    // ¥¥¥¥¥ íœ ¥¥¥¥¥
+    // // ƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg
     // public Transform player;
-    // â–²â–²â–²â–²â–² å‰Šé™¤ â–²â–²â–²â–²â–²
+    // £££££ íœ £££££
 
-    // ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹æ•µã®ãƒ—ãƒ¬ãƒãƒ–
+    // ƒXƒ|[ƒ“‚³‚¹‚é“G‚ÌƒvƒŒƒnƒu
     public GameObject BossPrefab;
 
-    // ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹çŸ©å½¢é ˜åŸŸã®ã‚µã‚¤ã‚ºï¼ˆä¸­å¿ƒã‹ã‚‰ã®è·é›¢ï¼‰
+    // ƒXƒ|[ƒ“‚³‚¹‚é‹éŒ`—Ìˆæ‚ÌƒTƒCƒYi’†S‚©‚ç‚Ì‹——£j
     public Vector2 spawnArea = new Vector2(9.5f, 5.5f);
 
     public TimeManager timeManager;
@@ -23,17 +23,13 @@ public class BossManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< HEAD
-        Invoke("SpawnBoss", 420f);
-=======
-        Invoke("SpawnBoss", 300f);
->>>>>>> 3a4f16e86f26a009a0195370649b2dc338c4cf0a
+        Invoke("SpawnBoss", 240f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (((int)timeManager.elapsedTime) == 420 && !hasBossSpawned)
+        /*if (((int)timeManager.elapsedTime) == 420 && !hasBossSpawned) 
         {
             SpawnBoss();
             hasBossSpawned = true;
@@ -42,45 +38,45 @@ public class BossManager : MonoBehaviour
 
     void SpawnBoss()
     {
-        // â˜…è¿½åŠ : ã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹ç¬é–“ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¢ã™
+        // š’Ç‰Á: ƒXƒ|[ƒ“‚·‚éuŠÔ‚ÉƒvƒŒƒCƒ„[‚ğ’T‚·
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
-        // â˜…è¿½åŠ : ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯å‡¦ç†ã‚’ä¸­æ–­ã™ã‚‹
+        // š’Ç‰Á: ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚Íˆ—‚ğ’†’f‚·‚é
         if (playerObj == null)
         {
-            Debug.LogError("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸãŸã‚ã€ãƒœã‚¹ã‚’ã‚¹ãƒãƒ¼ãƒ³ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚");
+            Debug.LogError("ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½‚½‚ßAƒ{ƒX‚ğƒXƒ|[ƒ“‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B");
             return;
         }
 
-        Vector2 offset = Vector2.zero; // ã‚¹ãƒãƒ¼ãƒ³ä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’åˆæœŸåŒ–
+        Vector2 offset = Vector2.zero; // ƒXƒ|[ƒ“ˆÊ’u‚ÌƒIƒtƒZƒbƒg‚ğ‰Šú‰»
 
-        // 0:ä¸Š, 1:ä¸‹, 2:å³, 3:å·¦ ã®4ã¤ã®è¾ºã‹ã‚‰1ã¤ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«é¸ã¶
+        // 0:ã, 1:‰º, 2:‰E, 3:¶ ‚Ì4‚Â‚Ì•Ó‚©‚ç1‚Â‚ğƒ‰ƒ“ƒ_ƒ€‚É‘I‚Ô
         int side = Random.Range(0, 4);
 
         switch (side)
         {
-            // ä¸Šè¾ºã«ã‚¹ãƒãƒ¼ãƒ³
+            // ã•Ó‚ÉƒXƒ|[ƒ“
             case 0:
                 offset = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), spawnArea.y);
                 break;
-            // ä¸‹è¾ºã«ã‚¹ãƒãƒ¼ãƒ³
+            // ‰º•Ó‚ÉƒXƒ|[ƒ“
             case 1:
                 offset = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), -spawnArea.y);
                 break;
-            // å³è¾ºã«ã‚¹ãƒãƒ¼ãƒ³
+            // ‰E•Ó‚ÉƒXƒ|[ƒ“
             case 2:
                 offset = new Vector2(spawnArea.x, Random.Range(-spawnArea.y, spawnArea.y));
                 break;
-            // å·¦è¾ºã«ã‚¹ãƒãƒ¼ãƒ³
+            // ¶•Ó‚ÉƒXƒ|[ƒ“
             case 3:
                 offset = new Vector2(-spawnArea.x, Random.Range(-spawnArea.y, spawnArea.y));
                 break;
         }
 
-        // â˜…å¤‰æ›´: è¦‹ã¤ã‘å‡ºã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã«è¨ˆç®—ã—ãŸã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’åŠ ç®—
+        // š•ÏX: Œ©‚Â‚¯o‚µ‚½ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ÉŒvZ‚µ‚½ƒIƒtƒZƒbƒg‚ğ‰ÁZ
         Vector2 spawnPosition = (Vector2)playerObj.transform.position + offset;
 
-        // æ•µã‚’ç”Ÿæˆ
+        // “G‚ğ¶¬
         Instantiate(BossPrefab, spawnPosition, Quaternion.identity);
     }
 }

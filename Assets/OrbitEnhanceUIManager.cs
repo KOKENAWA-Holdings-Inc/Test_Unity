@@ -5,51 +5,51 @@ using UnityEngine.UI;
 
 public class OrbitEnhanceUIManager : MonoBehaviour
 {
-    [Header("UIå‚ç…§")]
-    [Tooltip("ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ã‚’è¡¨ç¤ºã™ã‚‹ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼")]
+    [Header("UIQÆ")]
+    [Tooltip("ƒN[ƒ‹ƒ_ƒEƒ“‚ğ•\¦‚·‚éƒXƒ‰ƒCƒ_[")]
     [SerializeField] private Slider cooldownSlider;
 
-    // ç›£è¦–å¯¾è±¡ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+    // ŠÄ‹‘ÎÛ‚ÌƒXƒNƒŠƒvƒg‚ğŠi”[‚·‚é•Ï”
     private OrbitEnhancer orbitEnhancer;
 
     void Start()
     {
-        // ã‚·ãƒ¼ãƒ³å†…ã«å­˜åœ¨ã™ã‚‹OrbitEnhancerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æ¢ã™
+        // ƒV[ƒ““à‚É‘¶İ‚·‚éOrbitEnhancerƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’T‚·
         orbitEnhancer = FindObjectOfType<OrbitEnhancer>();
 
         if (orbitEnhancer == null)
         {
-            //Debug.LogError("ã‚·ãƒ¼ãƒ³ã«OrbitEnhancerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+            //Debug.LogError("ƒV[ƒ“‚ÉOrbitEnhancerƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
             this.enabled = false;
             return;
         }
         if (cooldownSlider == null)
         {
-            //Debug.LogError("Cooldown SliderãŒInspectorã‹ã‚‰è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
+            //Debug.LogError("Cooldown Slider‚ªInspector‚©‚çİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
             this.enabled = false;
             return;
         }
 
-
+        
     }
 
     void Update()
     {
         if (orbitEnhancer == null || cooldownSlider == null) return;
 
-        // ç¾åœ¨æ™‚åˆ»ãŒã€ã‚¢ãƒ“ãƒªãƒ†ã‚£ãŒä½¿ç”¨å¯èƒ½ã«ãªã‚‹æ™‚åˆ»ã‚ˆã‚Šå‰ã‹ï¼Ÿï¼ˆï¼ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ä¸­ã‹ï¼Ÿï¼‰
+        // Œ»İ‚ªAƒAƒrƒŠƒeƒB‚ªg—p‰Â”\‚É‚È‚é‚æ‚è‘O‚©HiƒN[ƒ‹ƒ_ƒEƒ“’†‚©Hj
         if (Time.time < orbitEnhancer.AbilityReadyTime)
         {
+            
 
-
-            // ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ã®æ®‹ã‚Šæ™‚é–“ã‚’è¨ˆç®—
+            // ƒN[ƒ‹ƒ_ƒEƒ“‚Ìc‚èŠÔ‚ğŒvZ
             float timeRemaining = orbitEnhancer.AbilityReadyTime - Time.time;
-            // å…¨ä½“ã®ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³æ™‚é–“ã«å¯¾ã™ã‚‹é€²æ—ç‡ã‚’è¨ˆç®—ï¼ˆ0.0ï½1.0ï¼‰
+            // ‘S‘Ì‚ÌƒN[ƒ‹ƒ_ƒEƒ“ŠÔ‚É‘Î‚·‚éi’»—¦‚ğŒvZi0.0`1.0j
             float progress = (orbitEnhancer.CooldownDuration - timeRemaining) / orbitEnhancer.CooldownDuration;
 
-            // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®å€¤ã‚’æ›´æ–°
+            // ƒXƒ‰ƒCƒ_[‚Ì’l‚ğXV
             cooldownSlider.value = progress;
         }
-
+        
     }
 }

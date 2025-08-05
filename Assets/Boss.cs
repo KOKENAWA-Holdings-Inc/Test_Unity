@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
 {
     public GameObject damagePopupPrefab;
     public float BossHP = 10f;
-    public float BossMAXHP = 20f;
+    public float BossMAXHP = 5000f;
     public float Attack = 10f;
     public float Defence = 0f;
     public int BossExperience = 10;

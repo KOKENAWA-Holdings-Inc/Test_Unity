@@ -7,7 +7,7 @@ public class EliteSpawner : MonoBehaviour
     private Transform player; // 内部でプレイヤーの情報を保持するための変数
 
     public GameObject ElitePrefab;
-    public TimeManager timeManager;
+    public TimeManager timeManager; 
 
     public float spawnInterval = 60f;
     private float spawnTimer = 0f;
@@ -53,8 +53,8 @@ public class EliteSpawner : MonoBehaviour
                 spawnTimer -= spawnInterval;
             }
 
-            // 時間が420秒以上になったら、スポーンを停止する
-            if (timeManager.elapsedTime >= 419)
+            // 時間が239秒以上になったら、スポーンを停止する
+            if (timeManager.elapsedTime >= 239)
             {
                 //Debug.Log("指定時間を超えたため、エネミーのスポーンを停止し、既存のエネミーを全て破壊します。");
                 isSpawningActive = false;

@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("最短のスポーン間隔")]
     [SerializeField] private float minSpawnInterval = 0.1f;
     [Tooltip("最短間隔に到達するまでの時間（秒）")]
-    [SerializeField] private float timeToMinInterval = 300f; // 5分
+    [SerializeField] private float timeToMinInterval = 180f; // 3分
 
     // ★追加: 敵の数の上限設定
     [Header("Spawn Limit Settings")]
@@ -73,7 +73,7 @@ public class EnemySpawner : MonoBehaviour
                 spawnTimer = 0f; // タイマーをリセット
             }
 
-            if (timeManager.elapsedTime >= 420)
+            if (timeManager.elapsedTime >= 240)
             {
                 //Debug.Log("指定時間を超えたため、エネミーのスポーンを停止し、既存のエネミーを全て破壊します。");
                 isSpawningActive = false;

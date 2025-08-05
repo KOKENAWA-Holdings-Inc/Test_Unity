@@ -1,44 +1,44 @@
 using UnityEngine;
-using UnityEngine.UI; // UIã‚’æ‰±ã†ãŸã‚ã«å¿…è¦
+using UnityEngine.UI; // UI‚ğˆµ‚¤‚½‚ß‚É•K—v
 
 public class AbilityChargeUI : MonoBehaviour
 {
-    [Header("UIå‚ç…§")]
-    [Tooltip("ãƒ–ãƒ¼ã‚¹ãƒˆã®ãƒãƒ£ãƒ¼ã‚¸é‡ã‚’è¡¨ç¤ºã™ã‚‹ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼")]
+    [Header("UIQÆ")]
+    [Tooltip("ƒu[ƒXƒg‚Ìƒ`ƒƒ[ƒW—Ê‚ğ•\¦‚·‚éƒXƒ‰ƒCƒ_[")]
     [SerializeField] private Slider chargeSlider;
 
-    // ç›£è¦–å¯¾è±¡ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+    // ŠÄ‹‘ÎÛ‚ÌƒXƒNƒŠƒvƒg‚ğŠi”[‚·‚é•Ï”
     private PlayerMoveSpeedAbility speedAbility;
 
     void Start()
     {
-        // ã‚·ãƒ¼ãƒ³å†…ã«å­˜åœ¨ã™ã‚‹PlayerMoveSpeedAbilityã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æ¢ã™
+        // ƒV[ƒ““à‚É‘¶İ‚·‚éPlayerMoveSpeedAbilityƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’T‚·
         speedAbility = FindObjectOfType<PlayerMoveSpeedAbility>();
 
-        // ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¾ãŸã¯ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼ã‚’å‡ºã™
+        // ƒXƒNƒŠƒvƒg‚Ü‚½‚ÍƒXƒ‰ƒCƒ_[‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍƒGƒ‰[‚ğo‚·
         if (speedAbility == null)
         {
-            //Debug.LogError("ã‚·ãƒ¼ãƒ³ã«PlayerMoveSpeedAbilityã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
-            this.enabled = false; // ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ç„¡åŠ¹åŒ–
+            //Debug.LogError("ƒV[ƒ“‚ÉPlayerMoveSpeedAbilityƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+            this.enabled = false; // ƒXƒNƒŠƒvƒg‚ğ–³Œø‰»
             return;
         }
         if (chargeSlider == null)
         {
-            //Debug.LogError("Charge SliderãŒInspectorã‹ã‚‰è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
+            //Debug.LogError("Charge Slider‚ªInspector‚©‚çİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
             this.enabled = false;
             return;
         }
 
-        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®æœ€å¤§å€¤ã‚’åˆæœŸè¨­å®š
+        // ƒXƒ‰ƒCƒ_[‚ÌÅ‘å’l‚ğ‰Šúİ’è
         chargeSlider.maxValue = speedAbility.MaxCharge;
     }
 
     void Update()
     {
-        // ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¨ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ãŒæ­£å¸¸ã«å­˜åœ¨ã™ã‚‹å ´åˆã®ã¿ã€æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å€¤ã‚’æ›´æ–°
+        // ƒXƒNƒŠƒvƒg‚ÆƒXƒ‰ƒCƒ_[‚ª³í‚É‘¶İ‚·‚éê‡‚Ì‚İA–ˆƒtƒŒ[ƒ€’l‚ğXV
         if (speedAbility != null && chargeSlider != null)
         {
-            // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®ç¾åœ¨ã®å€¤ã‚’ã€ãƒ–ãƒ¼ã‚¹ãƒˆã®ç¾åœ¨ã®ãƒãƒ£ãƒ¼ã‚¸é‡ã«åˆã‚ã›ã‚‹
+            // ƒXƒ‰ƒCƒ_[‚ÌŒ»İ‚Ì’l‚ğAƒu[ƒXƒg‚ÌŒ»İ‚Ìƒ`ƒƒ[ƒW—Ê‚É‡‚í‚¹‚é
             chargeSlider.value = speedAbility.CurrentCharge;
         }
     }

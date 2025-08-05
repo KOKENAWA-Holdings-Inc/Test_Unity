@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePopupPrefab: {fileID: 2472530067132266711, guid: 31c69438c09deda4ea27b31d57f2c32a, type: 3}
   BossHP: 1000
-  BossMAXHP: 1000
+  BossMAXHP: 5000
   Attack: 5
   Defence: 5
   BossExperience: 0
