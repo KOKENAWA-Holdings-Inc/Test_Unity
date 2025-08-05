@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrbitManager : MonoBehaviour
 {
-    // ... i•Ï”‚Ì‘å•”•ª‚Í‚»‚Ì‚Ü‚Üj ...
+    // ... ï¼ˆå¤‰æ•°ã®å¤§éƒ¨åˆ†ã¯ãã®ã¾ã¾ï¼‰ ...
     private Transform playerTransform;
     [SerializeField] private GameObject orbitingObjectPrefab;
     [SerializeField] private int numberOfObjects = 8;
@@ -19,18 +19,18 @@ public class OrbitManager : MonoBehaviour
 
     void Start()
     {
-        // š•ÏX: ƒ‰ƒCƒtƒTƒCƒNƒ‹‚ğŠJn‚·‚é‚¾‚¯‚É‚·‚é
+        // â˜…å¤‰æ›´: ãƒ©ã‚¤ãƒ•ã‚µã‚¤ã‚¯ãƒ«ã‚’é–‹å§‹ã™ã‚‹ã ã‘ã«ã™ã‚‹
         lifecycleCoroutine = StartCoroutine(LifecycleCoroutine());
     }
 
-    // ¥¥¥ InitializeCoroutine‚Í•s—v‚É‚È‚Á‚½‚½‚ßíœ ¥¥¥
+    // â–¼â–¼â–¼ InitializeCoroutineã¯ä¸è¦ã«ãªã£ãŸãŸã‚å‰Šé™¤ â–¼â–¼â–¼
     /*
     private IEnumerator InitializeCoroutine() { ... }
     */
 
     void LateUpdate()
     {
-        // š•ÏX: ƒvƒŒƒCƒ„[‚Ö‚ÌQÆ‚ª–³Œø‚É‚È‚Á‚½‚çA–ˆƒtƒŒ[ƒ€’T‚µ’¼‚·
+        // â˜…å¤‰æ›´: ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ã®å‚ç…§ãŒç„¡åŠ¹ã«ãªã£ãŸã‚‰ã€æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ¢ã—ç›´ã™
         if (playerTransform == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -40,19 +40,19 @@ public class OrbitManager : MonoBehaviour
             }
             else
             {
-                // ƒvƒŒƒCƒ„[‚ª‚¢‚È‚¢ê‡‚Í‰½‚à‚µ‚È‚¢
+                // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãªã„å ´åˆã¯ä½•ã‚‚ã—ãªã„
                 return;
             }
         }
 
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚ê‚ÎAü‰ñˆ—‚ğÀs
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ã¦ã„ã‚Œã°ã€å‘¨å›å‡¦ç†ã‚’å®Ÿè¡Œ
         if (spawnedObjects.Count > 0)
         {
             Orbit();
         }
     }
 
-    // ... i‘¼‚Ìƒƒ\ƒbƒh‚Í‚»‚Ì‚Ü‚Üj ...
+    // ... ï¼ˆä»–ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ãã®ã¾ã¾ï¼‰ ...
     private IEnumerator LifecycleCoroutine()
     {
         yield return new WaitForSeconds(initialSpawnDelay);

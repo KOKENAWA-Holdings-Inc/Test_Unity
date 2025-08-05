@@ -4,22 +4,22 @@ using System.Linq;
 using UnityEngine;
 
 public class EliteAttackBalletShooter : MonoBehaviour
-{// ƒCƒ“ƒXƒyƒNƒ^[‚©‚ç’e‚ÌƒvƒŒƒnƒu‚ğİ’è
+{// ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã‹ã‚‰å¼¾ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’è¨­å®š
     public GameObject bulletPrefab;
-    // ’e‚Ì”­Ë‘¬“x
+    // å¼¾ã®ç™ºå°„é€Ÿåº¦
     public float bulletSpeed = 15f;
 
-    // š’Ç‰Á: ËŒ‚‚ÌƒN[ƒ‹ƒ_ƒEƒ“ƒ^ƒCƒ€i3•bj
+    // â˜…è¿½åŠ : å°„æ’ƒã®ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ã‚¿ã‚¤ãƒ ï¼ˆ3ç§’ï¼‰
     private float shootCooldown = 3f;
-    // š’Ç‰Á: ÅŒã‚ÉŒ‚‚Á‚½ŠÔ‚ğ‹L˜^‚·‚é•Ï”
-    private float lastShotTime = -3f; // Å‰‚É‚·‚®Œ‚‚Ä‚é‚æ‚¤‚Éƒ}ƒCƒiƒX’l‚Å‰Šú‰»
+    // â˜…è¿½åŠ : æœ€å¾Œã«æ’ƒã£ãŸæ™‚é–“ã‚’è¨˜éŒ²ã™ã‚‹å¤‰æ•°
+    private float lastShotTime = -3f; // æœ€åˆã«ã™ãæ’ƒã¦ã‚‹ã‚ˆã†ã«ãƒã‚¤ãƒŠã‚¹å€¤ã§åˆæœŸåŒ–
 
     void Update()
     {
-        // š•ÏX:u‘O‰ñ‚ÌËŒ‚‚©‚ç3•bŒãv‚ÌğŒ‚É•ÏX
+        // â˜…å¤‰æ›´:ã€Œå‰å›ã®å°„æ’ƒã‹ã‚‰3ç§’å¾Œã€ã®æ¡ä»¶ã«å¤‰æ›´
         if (Time.time >= lastShotTime + shootCooldown)
         {
-            // š’Ç‰Á: ÅIËŒ‚‚ğŒ»İ‚Ì‚ÉXV
+            // â˜…è¿½åŠ : æœ€çµ‚å°„æ’ƒæ™‚åˆ»ã‚’ç¾åœ¨ã®æ™‚åˆ»ã«æ›´æ–°
             lastShotTime = Time.time;
             Shoot();
         }
@@ -27,44 +27,44 @@ public class EliteAttackBalletShooter : MonoBehaviour
 
     void Shoot()
     {
-        // š•ÏX: "Player"ƒ^ƒO‚ğ‚ÂuÅ‚à‹ß‚¢vƒIƒuƒWƒFƒNƒg‚ğ’T‚·‚æ‚¤‚ÉC³
+        // â˜…å¤‰æ›´: "Player"ã‚¿ã‚°ã‚’æŒã¤ã€Œæœ€ã‚‚è¿‘ã„ã€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã™ã‚ˆã†ã«ä¿®æ­£
         GameObject nearestPlayer = FindNearestPlayer();
 
-        // “G‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚Í‰½‚à‚µ‚È‚¢
+        // æ•µãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯ä½•ã‚‚ã—ãªã„
         if (nearestPlayer == null)
         {
-            Debug.LogWarning("ƒV[ƒ“‚ÉPlayer‚ª‚¢‚Ü‚¹‚ñB");
+            Debug.LogWarning("ã‚·ãƒ¼ãƒ³ã«PlayerãŒã„ã¾ã›ã‚“ã€‚");
             return;
         }
 
-        // “G‚Ì•ûŒü‚ğæ‚ÉŒvZ (‘ÎÛ‚ğnearestPlayer‚É•ÏX)
+        // æ•µã®æ–¹å‘ã‚’å…ˆã«è¨ˆç®— (å¯¾è±¡ã‚’nearestPlayerã«å¤‰æ›´)
         Vector2 direction = (nearestPlayer.transform.position - transform.position).normalized;
 
-        // Œü‚«‚©‚çŠp“x‚ğŒvZ‚µAQuaternioni‰ñ“]î•ñj‚ğ¶¬
+        // å‘ãã‹ã‚‰è§’åº¦ã‚’è¨ˆç®—ã—ã€Quaternionï¼ˆå›è»¢æƒ…å ±ï¼‰ã‚’ç”Ÿæˆ
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle - 90f);
 
-        // ŒvZ‚µ‚½‰ñ“]î•ñ(rotation)‚Å’e‚ğ¶¬
+        // è¨ˆç®—ã—ãŸå›è»¢æƒ…å ±(rotation)ã§å¼¾ã‚’ç”Ÿæˆ
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
-        // ’e‚É—Í‚ğ‰Á‚¦‚Ä”­Ë
+        // å¼¾ã«åŠ›ã‚’åŠ ãˆã¦ç™ºå°„
         rb.velocity = direction * bulletSpeed;
     }
 
-    // š’Ç‰Á: Å‚à‹ß‚¢“G‚ğ’T‚µ‚Ä•Ô‚·ƒƒ\ƒbƒh
+    // â˜…è¿½åŠ : æœ€ã‚‚è¿‘ã„æ•µã‚’æ¢ã—ã¦è¿”ã™ãƒ¡ã‚½ãƒƒãƒ‰
     GameObject FindNearestPlayer()
     {
-        // "Enemy"ƒ^ƒO‚ğ‚Â‘S‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚ğ”z—ñ‚Æ‚µ‚Äæ“¾
+        // "Enemy"ã‚¿ã‚°ã‚’æŒã¤å…¨ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é…åˆ—ã¨ã—ã¦å–å¾—
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Player");
 
-        // “G‚ªˆêl‚à‚¢‚È‚¯‚ê‚Înull‚ğ•Ô‚·
+        // æ•µãŒä¸€äººã‚‚ã„ãªã‘ã‚Œã°nullã‚’è¿”ã™
         if (enemys.Length == 0)
         {
             return null;
         }
 
-        // LINQ‚ğg‚¢AƒvƒŒƒCƒ„[‚©‚ç‚Ì‹——£‚Å¸‡‚É•À‚×‘Ö‚¦AÅ‰‚Ì—v‘fiÅ‚à‹ß‚¢“Gj‚ğ•Ô‚·
+        // LINQã‚’ä½¿ã„ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰ã®è·é›¢ã§æ˜‡é †ã«ä¸¦ã¹æ›¿ãˆã€æœ€åˆã®è¦ç´ ï¼ˆï¼æœ€ã‚‚è¿‘ã„æ•µï¼‰ã‚’è¿”ã™
         return enemys.OrderBy(player =>
             Vector2.Distance(transform.position, player.transform.position)
         ).FirstOrDefault();

@@ -1,44 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
-using System; // event Action ‚ğg‚¤‚½‚ß‚É•K—v
+using System; // event Action ã‚’ä½¿ã†ãŸã‚ã«å¿…è¦
 using UnityEngine;
-using UnityEngine.UI; // UI‚ÌƒXƒ‰ƒCƒ_[‚ğg‚¤ê‡‚Í•K—v
+using UnityEngine.UI; // UIã®ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ä½¿ã†å ´åˆã¯å¿…è¦
 
 public class PlayerUltShooter : MonoBehaviour
 {
-    [Header("”­Ëİ’è")]
+    [Header("ç™ºå°„è¨­å®š")]
     public GameObject projectilePrefab;
     public float projectileSpeed = 15f;
 
-    [Header("•KE‹Zƒ`ƒƒ[ƒWİ’è")]
-    public float maxUltCharge = 1500f; // ƒ`ƒƒ[ƒW‚ÌÅ‘å’l
-    public float passiveChargeRate = 1f;  // 1•b‚ ‚½‚è‚Ì©‘R‘‰Á—Ê
-    public float hitChargeAmount = 5.0f;    // 1ƒqƒbƒg‚ ‚½‚è‚Ì‘‰Á—Ê
-    public float currentUltCharge = 300f;  // Œ»İ‚Ìƒ`ƒƒ[ƒW—Ê
+    [Header("å¿…æ®ºæŠ€ãƒãƒ£ãƒ¼ã‚¸è¨­å®š")]
+    public float maxUltCharge = 1500f; // ãƒãƒ£ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+    public float passiveChargeRate = 1f;  // 1ç§’ã‚ãŸã‚Šã®è‡ªç„¶å¢—åŠ é‡
+    public float hitChargeAmount = 5.0f;    // 1ãƒ’ãƒƒãƒˆã‚ãŸã‚Šã®å¢—åŠ é‡
+    public float currentUltCharge = 300f;  // ç¾åœ¨ã®ãƒãƒ£ãƒ¼ã‚¸é‡
 
     private GameManager gameManager;
 
 
-    // š’Ç‰ÁF“G‚ÉUŒ‚‚ªƒqƒbƒg‚µ‚½‚±‚Æ‚ğ’Ê’m‚·‚é‚½‚ß‚ÌƒCƒxƒ“ƒg
+    // â˜…è¿½åŠ ï¼šæ•µã«æ”»æ’ƒãŒãƒ’ãƒƒãƒˆã—ãŸã“ã¨ã‚’é€šçŸ¥ã™ã‚‹ãŸã‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
     public static event Action OnEnemyHit;
 
-    // š’Ç‰ÁFŠO•”‚©‚çƒCƒxƒ“ƒg‚ğ”­¶‚³‚¹‚é‚½‚ß‚ÌŒöŠJƒƒ\ƒbƒh
+    // â˜…è¿½åŠ ï¼šå¤–éƒ¨ã‹ã‚‰ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºç”Ÿã•ã›ã‚‹ãŸã‚ã®å…¬é–‹ãƒ¡ã‚½ãƒƒãƒ‰
     public static void RaiseOnEnemyHit()
     {
-        // ƒƒ\ƒbƒh‚Ì“à•”‚©‚ç‚È‚çƒCƒxƒ“ƒg‚ğŒÄ‚Ño‚¹‚é
+        // ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…éƒ¨ã‹ã‚‰ãªã‚‰ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‘¼ã³å‡ºã›ã‚‹
         OnEnemyHit?.Invoke();
     }
 
 
     private Camera mainCamera;
 
-    // š’Ç‰ÁFƒCƒxƒ“ƒg‚Ìw“Ç‚ğŠJn
+    // â˜…è¿½åŠ ï¼šã‚¤ãƒ™ãƒ³ãƒˆã®è³¼èª­ã‚’é–‹å§‹
     private void OnEnable()
     {
         OnEnemyHit += HandleEnemyHit;
     }
 
-    // š’Ç‰ÁFƒCƒxƒ“ƒg‚Ìw“Ç‚ğ‰ğœiƒIƒuƒWƒFƒNƒg”jŠü‚É•K‚¸s‚¤j
+    // â˜…è¿½åŠ ï¼šã‚¤ãƒ™ãƒ³ãƒˆã®è³¼èª­ã‚’è§£é™¤ï¼ˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç ´æ£„æ™‚ã«å¿…ãšè¡Œã†ï¼‰
     private void OnDisable()
     {
         OnEnemyHit -= HandleEnemyHit;
@@ -52,25 +52,25 @@ public class PlayerUltShooter : MonoBehaviour
 
     void Update()
     {
-        // --- 1. ƒ`ƒƒ[ƒW‚ğ‘‚â‚· ---
-        // ŠÔŒo‰ß‚Åƒ`ƒƒ[ƒW
+        // --- 1. ãƒãƒ£ãƒ¼ã‚¸ã‚’å¢—ã‚„ã™ ---
+        // æ™‚é–“çµŒéã§ãƒãƒ£ãƒ¼ã‚¸
         currentUltCharge += passiveChargeRate * Time.deltaTime;
-        // Å‘å’l‚ğ’´‚¦‚È‚¢‚æ‚¤‚É§Œä
+        // æœ€å¤§å€¤ã‚’è¶…ãˆãªã„ã‚ˆã†ã«åˆ¶å¾¡
         currentUltCharge = Mathf.Min(currentUltCharge, maxUltCharge);
 
-        // --- 2. ”­ËğŒ‚ğƒ`ƒFƒbƒN ---
-        // š•ÏXFƒNƒŠƒbƒN‚É‰Á‚¦‚ÄAƒ`ƒƒ[ƒW‚ª–ƒ^ƒ“‚Å‚ ‚é‚©‚ğŠm”F
+        // --- 2. ç™ºå°„æ¡ä»¶ã‚’ãƒã‚§ãƒƒã‚¯ ---
+        // â˜…å¤‰æ›´ï¼šã‚¯ãƒªãƒƒã‚¯ã«åŠ ãˆã¦ã€ãƒãƒ£ãƒ¼ã‚¸ãŒæº€ã‚¿ãƒ³ã§ã‚ã‚‹ã‹ã‚’ç¢ºèª
         if (!gameManager.IsPaused && Input.GetMouseButtonDown(1) && currentUltCharge >= maxUltCharge)
         {
             Vector3 targetPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;
             Shoot(targetPosition);
 
-            // š’Ç‰ÁF”­Ë‚µ‚½‚çƒ`ƒƒ[ƒW‚ğƒŠƒZƒbƒg
+            // â˜…è¿½åŠ ï¼šç™ºå°„ã—ãŸã‚‰ãƒãƒ£ãƒ¼ã‚¸ã‚’ãƒªã‚»ãƒƒãƒˆ
             currentUltCharge = 0f;
         }
 
-        // --- 3. UI‚ğXVi”CˆÓj ---
+        // --- 3. UIã‚’æ›´æ–°ï¼ˆä»»æ„ï¼‰ ---
         /*if (ultChargeSlider != null)
         {
             ultChargeSlider.value = currentUltCharge;
@@ -88,10 +88,10 @@ public class PlayerUltShooter : MonoBehaviour
         }
     }
 
-    // š’Ç‰ÁFƒCƒxƒ“ƒg‚ª”­¶‚µ‚½‚ÉŒÄ‚Ño‚³‚ê‚éƒƒ\ƒbƒh
+    // â˜…è¿½åŠ ï¼šã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿã—ãŸæ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     private void HandleEnemyHit()
     {
-        // ƒqƒbƒg‚µ‚½‚Ì‚Åƒ`ƒƒ[ƒW‚ğ’Ç‰Á
+        // ãƒ’ãƒƒãƒˆã—ãŸã®ã§ãƒãƒ£ãƒ¼ã‚¸ã‚’è¿½åŠ 
         currentUltCharge += hitChargeAmount;
     }
 }

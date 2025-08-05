@@ -38,37 +38,37 @@ public class PlayerLanceShooter : MonoBehaviour
         target.z = transform.position.z;
         Vector2 direction = (target - transform.position).normalized;
 
-        // ‚»‚Ì•ûŒü‚ğŒü‚­‚½‚ß‚ÌŠp“x‚ğŒvZiAtan2‚ğg—pj
+        // ãã®æ–¹å‘ã‚’å‘ããŸã‚ã®è§’åº¦ã‚’è¨ˆç®—ï¼ˆAtan2ã‚’ä½¿ç”¨ï¼‰
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // ‰æ‘œ‚ÌƒAƒZƒbƒg‚ªãŒü‚«iªj‚ğ³–Ê‚Æ‚µ‚Ä‚¢‚éê‡A90“xƒIƒtƒZƒbƒg‚ğ‰Á‚¦‚é
+        // ç”»åƒã®ã‚¢ã‚»ãƒƒãƒˆãŒä¸Šå‘ãï¼ˆâ†‘ï¼‰ã‚’æ­£é¢ã¨ã—ã¦ã„ã‚‹å ´åˆã€90åº¦ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’åŠ ãˆã‚‹
         Quaternion rotation = Quaternion.Euler(0, 0, angle - 90f);
 
-        // --- 2. ’e‚Ì¶¬‚Æ”­Ë ---
-        // ŒvZ‚µ‚½Šp“x‚Å’e‚ğ¶¬
+        // --- 2. å¼¾ã®ç”Ÿæˆã¨ç™ºå°„ ---
+        // è¨ˆç®—ã—ãŸè§’åº¦ã§å¼¾ã‚’ç”Ÿæˆ
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
 
-        // ¶¬‚µ‚½’e‚ÌRigidbody2D‚ğæ“¾
+        // ç”Ÿæˆã—ãŸå¼¾ã®Rigidbody2Dã‚’å–å¾—
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
     }
 
     GameObject FindNearestEnemy()
     {
-        // "Enemy", "Boss", "Elite"‚Ìƒ^ƒO‚ğ‚ÂƒIƒuƒWƒFƒNƒg‚ğ‚»‚ê‚¼‚êæ“¾
+        // "Enemy", "Boss", "Elite"ã®ã‚¿ã‚°ã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãã‚Œãã‚Œå–å¾—
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
-        GameObject[] elites = GameObject.FindGameObjectsWithTag("Elite"); // š’Ç‰Á
+        GameObject[] elites = GameObject.FindGameObjectsWithTag("Elite"); // â˜…è¿½åŠ 
 
-        // 3‚Â‚Ì”z—ñ‚ğ1‚Â‚ÌƒŠƒXƒg‚ÉŒ‹‡
-        var allTargets = enemies.Concat(bosses).Concat(elites); // š•ÏX
+        // 3ã¤ã®é…åˆ—ã‚’1ã¤ã®ãƒªã‚¹ãƒˆã«çµåˆ
+        var allTargets = enemies.Concat(bosses).Concat(elites); // â˜…å¤‰æ›´
 
-        // Œ‹‡‚µ‚½ƒŠƒXƒg‚ª‹ó‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+        // çµåˆã—ãŸãƒªã‚¹ãƒˆãŒç©ºã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
         if (!allTargets.Any())
         {
             return null;
         }
 
-        // Œ‹‡‚µ‚½ƒŠƒXƒg‚©‚çÅ‚à‹ß‚¢ƒ^[ƒQƒbƒg‚ğ’T‚·
+        // çµåˆã—ãŸãƒªã‚¹ãƒˆã‹ã‚‰æœ€ã‚‚è¿‘ã„ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’æ¢ã™
         return allTargets.OrderBy(target =>
             Vector2.Distance(transform.position, target.transform.position)
         ).FirstOrDefault();

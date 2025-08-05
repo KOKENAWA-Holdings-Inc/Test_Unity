@@ -15,22 +15,22 @@ public class BossBallet : MonoBehaviour
     }
     void Start()
     {
-        // 2•bŒã‚É’e‚ª©“®“I‚ÉÁ‚¦‚é‚æ‚¤‚É‚·‚é
+        // 2ç§’å¾Œã«å¼¾ãŒè‡ªå‹•çš„ã«æ¶ˆãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
         Destroy(gameObject, 2f);
     }
 
-    // ‰½‚©‚ÉÕ“Ë‚µ‚½‚ÉŒÄ‚Î‚ê‚é
+    // ä½•ã‹ã«è¡çªã—ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject bossObj = GameObject.FindGameObjectWithTag("Boss");
         Boss bossComponent = bossObj.GetComponent<Boss>();
-        // Õ“Ë‚µ‚½‘Šè‚ª"Enemy"ƒ^ƒO‚ğ‚Á‚Ä‚¢‚½‚ç
-        if (other.CompareTag("Player")) // other.tag == "Enemy" ‚Å‚à‰Â
+        // è¡çªã—ãŸç›¸æ‰‹ãŒ"Enemy"ã‚¿ã‚°ã‚’æŒã£ã¦ã„ãŸã‚‰
+        if (other.CompareTag("Player")) // other.tag == "Enemy" ã§ã‚‚å¯
         {
-            // šC³“_: Õ“Ë‚µ‚½‘Šè(other)‚©‚çEnemyManagerƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
+            // â˜…ä¿®æ­£ç‚¹: è¡çªã—ãŸç›¸æ‰‹(other)ã‹ã‚‰EnemyManagerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
             Player PlayerComponent = other.GetComponent<Player>();
 
-            // š’Ç‰Á: EnemyManager‚ªæ“¾‚Å‚«‚½ê‡‚Ì‚İƒ_ƒ[ƒW‚ğ—^‚¦‚é
+            // â˜…è¿½åŠ : EnemyManagerãŒå–å¾—ã§ããŸå ´åˆã®ã¿ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
             if (PlayerComponent != null)
             {
                 float totalDamage = Attack * (this.ownerAttack * 0.5f) - PlayerComponent.Defence;
@@ -43,11 +43,11 @@ public class BossBallet : MonoBehaviour
                     PlayerComponent.PlayerHP -= 1f;
                 }
                 
-                //Debug.Log(other.name + "‚ÉƒqƒbƒgIc‚èHP: " + EnemyComponent.EnemyHP);
+                //Debug.Log(other.name + "ã«ãƒ’ãƒƒãƒˆï¼æ®‹ã‚ŠHP: " + EnemyComponent.EnemyHP);
             }
 
 
-            // “G‚É“–‚½‚Á‚½‚ç’e‚ğÁ‚·ê‡i”CˆÓj
+            // æ•µã«å½“ãŸã£ãŸã‚‰å¼¾ã‚’æ¶ˆã™å ´åˆï¼ˆä»»æ„ï¼‰
             // Destroy(gameObject);
         }
     }

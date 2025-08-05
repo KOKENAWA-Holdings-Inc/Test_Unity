@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetedProjectile : MonoBehaviour
 {
-    // Inspector‚©‚ç¢Š«‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg‚ÌƒvƒŒƒnƒu‚ğİ’è
+    // Inspectorã‹ã‚‰å¬å–šã—ãŸã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ—ãƒ¬ãƒãƒ–ã‚’è¨­å®š
     public GameObject objectToSummon;
 
     private Vector3 targetPosition;
@@ -12,7 +12,7 @@ public class TargetedProjectile : MonoBehaviour
     private bool isInitialized = false;
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚©‚ç–Ú•W’n“_‚Æ‘¬“x‚ğó‚¯æ‚é‚½‚ß‚Ì‰Šú‰»ƒƒ\ƒbƒh
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰ç›®æ¨™åœ°ç‚¹ã¨é€Ÿåº¦ã‚’å—ã‘å–ã‚‹ãŸã‚ã®åˆæœŸåŒ–ãƒ¡ã‚½ãƒƒãƒ‰
     /// </summary>
     public void Initialize(Vector3 target, float projectileSpeed)
     {
@@ -34,20 +34,20 @@ public class TargetedProjectile : MonoBehaviour
     }
 
     /// <summary>
-    /// “’…‚µ‚½‚Ìˆ—
+    /// åˆ°ç€ã—ãŸæ™‚ã®å‡¦ç†
     /// </summary>
     private void OnArrive()
     {
         if (objectToSummon != null)
         {
-            // š•ÏX“_1F¶¬‚µ‚½ƒIƒuƒWƒFƒNƒg‚ğˆê“I‚È•Ï”‚ÉŠi”[‚·‚é
+            // â˜…å¤‰æ›´ç‚¹1ï¼šç”Ÿæˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸€æ™‚çš„ãªå¤‰æ•°ã«æ ¼ç´ã™ã‚‹
             GameObject summonedObject = Instantiate(objectToSummon, transform.position, Quaternion.identity);
 
-            // š•ÏX“_2FŠi”[‚µ‚½ƒIƒuƒWƒFƒNƒg‚ğ0.2•bŒã‚É”j‰ó‚·‚é
+            // â˜…å¤‰æ›´ç‚¹2ï¼šæ ¼ç´ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’0.2ç§’å¾Œã«ç ´å£Šã™ã‚‹
             Destroy(summonedObject, 0.2f);
         }
 
-        // ©g‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒgi’ej‚Í‘¦À‚É”j‰ó‚·‚é
+        // è‡ªèº«ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆå¼¾ï¼‰ã¯å³åº§ã«ç ´å£Šã™ã‚‹
         Destroy(gameObject);
     }
 }

@@ -4,21 +4,21 @@ using TMPro;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
-{// Inspector‚©‚çİ’è‚·‚éƒeƒLƒXƒgUI
+{// Inspectorã‹ã‚‰è¨­å®šã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆUI
     public TextMeshProUGUI timeText;
 
-    public float elapsedTime; // Œo‰ßŠÔ‚ğ‹L˜^‚·‚é•Ï”
+    public float elapsedTime; // çµŒéæ™‚é–“ã‚’è¨˜éŒ²ã™ã‚‹å¤‰æ•°
 
     void Update()
     {
-        // –ˆƒtƒŒ[ƒ€‚ÌŠÔ‚ğ‰ÁZ‚µ‚Ä‚¢‚­
+        // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ™‚é–“ã‚’åŠ ç®—ã—ã¦ã„ã
         elapsedTime += Time.deltaTime;
 
-        // Œo‰ßŠÔ‚ğ•ª‚Æ•b‚É•ÏŠ·
+        // çµŒéæ™‚é–“ã‚’åˆ†ã¨ç§’ã«å¤‰æ›
         int minutes = Mathf.FloorToInt(elapsedTime / 60);
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
 
-        // ƒeƒLƒXƒgUI‚É•\¦‚·‚é•¶š—ñ‚ğ®Œ` (—á: "02:05")
+        // ãƒ†ã‚­ã‚¹ãƒˆUIã«è¡¨ç¤ºã™ã‚‹æ–‡å­—åˆ—ã‚’æ•´å½¢ (ä¾‹: "02:05")
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     // Start is called before the first frame update

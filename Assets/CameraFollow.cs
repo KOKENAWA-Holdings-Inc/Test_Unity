@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // �^�[�Q�b�g��Transform�B�X�N���v�g�������ŒT��
+    // ターゲットのTransform。スクリプトが自動で探す
     private Transform target;
 
-    // �J�����ƃ^�[�Q�b�g�̊Ԃ̋�����ێ�����ϐ�
+    // カメラとターゲットの間の距離を保持する変数
     private Vector3 offset;
 
-    // �S�Ă�Update�������I�������ɌĂ΂��
+    // 全てのUpdate処理が終わった後に呼ばれる
     void LateUpdate()
     {
-        // �܂��^�[�Q�b�g�iPlayer�j�������Ă��Ȃ��ꍇ
+        // まだターゲット（Player）を見つけていない場合
         if (target == null)
         {
-            // "Player" �^�O���t�����I�u�W�F�N�g��T��
+            // "Player" タグが付いたオブジェクトを探す
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
-            // ��������������
+            // もし見つかったら
             if (playerObj != null)
             {
-                // �^�[�Q�b�g�Ƃ��Đݒ�
+                // ターゲットとして設定
                 target = playerObj.transform;
 
-                // �������u�ԂɁA�J�����ƃ^�[�Q�b�g�̍����i�I�t�Z�b�g�j���v�Z���ĕۑ�
+                // 見つけた瞬間に、カメラとターゲットの差分（オフセット）を計算して保存
                 offset = transform.position - target.position;
             }
         }
 
-        // �^�[�Q�b�g���������Ă���Ȃ�i���������ꍇ���܂ށj
+        // ターゲットが見つかっているなら（今見つけた場合も含む）
         if (target != null)
         {
-            // �J�����̈ʒu���u�^�[�Q�b�g�̈ʒu + �ۑ������I�t�Z�b�g�v�ɍX�V����
+            // カメラの位置を「ターゲットの位置 + 保存したオフセット」に更新する
             transform.position = target.position + offset;
         }
     }

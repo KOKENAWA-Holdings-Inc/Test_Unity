@@ -6,21 +6,21 @@ using UnityEngine.UI;
 public class ultCoolTimeManager : MonoBehaviour
 {
     [SerializeField] private Slider ultChargeSlider;
-    private PlayerUltShooter PlayerUltShooter; // •Ï”éŒ¾‚Í‚»‚Ì‚Ü‚Ü
+    private PlayerUltShooter PlayerUltShooter; // å¤‰æ•°å®£è¨€ã¯ãã®ã¾ã¾
 
     void Start()
     {
-        // š’Ç‰Á: ƒV[ƒ““à‚©‚çPlayerUltShooterƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’T‚µ‚Ä•Ï”‚É‘ã“ü‚·‚é
+        // â˜…è¿½åŠ : ã‚·ãƒ¼ãƒ³å†…ã‹ã‚‰PlayerUltShooterã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æ¢ã—ã¦å¤‰æ•°ã«ä»£å…¥ã™ã‚‹
         PlayerUltShooter = FindObjectOfType<PlayerUltShooter>();
 
-        // š’Ç‰Á: ‚à‚µŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚ÌƒGƒ‰[ˆ—
+        // â˜…è¿½åŠ : ã‚‚ã—è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã®ã‚¨ãƒ©ãƒ¼å‡¦ç†
         if (PlayerUltShooter == null)
         {
-            //Debug.LogError("ƒV[ƒ“‚ÉPlayerUltShooterƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-            return; // ˆ—‚ğ’†’f
+            //Debug.LogError("ã‚·ãƒ¼ãƒ³ã«PlayerUltShooterã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+            return; // å‡¦ç†ã‚’ä¸­æ–­
         }
 
-        // PlayerUltShooter‚ğ³‚µ‚­æ“¾‚µ‚½Œã‚ÉAƒXƒ‰ƒCƒ_[‚Ì‰Šúİ’è‚ğs‚¤
+        // PlayerUltShooterã‚’æ­£ã—ãå–å¾—ã—ãŸå¾Œã«ã€ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®åˆæœŸè¨­å®šã‚’è¡Œã†
         if (ultChargeSlider != null)
         {
             ultChargeSlider.maxValue = PlayerUltShooter.maxUltCharge;
@@ -30,7 +30,7 @@ public class ultCoolTimeManager : MonoBehaviour
 
     void Update()
     {
-        // PlayerUltShooter‚ªnull‚Å‚È‚¯‚ê‚Î’l‚ğXV‚·‚é
+        // PlayerUltShooterãŒnullã§ãªã‘ã‚Œã°å€¤ã‚’æ›´æ–°ã™ã‚‹
         if (ultChargeSlider != null && PlayerUltShooter != null)
         {
             ultChargeSlider.value = PlayerUltShooter.currentUltCharge;

@@ -10,7 +10,7 @@ public class StartManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        //Debug.Log("Start Scene‚ªŠJn‚µ‚Ü‚µ‚½BŒ»İ‚ÌTime.timeScale‚Í: " + Time.timeScale);
+        //Debug.Log("Start SceneãŒé–‹å§‹ã—ã¾ã—ãŸã€‚ç¾åœ¨ã®Time.timeScaleã¯: " + Time.timeScale);
     }
 
     // Update is called once per frame

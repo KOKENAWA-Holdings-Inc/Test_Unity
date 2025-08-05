@@ -5,7 +5,7 @@ using UnityEngine;
 public class TheWorld1 : MonoBehaviour
 {
     public GameManager GameManager;
-    // public Player player; // š •s—v‚È‚Ì‚Åíœ
+    // public Player player; // â˜… ä¸è¦ãªã®ã§å‰Šé™¤
 
     // Start is called before the first frame update
     void Start()
@@ -21,28 +21,28 @@ public class TheWorld1 : MonoBehaviour
 
     public void Theworld()
     {
-        // š ‚±‚Ìƒƒ\ƒbƒh‚ªŒÄ‚Î‚ê‚½uŠÔ‚É "Player" ƒ^ƒO‚ÅƒvƒŒƒCƒ„[‚ğ’T‚·
+        // â˜… ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒå‘¼ã°ã‚ŒãŸç¬é–“ã« "Player" ã‚¿ã‚°ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¢ã™
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚ÍAƒGƒ‰[ƒƒO‚ğo‚µ‚Äˆ—‚ğ’†’f‚·‚é
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯ã€ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’å‡ºã—ã¦å‡¦ç†ã‚’ä¸­æ–­ã™ã‚‹
         if (playerObj == null)
         {
-            //Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+            //Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
             return;
         }
 
-        // Œ©‚Â‚©‚Á‚½ƒIƒuƒWƒFƒNƒg‚©‚çPlayerƒXƒNƒŠƒvƒg‚ğæ“¾‚·‚é
+        // è¦‹ã¤ã‹ã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰Playerã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å–å¾—ã™ã‚‹
         Player playerComponent = playerObj.GetComponent<Player>();
         PlayerLanceShooter lanceShooterComponent = playerObj.GetComponent<PlayerLanceShooter>();
         OrbitManager OrbitComponent = playerObj.GetComponent<OrbitManager>();
         if (playerComponent == null)
         {
-            //Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ÉPlayerƒXƒNƒŠƒvƒg‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            //Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«Playerã‚¹ã‚¯ãƒªãƒ—ãƒˆãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
             return;
         }
 
 
-        // ššš ‚±‚êˆÈ~A'player' ‚Ì‘ã‚í‚è‚É 'playerComponent' ‚ğg‚¤ ššš
+        // â˜…â˜…â˜… ã“ã‚Œä»¥é™ã€'player' ã®ä»£ã‚ã‚Šã« 'playerComponent' ã‚’ä½¿ã† â˜…â˜…â˜…
         switch (GameManager.selectedItem2)
         {
             case "Attack+10%":
@@ -52,7 +52,7 @@ public class TheWorld1 : MonoBehaviour
                 playerComponent.Defence = playerComponent.Defence * 1.05f;
                 break;
             case "MaxHP+5%":
-                // ƒƒWƒbƒN‚ğ‰ü‘P: Å‘åHP‚ğ‘‚â‚µAŒ»İHP‚ğÅ‘å’l‚É‚·‚é
+                // ãƒ­ã‚¸ãƒƒã‚¯ã‚’æ”¹å–„: æœ€å¤§HPã‚’å¢—ã‚„ã—ã€ç¾åœ¨HPã‚’æœ€å¤§å€¤ã«ã™ã‚‹
                 playerComponent.PlayerMAXHP = playerComponent.PlayerMAXHP * 1.05f;
                 playerComponent.PlayerHP = playerComponent.PlayerMAXHP;
                 break;

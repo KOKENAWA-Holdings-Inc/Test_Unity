@@ -1,29 +1,29 @@
 using UnityEngine;
-using UnityEngine.UI; // Text (UI) ‚ğg‚¤ê‡
-using TMPro; // TextMeshPro ‚ğg‚¤ê‡
+using UnityEngine.UI; // Text (UI) ã‚’ä½¿ã†å ´åˆ
+using TMPro; // TextMeshPro ã‚’ä½¿ã†å ´åˆ
 
 public class DamagePopup : MonoBehaviour
 {
-    public float displayDuration = 1f; // ƒ_ƒ[ƒW•\¦ŠÔ
-    public float moveSpeed = 1f; // ã¸‘¬“x
-    public Color startColor = Color.white; // ŠJn‚ÌF
-    public Color endColor = new Color(1, 1, 1, 0); // I—¹‚ÌF (“§–¾)
-    public Vector3 offset = new Vector3(0, 0.5f, 0); // •\¦ˆÊ’u‚ÌƒIƒtƒZƒbƒg
+    public float displayDuration = 1f; // ãƒ€ãƒ¡ãƒ¼ã‚¸è¡¨ç¤ºæ™‚é–“
+    public float moveSpeed = 1f; // ä¸Šæ˜‡é€Ÿåº¦
+    public Color startColor = Color.white; // é–‹å§‹æ™‚ã®è‰²
+    public Color endColor = new Color(1, 1, 1, 0); // çµ‚äº†æ™‚ã®è‰² (é€æ˜)
+    public Vector3 offset = new Vector3(0, 0.5f, 0); // è¡¨ç¤ºä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 
-    private TextMeshProUGUI damageText; // TextMeshPro ‚ğg‚¤ê‡
-    // private Text damageText; // Text (UI) ‚ğg‚¤ê‡
+    private TextMeshProUGUI damageText; // TextMeshPro ã‚’ä½¿ã†å ´åˆ
+    // private Text damageText; // Text (UI) ã‚’ä½¿ã†å ´åˆ
 
     private float timer;
 
     void Awake()
     {
-        // GetComponentInChildren ‚Ì•û‚ªAƒeƒLƒXƒg‚ªqƒIƒuƒWƒFƒNƒg‚Å‚àˆÀ‘S‚Éæ“¾‚Å‚«‚Ü‚·
+        // GetComponentInChildren ã®æ–¹ãŒã€ãƒ†ã‚­ã‚¹ãƒˆãŒå­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã‚‚å®‰å…¨ã«å–å¾—ã§ãã¾ã™
         damageText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void Setup(float damageAmount)
     {
-        // š•ÏX: ¬”“_ˆÈ‰º‚ğØ‚èÌ‚Ä‚ÄA‚«‚ê‚¢‚È®”‚Å•\¦‚·‚é
+        // â˜…å¤‰æ›´: å°æ•°ç‚¹ä»¥ä¸‹ã‚’åˆ‡ã‚Šæ¨ã¦ã¦ã€ãã‚Œã„ãªæ•´æ•°ã§è¡¨ç¤ºã™ã‚‹
         damageText.text = Mathf.FloorToInt(damageAmount).ToString();
         timer = displayDuration;
     }
@@ -32,15 +32,15 @@ public class DamagePopup : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
-        // ã¸
+        // ä¸Šæ˜‡
         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
 
-        // ƒtƒF[ƒhƒAƒEƒg
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
         damageText.color = Color.Lerp(endColor, startColor, timer / displayDuration);
 
         if (timer <= 0)
         {
-            Destroy(gameObject); // •\¦ŠÔŒo‰ß‚Å”jŠü
+            Destroy(gameObject); // è¡¨ç¤ºæ™‚é–“çµŒéã§ç ´æ£„
         }
     }
 }

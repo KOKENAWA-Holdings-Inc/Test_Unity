@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class PlayerMoveSpeedAbility : MonoBehaviour
 {
-    [Header("ƒu[ƒXƒgİ’è")]
-    [SerializeField] private float moveSpeedBoost = 1.5f; // ‘¬“x‚Ì‘‰Á”{—¦
+    [Header("ãƒ–ãƒ¼ã‚¹ãƒˆè¨­å®š")]
+    [SerializeField] private float moveSpeedBoost = 1.5f; // é€Ÿåº¦ã®å¢—åŠ å€ç‡
 
-    [Header("ƒ`ƒƒ[ƒWİ’è")]
-    [SerializeField] private float chargeMax = 30.0f;     // ƒ`ƒƒ[ƒW‚ÌÅ‘å’l
-    [SerializeField] private float regenerationDelay = 3.0f;  // ‰ñ•œ‚ªn‚Ü‚é‚Ü‚Å‚Ì‘Ò‹@ŠÔ
-    [SerializeField] private float regenerationRate = 1.0f;   // 1•b‚ ‚½‚è‚Ì‰ñ•œ—Ê
-    [SerializeField] private float drainRate = 0.2f;      // 1•b‚ ‚½‚è‚ÌÅ‘åƒ`ƒƒ[ƒW‚É‘Î‚·‚éŒ¸­—¦ (20%)
-    // š’Ç‰Á: ŠO•”‚©‚çŒ»İ‚Ìƒ`ƒƒ[ƒW—Ê‚ğ“Ç‚İæ‚é‚½‚ß‚ÌƒvƒƒpƒeƒB
+    [Header("ãƒãƒ£ãƒ¼ã‚¸è¨­å®š")]
+    [SerializeField] private float chargeMax = 30.0f;     // ãƒãƒ£ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+    [SerializeField] private float regenerationDelay = 3.0f;  // å›å¾©ãŒå§‹ã¾ã‚‹ã¾ã§ã®å¾…æ©Ÿæ™‚é–“
+    [SerializeField] private float regenerationRate = 1.0f;   // 1ç§’ã‚ãŸã‚Šã®å›å¾©é‡
+    [SerializeField] private float drainRate = 0.2f;      // 1ç§’ã‚ãŸã‚Šã®æœ€å¤§ãƒãƒ£ãƒ¼ã‚¸ã«å¯¾ã™ã‚‹æ¸›å°‘ç‡ (20%)
+    // â˜…è¿½åŠ : å¤–éƒ¨ã‹ã‚‰ç¾åœ¨ã®ãƒãƒ£ãƒ¼ã‚¸é‡ã‚’èª­ã¿å–ã‚‹ãŸã‚ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
     public float CurrentCharge => charge;
-    // š’Ç‰Á: ŠO•”‚©‚çÅ‘åƒ`ƒƒ[ƒW—Ê‚ğ“Ç‚İæ‚é‚½‚ß‚ÌƒvƒƒpƒeƒB
+    // â˜…è¿½åŠ : å¤–éƒ¨ã‹ã‚‰æœ€å¤§ãƒãƒ£ãƒ¼ã‚¸é‡ã‚’èª­ã¿å–ã‚‹ãŸã‚ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
     public float MaxCharge => chargeMax;
 
-    private float charge;              // Œ»İ‚Ìƒ`ƒƒ[ƒW—Ê
-    private bool isBoosting = false;   // Œ»İƒu[ƒXƒg’†‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-    private float timeOfLastChargeChange; // ÅŒã‚Éƒ`ƒƒ[ƒW‚ª•Ï‰»‚µ‚½
+    private float charge;              // ç¾åœ¨ã®ãƒãƒ£ãƒ¼ã‚¸é‡
+    private bool isBoosting = false;   // ç¾åœ¨ãƒ–ãƒ¼ã‚¹ãƒˆä¸­ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+    private float timeOfLastChargeChange; // æœ€å¾Œã«ãƒãƒ£ãƒ¼ã‚¸ãŒå¤‰åŒ–ã—ãŸæ™‚åˆ»
 
-    private Player playerComponent; // ƒvƒŒƒCƒ„[ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ö‚ÌQÆ
+    private Player playerComponent; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¸ã®å‚ç…§
 
     private GameManager gameManager;
 
     void Start()
     {
-        // Å‰‚ÉƒvƒŒƒCƒ„[‚ğ’T‚µ‚ÄƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ•Û‚µ‚Ä‚¨‚­iŒø—¦‰»j
+        // æœ€åˆã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¢ã—ã¦ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ä¿æŒã—ã¦ãŠãï¼ˆåŠ¹ç‡åŒ–ï¼‰
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -35,21 +35,21 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
         }
         else
         {
-            //Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
-            this.enabled = false; // ƒvƒŒƒCƒ„[‚ª‚¢‚È‚¢‚È‚çƒXƒNƒŠƒvƒg‚ğ–³Œø‰»
+            //Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
+            this.enabled = false; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãªã„ãªã‚‰ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ç„¡åŠ¹åŒ–
             return;
         }
 
-        charge = chargeMax; // Å‰‚Íƒ`ƒƒ[ƒW–ƒ^ƒ“
+        charge = chargeMax; // æœ€åˆã¯ãƒãƒ£ãƒ¼ã‚¸æº€ã‚¿ãƒ³
         gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
-        // --- 1. EƒL[“ü—Í‚Ìˆ— ---
+        // --- 1. Eã‚­ãƒ¼å…¥åŠ›ã®å‡¦ç† ---
         if (!gameManager.IsPaused && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            // Œ»İƒu[ƒXƒg’†‚È‚ç’â~A‚»‚¤‚Å‚È‚¯‚ê‚ÎŠJn‚ğ‚İ‚é
+            // ç¾åœ¨ãƒ–ãƒ¼ã‚¹ãƒˆä¸­ãªã‚‰åœæ­¢ã€ãã†ã§ãªã‘ã‚Œã°é–‹å§‹ã‚’è©¦ã¿ã‚‹
             if (isBoosting)
             {
                 StopBoost();
@@ -60,60 +60,60 @@ public class PlayerMoveSpeedAbility : MonoBehaviour
             }
         }
 
-        // --- 2. ƒu[ƒXƒg’†‚Ìˆ— ---
+        // --- 2. ãƒ–ãƒ¼ã‚¹ãƒˆä¸­ã®å‡¦ç† ---
         if (isBoosting)
         {
-            // ƒ`ƒƒ[ƒW‚ğŒ¸­‚³‚¹‚é
+            // ãƒãƒ£ãƒ¼ã‚¸ã‚’æ¸›å°‘ã•ã›ã‚‹
             charge -= (chargeMax * drainRate) * Time.deltaTime;
-            timeOfLastChargeChange = Time.time; // ƒ`ƒƒ[ƒW‚ª•Ï‰»‚µ‚½‚ğXV
+            timeOfLastChargeChange = Time.time; // ãƒãƒ£ãƒ¼ã‚¸ãŒå¤‰åŒ–ã—ãŸæ™‚åˆ»ã‚’æ›´æ–°
 
-            // ƒ`ƒƒ[ƒW‚ª0‚É‚È‚Á‚½‚ç‹­§“I‚Éƒu[ƒXƒg‚ğI—¹
+            // ãƒãƒ£ãƒ¼ã‚¸ãŒ0ã«ãªã£ãŸã‚‰å¼·åˆ¶çš„ã«ãƒ–ãƒ¼ã‚¹ãƒˆã‚’çµ‚äº†
             if (charge <= 0)
             {
-                //Debug.Log("ƒ`ƒƒ[ƒWØ‚êIƒu[ƒXƒg‚ğI—¹‚µ‚Ü‚·B");
+                //Debug.Log("ãƒãƒ£ãƒ¼ã‚¸åˆ‡ã‚Œï¼ãƒ–ãƒ¼ã‚¹ãƒˆã‚’çµ‚äº†ã—ã¾ã™ã€‚");
                 StopBoost();
             }
         }
-        // --- 3. ”ñƒu[ƒXƒg’†‚Ì‰ñ•œˆ— ---
+        // --- 3. éãƒ–ãƒ¼ã‚¹ãƒˆä¸­ã®å›å¾©å‡¦ç† ---
         else if (charge < chargeMax)
         {
-            // ÅŒã‚Éƒ`ƒƒ[ƒW‚ª•Ï‰»‚µ‚Ä‚©‚çw’è•b”Œo‰ß‚µ‚½‚çA‰ñ•œ‚ğŠJn
+            // æœ€å¾Œã«ãƒãƒ£ãƒ¼ã‚¸ãŒå¤‰åŒ–ã—ã¦ã‹ã‚‰æŒ‡å®šç§’æ•°çµŒéã—ãŸã‚‰ã€å›å¾©ã‚’é–‹å§‹
             if (Time.time >= timeOfLastChargeChange + regenerationDelay)
             {
                 charge += regenerationRate * Time.deltaTime;
             }
         }
 
-        // ƒ`ƒƒ[ƒW‚ª0–¢–‚âÅ‘å’l‚ğ’´‚¦‚È‚¢‚æ‚¤‚É’l‚ğŠÛ‚ß‚é
+        // ãƒãƒ£ãƒ¼ã‚¸ãŒ0æœªæº€ã‚„æœ€å¤§å€¤ã‚’è¶…ãˆãªã„ã‚ˆã†ã«å€¤ã‚’ä¸¸ã‚ã‚‹
         charge = Mathf.Clamp(charge, 0f, chargeMax);
     }
 
     /// <summary>
-    /// ƒu[ƒXƒg‚ğŠJn‚·‚éˆ—
+    /// ãƒ–ãƒ¼ã‚¹ãƒˆã‚’é–‹å§‹ã™ã‚‹å‡¦ç†
     /// </summary>
     private void StartBoost()
     {
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚ÄAƒ`ƒƒ[ƒW‚ª­‚µ‚Å‚àc‚Á‚Ä‚¢‚½‚çŠJn
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ã¦ã„ã¦ã€ãƒãƒ£ãƒ¼ã‚¸ãŒå°‘ã—ã§ã‚‚æ®‹ã£ã¦ã„ãŸã‚‰é–‹å§‹
         if (playerComponent != null && charge > 0)
         {
             isBoosting = true;
             playerComponent.moveSpeed *= moveSpeedBoost;
             timeOfLastChargeChange = Time.time;
-            //Debug.Log("ƒu[ƒXƒgŠJnI Œ»İ‚Ì‘¬“x: " + playerComponent.moveSpeed);
+            //Debug.Log("ãƒ–ãƒ¼ã‚¹ãƒˆé–‹å§‹ï¼ ç¾åœ¨ã®é€Ÿåº¦: " + playerComponent.moveSpeed);
         }
     }
 
     /// <summary>
-    /// ƒu[ƒXƒg‚ğ’â~‚·‚éˆ—
+    /// ãƒ–ãƒ¼ã‚¹ãƒˆã‚’åœæ­¢ã™ã‚‹å‡¦ç†
     /// </summary>
     private void StopBoost()
     {
-        if (playerComponent != null && isBoosting) // isBoostingƒ`ƒFƒbƒN‚Å“ñd’â~‚ğ–h~
+        if (playerComponent != null && isBoosting) // isBoostingãƒã‚§ãƒƒã‚¯ã§äºŒé‡åœæ­¢ã‚’é˜²æ­¢
         {
             isBoosting = false;
             playerComponent.moveSpeed /= moveSpeedBoost;
             timeOfLastChargeChange = Time.time;
-            //Debug.Log("ƒu[ƒXƒg’â~B Œ»İ‚Ì‘¬“x: " + playerComponent.moveSpeed);
+            //Debug.Log("ãƒ–ãƒ¼ã‚¹ãƒˆåœæ­¢ã€‚ ç¾åœ¨ã®é€Ÿåº¦: " + playerComponent.moveSpeed);
         }
     }
 }

@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class BossHPUIManager : MonoBehaviour
 {
     [SerializeField] private Slider hpSlider;
-    private Boss targetBoss; // QÆ‚·‚éBossƒXƒNƒŠƒvƒg
+    private Boss targetBoss; // å‚ç…§ã™ã‚‹Bossã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 
     void Update()
     {
-        // ƒ^[ƒQƒbƒg‚Ìƒ{ƒX‚ª‚¢‚È‚¢ê‡‚Ì‚İAƒV[ƒ“‚©‚ç’T‚·
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒœã‚¹ãŒã„ãªã„å ´åˆã®ã¿ã€ã‚·ãƒ¼ãƒ³ã‹ã‚‰æ¢ã™
         if (targetBoss == null)
         {
-            // "Boss"ƒ^ƒO‚Ì•t‚¢‚½ƒIƒuƒWƒFƒNƒg‚ğ’T‚µA‚»‚ÌƒIƒuƒWƒFƒNƒg‚©‚çBossƒXƒNƒŠƒvƒg‚ğæ“¾
+            // "Boss"ã‚¿ã‚°ã®ä»˜ã„ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã—ã€ãã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰Bossã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å–å¾—
             GameObject bossObj = GameObject.FindGameObjectWithTag("Boss");
             if (bossObj != null)
             {
@@ -21,22 +21,22 @@ public class BossHPUIManager : MonoBehaviour
             }
         }
 
-        // ƒ^[ƒQƒbƒg‚Ìƒ{ƒX‚ªŒ©‚Â‚©‚ç‚È‚¢A‚Ü‚½‚ÍHP‚ª0‚Å”j‰ó‚³‚ê‚½ê‡‚ÍƒXƒ‰ƒCƒ_[‚ğ”ñ•\¦
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒœã‚¹ãŒè¦‹ã¤ã‹ã‚‰ãªã„ã€ã¾ãŸã¯HPãŒ0ã§ç ´å£Šã•ã‚ŒãŸå ´åˆã¯ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’éè¡¨ç¤º
         if (targetBoss == null)
         {
             hpSlider.gameObject.SetActive(false);
             return;
         }
 
-        // ƒ{ƒX‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚½‚çAƒXƒ‰ƒCƒ_[‚ğƒAƒNƒeƒBƒu‚É‚µ‚ÄUI‚ğXV
+        // ãƒœã‚¹ãŒè¦‹ã¤ã‹ã£ã¦ã„ãŸã‚‰ã€ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã—ã¦UIã‚’æ›´æ–°
         hpSlider.gameObject.SetActive(true);
         UpdateBossHPUI();
     }
 
-    // UI‚ğXV‚·‚éƒƒ\ƒbƒh
+    // UIã‚’æ›´æ–°ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void UpdateBossHPUI()
     {
-        // targetBoss‚ÌŒ»İ’l‚ğg‚Á‚ÄUI‚ğXV
+        // targetBossã®ç¾åœ¨å€¤ã‚’ä½¿ã£ã¦UIã‚’æ›´æ–°
         hpSlider.maxValue = targetBoss.BossMAXHP;
         hpSlider.value = targetBoss.BossHP;
     }

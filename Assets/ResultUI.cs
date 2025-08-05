@@ -44,23 +44,23 @@ public class ResultUI : MonoBehaviour
 
     void OnEnable()
     {
-        // Boss‚ÌÃ“IƒCƒxƒ“ƒg‚ÉA©•ª‚ÌUI•\¦ƒƒ\ƒbƒh‚ğ“o˜^iw“Çj‚·‚é
+        // Bossã®é™çš„ã‚¤ãƒ™ãƒ³ãƒˆã«ã€è‡ªåˆ†ã®UIè¡¨ç¤ºãƒ¡ã‚½ãƒƒãƒ‰ã‚’ç™»éŒ²ï¼ˆè³¼èª­ï¼‰ã™ã‚‹
         Boss.OnBossDied += ShowBossDefeatedUI;
         Player.OnPlayerDied += resultUIonlyPlayer;
     }
 
-    // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª–³Œø‚É‚È‚Á‚½‚ÉŒÄ‚Î‚ê‚é
+    // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç„¡åŠ¹ã«ãªã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹
     void OnDisable()
     {
-        // “o˜^‚ğ‰ğœ‚·‚éiƒƒ‚ƒŠƒŠ[ƒN–h~‚Ì‚½‚ßd—vj
+        // ç™»éŒ²ã‚’è§£é™¤ã™ã‚‹ï¼ˆãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯é˜²æ­¢ã®ãŸã‚é‡è¦ï¼‰
         Boss.OnBossDied -= ShowBossDefeatedUI;
         Player.OnPlayerDied -= resultUIonlyPlayer;
     }
 
     public void ShowBossDefeatedUI()
     {
-        //Debug.Log("ƒ{ƒXŒ‚”j‚ÌƒCƒxƒ“ƒg‚ğŒŸ’mIUI‚ğ•\¦‚µ‚Ü‚·B");
-        // UI•\¦ˆ—
+        //Debug.Log("ãƒœã‚¹æ’ƒç ´ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ¤œçŸ¥ï¼UIã‚’è¡¨ç¤ºã—ã¾ã™ã€‚");
+        // UIè¡¨ç¤ºå‡¦ç†
         ResultText.enabled = true;
         BackGround.enabled = true;
         TotalEnemyKill.ResultKilledEnemyText.enabled = true;

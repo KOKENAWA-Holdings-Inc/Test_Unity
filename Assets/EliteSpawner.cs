@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EliteSpawner : MonoBehaviour
 {
-    private Transform player; // “à•”‚ÅƒvƒŒƒCƒ„[‚Ìî•ñ‚ğ•Û‚·‚é‚½‚ß‚Ì•Ï”
+    private Transform player; // å†…éƒ¨ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æƒ…å ±ã‚’ä¿æŒã™ã‚‹ãŸã‚ã®å¤‰æ•°
 
     public GameObject ElitePrefab;
     public TimeManager timeManager; 
@@ -13,15 +13,15 @@ public class EliteSpawner : MonoBehaviour
     private float spawnTimer = 0f;
     public Vector2 spawnArea = new Vector2(9.5f, 5.5f);
     private bool isSpawningActive = true;
-    [Tooltip("“G‚ÌŠî–{“I‚ÈÅ‘åHP")]
+    [Tooltip("æ•µã®åŸºæœ¬çš„ãªæœ€å¤§HP")]
     [SerializeField] private float baseEliteMaxHp = 100f;
-    [Tooltip("1•b‚ ‚½‚è‚É‘‰Á‚·‚éÅ‘åHP‚Ì—Ê")]
+    [Tooltip("1ç§’ã‚ãŸã‚Šã«å¢—åŠ ã™ã‚‹æœ€å¤§HPã®é‡")]
     [SerializeField] private float hpGrowthPerSecond = 0.5f;
 
-    // ššš ƒQ[ƒ€ŠJn‚Éˆê“x‚¾‚¯Às‚³‚ê‚éAwakeƒƒ\ƒbƒh‚ğ’Ç‰Á ššš
+    // â˜…â˜…â˜… ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«ä¸€åº¦ã ã‘å®Ÿè¡Œã•ã‚Œã‚‹Awakeãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ  â˜…â˜…â˜…
     void Start()
     {
-        // "Player"‚Æ‚¢‚¤ƒ^ƒO‚ª•t‚¢‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ’T‚µA‚»‚ÌTransformƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾‚·‚é
+        // "Player"ã¨ã„ã†ã‚¿ã‚°ãŒä»˜ã„ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã—ã€ãã®Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—ã™ã‚‹
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
         {
@@ -29,21 +29,21 @@ public class EliteSpawner : MonoBehaviour
         }
         else
         {
-            // ‚à‚µŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡AƒGƒ‰[ƒƒO‚ğo‚µ‚ÄƒXƒ|[ƒ“‚ğ’â~‚·‚é
-            //Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI 'Player'ƒ^ƒO‚ªİ’è‚³‚ê‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢B");
+            // ã‚‚ã—è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã€ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’å‡ºã—ã¦ã‚¹ãƒãƒ¼ãƒ³ã‚’åœæ­¢ã™ã‚‹
+            //Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼ 'Player'ã‚¿ã‚°ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
             isSpawningActive = false;
         }
     }
 
     void Update()
     {
-        // player‚ª‚¢‚È‚¢ê‡‚Í‰½‚à‚µ‚È‚¢
+        // playerãŒã„ãªã„å ´åˆã¯ä½•ã‚‚ã—ãªã„
         if (player == null) return;
 
-        // ƒXƒ|ƒi[‚ªƒAƒNƒeƒBƒu‚Èê‡‚Ì‚İˆ—‚ğÀs
+        // ã‚¹ãƒãƒŠãƒ¼ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªå ´åˆã®ã¿å‡¦ç†ã‚’å®Ÿè¡Œ
         if (isSpawningActive)
         {
-            // ƒ^ƒCƒ}[ˆ—
+            // ã‚¿ã‚¤ãƒãƒ¼å‡¦ç†
             spawnTimer += Time.deltaTime;
 
             if (spawnTimer >= spawnInterval)
@@ -53,10 +53,15 @@ public class EliteSpawner : MonoBehaviour
                 spawnTimer -= spawnInterval;
             }
 
+<<<<<<< HEAD
             // ŠÔ‚ª239•bˆÈã‚É‚È‚Á‚½‚çAƒXƒ|[ƒ“‚ğ’â~‚·‚é
             if (timeManager.elapsedTime >= 239)
+=======
+            // æ™‚é–“ãŒ420ç§’ä»¥ä¸Šã«ãªã£ãŸã‚‰ã€ã‚¹ãƒãƒ¼ãƒ³ã‚’åœæ­¢ã™ã‚‹
+            if (timeManager.elapsedTime >= 419)
+>>>>>>> 927486844afcf2844f2a35d193214de238cece5c
             {
-                //Debug.Log("w’èŠÔ‚ğ’´‚¦‚½‚½‚ßAƒGƒlƒ~[‚ÌƒXƒ|[ƒ“‚ğ’â~‚µAŠù‘¶‚ÌƒGƒlƒ~[‚ğ‘S‚Ä”j‰ó‚µ‚Ü‚·B");
+                //Debug.Log("æŒ‡å®šæ™‚é–“ã‚’è¶…ãˆãŸãŸã‚ã€ã‚¨ãƒãƒŸãƒ¼ã®ã‚¹ãƒãƒ¼ãƒ³ã‚’åœæ­¢ã—ã€æ—¢å­˜ã®ã‚¨ãƒãƒŸãƒ¼ã‚’å…¨ã¦ç ´å£Šã—ã¾ã™ã€‚");
                 isSpawningActive = false;
                 DestroyAllEnemies();
             }
@@ -76,7 +81,7 @@ public class EliteSpawner : MonoBehaviour
     {
         if (ElitePrefab == null)
         {
-            //Debug.LogError("Elite Prefab‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            //Debug.LogError("Elite PrefabãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
             return;
         }
 

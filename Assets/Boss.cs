@@ -37,27 +37,27 @@ public class Boss : MonoBehaviour
             {
                 float damage = previousHP - BossHP;
 
-                // š•ÏX: “G‚Ì“ªã‚É’¼Ú¶¬‚·‚é
-                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // “G‚Ì1ƒ†ƒjƒbƒgã‚É•\¦
+                // â˜…å¤‰æ›´: æ•µã®é ­ä¸Šã«ç›´æ¥ç”Ÿæˆã™ã‚‹
+                Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0); // æ•µã®1ãƒ¦ãƒ‹ãƒƒãƒˆä¸Šã«è¡¨ç¤º
                 GameObject popup = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity);
 
-                // ¥¥¥ –â‘è‚ÌŒ´ˆö‚È‚Ì‚ÅA‚±‚Ìs‚ğŠ®‘S‚Éíœ ¥¥¥
+                // â–¼â–¼â–¼ å•é¡Œã®åŸå› ãªã®ã§ã€ã“ã®è¡Œã‚’å®Œå…¨ã«å‰Šé™¤ â–¼â–¼â–¼
                 // popup.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
 
-                // ¶¬‚µ‚½ƒ|ƒbƒvƒAƒbƒv‚Éƒ_ƒ[ƒW—Ê‚ğİ’è
+                // ç”Ÿæˆã—ãŸãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã«ãƒ€ãƒ¡ãƒ¼ã‚¸é‡ã‚’è¨­å®š
                 popup.GetComponent<DamagePopup>().Setup(damage);
             }
         }
         previousHP = BossHP;
-        // ©g‚ÌHP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚©‚ğ–ˆƒtƒŒ[ƒ€ŠÄ‹‚·‚é
+        // è‡ªèº«ã®HPãŒ0ä»¥ä¸‹ã«ãªã£ãŸã‹ã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ç›£è¦–ã™ã‚‹
         if (BossHP <= 0)
         {
-            Die(); // ƒCƒxƒ“ƒg‚ğ”­s
+            Die(); // ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œ
 
-            // ƒV[ƒ“‚©‚ç "Player" ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ğ’T‚·
+            // ã‚·ãƒ¼ãƒ³ã‹ã‚‰ "Player" ã‚¿ã‚°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ã™
             GameObject playerToReward = GameObject.FindGameObjectWithTag("Player");
 
-            // ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚½ê‡‚Ì‚İŒoŒ±’l‚ğ—^‚¦‚é
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ãŸå ´åˆã®ã¿çµŒé¨“å€¤ã‚’ä¸ãˆã‚‹
             if (playerToReward != null)
             {
                 Player playerComponent = playerToReward.GetComponent<Player>();
@@ -68,7 +68,7 @@ public class Boss : MonoBehaviour
                 }
             }
 
-            // ©g‚ğ”j‰ó‚·‚é
+            // è‡ªèº«ã‚’ç ´å£Šã™ã‚‹
             Destroy(this.gameObject);
         }
     }

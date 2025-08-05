@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq; // ”O‚Ì‚½‚ß’Ç‰Á
+using System.Linq; // å¿µã®ãŸã‚è¿½åŠ 
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,60 +10,60 @@ public class GameManager : MonoBehaviour
     private bool isPaused = false;
     public bool IsPaused => isPaused;
     private int playerLvre;
-    // public Player player; // š •s—v‚È‚Ì‚Åíœ
-    private Player targetPlayer; // š ©“®‚ÅŒŸo‚·‚é‚½‚ß‚Ì•Ï”
+    // public Player player; // â˜… ä¸è¦ãªã®ã§å‰Šé™¤
+    private Player targetPlayer; // â˜… è‡ªå‹•ã§æ¤œå‡ºã™ã‚‹ãŸã‚ã®å¤‰æ•°
 
-    public GameObject PassiveUI; // ‚±‚ê‚ç‚àpassiveChoiceUIParent‚ÅŠÇ—„§
+    public GameObject PassiveUI; // ã“ã‚Œã‚‰ã‚‚passiveChoiceUIParentã§ç®¡ç†æ¨å¥¨
     public GameObject PassiveUI1; //
     public string selectedItem1;
     public string selectedItem2;
 
-    [Header("UIQÆ")]
+    [Header("UIå‚ç…§")]
     public GameObject passiveChoiceUIParent;
     public TextMeshProUGUI RandomPassive1;
     public TextMeshProUGUI RandomPassive2;
     public TextMeshProUGUI Choice;
 
-    [Header("‘I‘ğˆ‚ÌŠÇ—")]
+    [Header("é¸æŠè‚¢ã®ç®¡ç†")]
     public string[] masterItemChoices = { "Attack+10%", "Defence+5%", "MaxHP+5%", "MoveSpeed+0.1", "Cool Time-2%", "Weapon Speed+3%" , "Experience +10%" };
     private List<string> remainingChoices;
 
-    [Header("UIQÆ")]
-    [Tooltip("ƒXƒe[ƒ^ƒX‘S‘Ì‚ğˆÍ‚Şeƒpƒlƒ‹")]
+    [Header("UIå‚ç…§")]
+    [Tooltip("ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹å…¨ä½“ã‚’å›²ã‚€è¦ªãƒ‘ãƒãƒ«")]
     [SerializeField] private GameObject statusPanel;
-    [Tooltip("HP‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("HPã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI hpText;
-    [Tooltip("UŒ‚—Í‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("æ”»æ’ƒåŠ›ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI attackText;
-    [Tooltip("–hŒä—Í‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("é˜²å¾¡åŠ›ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI defenceText;
-    [Tooltip("ˆÚ“®‘¬“x‚ğ•\¦‚·‚éƒeƒLƒXƒg")]
+    [Tooltip("ç§»å‹•é€Ÿåº¦ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private TextMeshProUGUI moveSpeedText;
 
-    //private Player targetPlayer; // QÆ‚·‚éƒvƒŒƒCƒ„[
-    private bool isPanelActive = false; // ƒpƒlƒ‹‚ª•\¦‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ìó‘Ô
+    //private Player targetPlayer; // å‚ç…§ã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+    private bool isPanelActive = false; // ãƒ‘ãƒãƒ«ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã®çŠ¶æ…‹
 
     void Start()
     {
-        // Å‰‚ÍUI‚ğ”ñ•\¦‚É‚µ‚Ä‚¨‚­
+        // æœ€åˆã¯UIã‚’éè¡¨ç¤ºã«ã—ã¦ãŠã
         if (passiveChoiceUIParent != null)
         {
             passiveChoiceUIParent.SetActive(false);
         }
-        // ”O‚Ì‚½‚ßAŠJn‚Í•K‚¸”ñ•\¦‚É‚µ‚Ä‚¨‚­
+        // å¿µã®ãŸã‚ã€é–‹å§‹æ™‚ã¯å¿…ãšéè¡¨ç¤ºã«ã—ã¦ãŠã
         if (statusPanel != null)
         {
             statusPanel.SetActive(false);
         }
 
-        // š ƒvƒŒƒCƒ„[‚ğ’T‚µAŒ©‚Â‚¯‚½‚çƒŒƒxƒ‹ŠÄ‹‚ğn‚ß‚éƒRƒ‹[ƒ`ƒ“‚ğŠJn
+        // â˜… ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¢ã—ã€è¦‹ã¤ã‘ãŸã‚‰ãƒ¬ãƒ™ãƒ«ç›£è¦–ã‚’å§‹ã‚ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³ã‚’é–‹å§‹
         StartCoroutine(InitializeAndMonitorPlayer());
     }
 
-    // š ƒvƒŒƒCƒ„[‚Ì‰Šú‰»‚ÆƒŒƒxƒ‹ŠÄ‹‚ğ‘S‚Äs‚¤ƒRƒ‹[ƒ`ƒ“
+    // â˜… ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åˆæœŸåŒ–ã¨ãƒ¬ãƒ™ãƒ«ç›£è¦–ã‚’å…¨ã¦è¡Œã†ã‚³ãƒ«ãƒ¼ãƒãƒ³
     private IEnumerator InitializeAndMonitorPlayer()
     {
-        // --- 1. ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚é‚Ü‚Å‘Ò‹@ ---
+        // --- 1. ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‹ã¾ã§å¾…æ©Ÿ ---
         while (targetPlayer == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -71,18 +71,18 @@ public class GameManager : MonoBehaviour
             {
                 targetPlayer = playerObj.GetComponent<Player>();
             }
-            yield return null; // 1ƒtƒŒ[ƒ€‘Ò‚Á‚Ä‚©‚çÄŒŸõ
+            yield return null; // 1ãƒ•ãƒ¬ãƒ¼ãƒ å¾…ã£ã¦ã‹ã‚‰å†æ¤œç´¢
         }
 
-        // --- 2. ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚½‚ç‰Šúİ’è‚ğs‚¤ ---
+        // --- 2. ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ãŸã‚‰åˆæœŸè¨­å®šã‚’è¡Œã† ---
         playerLvre = (int)targetPlayer.PlayerLv;
         ResetRemainingChoices();
-        //Debug.Log("ƒvƒŒƒCƒ„[‚ğŒŸo‚µ‚Ü‚µ‚½BƒŒƒxƒ‹ŠÄ‹‚ğŠJn‚µ‚Ü‚·B");
+        //Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¤œå‡ºã—ã¾ã—ãŸã€‚ãƒ¬ãƒ™ãƒ«ç›£è¦–ã‚’é–‹å§‹ã—ã¾ã™ã€‚");
 
-        // --- 3. ƒŒƒxƒ‹ƒAƒbƒv‚ÌŠÄ‹ƒ‹[ƒviUpdate‚Ì‘ã‚í‚èj ---
+        // --- 3. ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã®ç›£è¦–ãƒ«ãƒ¼ãƒ—ï¼ˆUpdateã®ä»£ã‚ã‚Šï¼‰ ---
         while (true)
         {
-            // isPaused‚ªfalse‚Ì‚¾‚¯ƒŒƒxƒ‹ƒAƒbƒv‚ğŒŸ’m‚·‚é
+            // isPausedãŒfalseã®æ™‚ã ã‘ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã‚’æ¤œçŸ¥ã™ã‚‹
             if (!isPaused)
             {
                 if (targetPlayer.PlayerLv != playerLvre)
@@ -100,17 +100,17 @@ public class GameManager : MonoBehaviour
                         
                 }
             }
-            yield return null; // 1ƒtƒŒ[ƒ€‘Ò‚Â
+            yield return null; // 1ãƒ•ãƒ¬ãƒ¼ãƒ å¾…ã¤
         }
     }
 
-    // void Update() ‚ÍƒRƒ‹[ƒ`ƒ“‚É“‡‚³‚ê‚½‚½‚ß•s—v
+    // void Update() ã¯ã‚³ãƒ«ãƒ¼ãƒãƒ³ã«çµ±åˆã•ã‚ŒãŸãŸã‚ä¸è¦
     void Update()
     {
-        // EscapeƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚ğŒŸ’m
+        // Escapeã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸç¬é–“ã‚’æ¤œçŸ¥
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Œ»İ‚Ìó‘Ô‚ğ”½“]‚³‚¹‚é (•\¦ -> ”ñ•\¦, ”ñ•\¦ -> •\¦)
+            // ç¾åœ¨ã®çŠ¶æ…‹ã‚’åè»¢ã•ã›ã‚‹ (è¡¨ç¤º -> éè¡¨ç¤º, éè¡¨ç¤º -> è¡¨ç¤º)
             isPanelActive = !isPanelActive;
 
             if (isPanelActive)
@@ -126,22 +126,22 @@ public class GameManager : MonoBehaviour
 
     private void ShowStatus()
     {
-        // í‚ÉÅV‚ÌƒvƒŒƒCƒ„[î•ñ‚ğ’T‚·
+        // å¸¸ã«æœ€æ–°ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æƒ…å ±ã‚’æ¢ã™
         targetPlayer = FindObjectOfType<Player>();
         if (targetPlayer == null)
         {
-            Debug.LogError("PlayerƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-            isPanelActive = false; // •\¦‚Å‚«‚È‚¢‚Ì‚Åó‘Ô‚ğ–ß‚·
+            Debug.LogError("Playerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
+            isPanelActive = false; // è¡¨ç¤ºã§ããªã„ã®ã§çŠ¶æ…‹ã‚’æˆ»ã™
             return;
         }
 
-        // ƒQ[ƒ€‚ÌŠÔ‚ğ~‚ß‚é
+        // ã‚²ãƒ¼ãƒ ã®æ™‚é–“ã‚’æ­¢ã‚ã‚‹
         PauseGame();
-        // ƒpƒlƒ‹‚ğ•\¦‚·‚é
+        // ãƒ‘ãƒãƒ«ã‚’è¡¨ç¤ºã™ã‚‹
         statusPanel.SetActive(true);
 
-        // ŠeƒeƒLƒXƒg‚ÉŒ»İ‚ÌƒXƒe[ƒ^ƒX‚ğ”½‰f‚³‚¹‚é
-        // ToString("F1") ‚È‚Ç‚ÍA¬”“_ˆÈ‰º‚Ì•\¦Œ…”‚ğw’è‚·‚é‘®İ’è‚Å‚·
+        // å„ãƒ†ã‚­ã‚¹ãƒˆã«ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’åæ˜ ã•ã›ã‚‹
+        // ToString("F1") ãªã©ã¯ã€å°æ•°ç‚¹ä»¥ä¸‹ã®è¡¨ç¤ºæ¡æ•°ã‚’æŒ‡å®šã™ã‚‹æ›¸å¼è¨­å®šã§ã™
         hpText.text = $"HP: {targetPlayer.PlayerHP.ToString("F0")} / {targetPlayer.PlayerMAXHP.ToString("F0")}";
         attackText.text = $"Attack: {targetPlayer.Attack.ToString("F2")}";
         defenceText.text = $"Defence: {targetPlayer.Defence.ToString("F2")}";
@@ -149,13 +149,13 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒe[ƒ^ƒX‚ğ”ñ•\¦‚É‚µAƒQ[ƒ€‚ğÄŠJ‚·‚é
+    /// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’éè¡¨ç¤ºã«ã—ã€ã‚²ãƒ¼ãƒ ã‚’å†é–‹ã™ã‚‹
     /// </summary>
     private void HideStatus()
     {
-        // ƒQ[ƒ€‚ÌŠÔ‚ğŒ³‚É–ß‚·
+        // ã‚²ãƒ¼ãƒ ã®æ™‚é–“ã‚’å…ƒã«æˆ»ã™
         ResumeGame();
-        // ƒpƒlƒ‹‚ğ”ñ•\¦‚É‚·‚é
+        // ãƒ‘ãƒãƒ«ã‚’éè¡¨ç¤ºã«ã™ã‚‹
         statusPanel.SetActive(false);
     }
 
